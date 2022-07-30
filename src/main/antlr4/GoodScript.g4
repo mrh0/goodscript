@@ -56,7 +56,9 @@ primitive:
     ;
 
 expr:
-    primitive
+    expr '+' expr
+    | '(' expr ')'
+    | primitive
     ;
 
 shortcall:
