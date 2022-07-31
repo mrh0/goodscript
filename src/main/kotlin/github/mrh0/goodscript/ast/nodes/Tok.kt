@@ -19,4 +19,8 @@ open class Tok(private var token: Token, private var file: File) : ITok {
     override fun getToken(): Token {
         return token
     }
+
+    override fun toString(): String {
+        return this.javaClass.name
+    }
 }

@@ -37,4 +37,28 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
     override fun visitBlock(ctx: GoodscriptParser.BlockContext): ITok {
         return TBlock(visit(ctx.statements), ctx.start, file);
     }
+
+    override fun visitExprNest(ctx: GoodscriptParser.ExprNestContext): ITok {
+        return visit(ctx.expr());
+    }
+
+    override fun visitStatementShortcall(ctx: GoodscriptParser.StatementShortcallContext): ITok {
+        return visit(ctx.shortcall())
+    }
+
+    override fun visitExprShortcall(ctx: GoodscriptParser.ExprShortcallContext): ITok {
+        return visit(ctx.shortcall())
+    }
+
+    override fun visitShortcallArg(ctx: GoodscriptParser.ShortcallArgContext): ITok {
+        return TShortCallArg(ctx.name.text, visit(ctx.next), ctx.start, file)
+    }
+
+    override fun visitShortcallNoArg(ctx: GoodscriptParser.ShortcallNoArgContext): ITok {
+        return TShortCallNoArg(ctx.name.text, ctx.start, file)
+    }
+
+    override fun visitNumberInt(ctx: GoodscriptParser.NumberIntContext): ITok {
+        return TInteger(Integer.valueOf(ctx.text), ctx.start, file)
+    }
 }

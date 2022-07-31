@@ -61,12 +61,12 @@ expr:
     expr '+' expr       #exprOpBin
     | '(' expr ')'      #exprNest
     | primitive         #exprPrimitive
+    | shortcall         #exprShortcall
     ;
 
 shortcall:
-    NAME shortcall                  #shortcallArg
-    | NAME expr                     #shortcallArg
-    | NAME                          #shortcallNoArg
+    name=NAME next=expr                     #shortcallArg
+    | name=NAME                          #shortcallNoArg
     ;
 
 statement:

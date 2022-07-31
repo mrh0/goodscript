@@ -12,4 +12,8 @@ open class GsType {
     fun isSameType(other: GsType): Boolean {
         return this.getType() == other.getType()
     }
+
+    open fun invoke(vararg args: GsType): GsType {
+        throw Exception("Cannot invoke ${getType()}")
+    }
 }

@@ -61,22 +61,27 @@ expr:
     expr '+' expr       #exprOpBin
     | '(' expr ')'      #exprNest
     | primitive         #exprPrimitive
+    | shortcall         #exprShortcall
     ;
 
 shortcall:
-    | NAME shortcall
-    | NAME expr
-    | NAME
+    name=NAME next=expr                     #shortcallArg
+    | name=NAME                          #shortcallNoArg
     ;
 
 statement:
     NAME '=' '(' expr ')' NL        #statementAssignment
     | NAME '=' expr NL              #statementAssignment
     | shortcall NL                  #statementShortcall
+    | 'ret' expr NL                 #statementReturn
     ;
 
 block:
     INDENT (statements+=statement)+ DEDENT
+    ;
+
+use:
+    'use' (NAME 'from')? STRING ('as' NAME)? NL
     ;
 
 func:
@@ -84,5 +89,6 @@ func:
     ;
 
 program:
+    use*
     functions+=func*
     ;

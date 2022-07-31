@@ -78,6 +78,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitExprNest(GoodscriptParser.ExprNestContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code exprShortcall}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprShortcall(GoodscriptParser.ExprShortcallContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprShortcall}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprShortcall(GoodscriptParser.ExprShortcallContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code exprPrimitive}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree

@@ -88,6 +88,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExprShortcall(GoodscriptParser.ExprShortcallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExprShortcall(GoodscriptParser.ExprShortcallContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExprPrimitive(GoodscriptParser.ExprPrimitiveContext ctx) { }
 	/**
 	 * {@inheritDoc}
