@@ -3,7 +3,6 @@ package github.mrh0.goodscript
 import Root
 import github.mrh0.goodscript.antlr.GoodscriptLexer
 import github.mrh0.goodscript.antlr.GoodscriptParser
-import github.mrh0.goodscript.ast.nodes.ITok
 import github.mrh0.goodscript.ast.Visitor
 import org.antlr.v4.runtime.ANTLRInputStream
 import org.antlr.v4.runtime.CommonTokenStream

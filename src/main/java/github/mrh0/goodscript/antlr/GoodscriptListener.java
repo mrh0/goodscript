@@ -1,4 +1,4 @@
-// Generated from C:/Development/goodscript/src/main/antlr4\Goodscript.g4 by ANTLR 4.10.1
+// Generated from W:/Development/GitHub/goodscript/src/main/antlr4\Goodscript.g4 by ANTLR 4.10.1
 package github.mrh0.goodscript.antlr;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
@@ -8,15 +8,53 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface GoodscriptListener extends ParseTreeListener {
 	/**
-	 * Enter a parse tree produced by {@link GoodscriptParser#number}.
+	 * Enter a parse tree produced by the {@code numberInt}
+	 * labeled alternative in {@link GoodscriptParser#number}.
 	 * @param ctx the parse tree
 	 */
-	void enterNumber(GoodscriptParser.NumberContext ctx);
+	void enterNumberInt(GoodscriptParser.NumberIntContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GoodscriptParser#number}.
+	 * Exit a parse tree produced by the {@code numberInt}
+	 * labeled alternative in {@link GoodscriptParser#number}.
 	 * @param ctx the parse tree
 	 */
-	void exitNumber(GoodscriptParser.NumberContext ctx);
+	void exitNumberInt(GoodscriptParser.NumberIntContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code numberFloat}
+	 * labeled alternative in {@link GoodscriptParser#number}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumberFloat(GoodscriptParser.NumberFloatContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code numberFloat}
+	 * labeled alternative in {@link GoodscriptParser#number}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumberFloat(GoodscriptParser.NumberFloatContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code numberHex}
+	 * labeled alternative in {@link GoodscriptParser#number}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumberHex(GoodscriptParser.NumberHexContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code numberHex}
+	 * labeled alternative in {@link GoodscriptParser#number}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumberHex(GoodscriptParser.NumberHexContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code numberBin}
+	 * labeled alternative in {@link GoodscriptParser#number}.
+	 * @param ctx the parse tree
+	 */
+	void enterNumberBin(GoodscriptParser.NumberBinContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code numberBin}
+	 * labeled alternative in {@link GoodscriptParser#number}.
+	 * @param ctx the parse tree
+	 */
+	void exitNumberBin(GoodscriptParser.NumberBinContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GoodscriptParser#primitive}.
 	 * @param ctx the parse tree
@@ -28,25 +66,65 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitPrimitive(GoodscriptParser.PrimitiveContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GoodscriptParser#expr}.
+	 * Enter a parse tree produced by the {@code exprNest}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterExpr(GoodscriptParser.ExprContext ctx);
+	void enterExprNest(GoodscriptParser.ExprNestContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GoodscriptParser#expr}.
+	 * Exit a parse tree produced by the {@code exprNest}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitExpr(GoodscriptParser.ExprContext ctx);
+	void exitExprNest(GoodscriptParser.ExprNestContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GoodscriptParser#shortcall}.
+	 * Enter a parse tree produced by the {@code exprPrimitive}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterShortcall(GoodscriptParser.ShortcallContext ctx);
+	void enterExprPrimitive(GoodscriptParser.ExprPrimitiveContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GoodscriptParser#shortcall}.
+	 * Exit a parse tree produced by the {@code exprPrimitive}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitShortcall(GoodscriptParser.ShortcallContext ctx);
+	void exitExprPrimitive(GoodscriptParser.ExprPrimitiveContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code exprOpBin}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprOpBin(GoodscriptParser.ExprOpBinContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprOpBin}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprOpBin(GoodscriptParser.ExprOpBinContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code shortcallArg}
+	 * labeled alternative in {@link GoodscriptParser#shortcall}.
+	 * @param ctx the parse tree
+	 */
+	void enterShortcallArg(GoodscriptParser.ShortcallArgContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code shortcallArg}
+	 * labeled alternative in {@link GoodscriptParser#shortcall}.
+	 * @param ctx the parse tree
+	 */
+	void exitShortcallArg(GoodscriptParser.ShortcallArgContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code shortcallNoArg}
+	 * labeled alternative in {@link GoodscriptParser#shortcall}.
+	 * @param ctx the parse tree
+	 */
+	void enterShortcallNoArg(GoodscriptParser.ShortcallNoArgContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code shortcallNoArg}
+	 * labeled alternative in {@link GoodscriptParser#shortcall}.
+	 * @param ctx the parse tree
+	 */
+	void exitShortcallNoArg(GoodscriptParser.ShortcallNoArgContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code statementAssignment}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
@@ -72,6 +150,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitStatementShortcall(GoodscriptParser.StatementShortcallContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code statementReturn}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementReturn(GoodscriptParser.StatementReturnContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code statementReturn}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementReturn(GoodscriptParser.StatementReturnContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GoodscriptParser#block}.
 	 * @param ctx the parse tree
 	 */
@@ -81,6 +171,16 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitBlock(GoodscriptParser.BlockContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GoodscriptParser#use}.
+	 * @param ctx the parse tree
+	 */
+	void enterUse(GoodscriptParser.UseContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GoodscriptParser#use}.
+	 * @param ctx the parse tree
+	 */
+	void exitUse(GoodscriptParser.UseContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GoodscriptParser#func}.
 	 * @param ctx the parse tree

@@ -1,4 +1,4 @@
-// Generated from C:/Development/goodscript/src/main/antlr4\Goodscript.g4 by ANTLR 4.10.1
+// Generated from W:/Development/GitHub/goodscript/src/main/antlr4\Goodscript.g4 by ANTLR 4.10.1
 package github.mrh0.goodscript.antlr;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -16,13 +16,49 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterNumber(GoodscriptParser.NumberContext ctx) { }
+	@Override public void enterNumberInt(GoodscriptParser.NumberIntContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitNumber(GoodscriptParser.NumberContext ctx) { }
+	@Override public void exitNumberInt(GoodscriptParser.NumberIntContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNumberFloat(GoodscriptParser.NumberFloatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNumberFloat(GoodscriptParser.NumberFloatContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNumberHex(GoodscriptParser.NumberHexContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNumberHex(GoodscriptParser.NumberHexContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNumberBin(GoodscriptParser.NumberBinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNumberBin(GoodscriptParser.NumberBinContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -40,25 +76,61 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExpr(GoodscriptParser.ExprContext ctx) { }
+	@Override public void enterExprNest(GoodscriptParser.ExprNestContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExpr(GoodscriptParser.ExprContext ctx) { }
+	@Override public void exitExprNest(GoodscriptParser.ExprNestContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterShortcall(GoodscriptParser.ShortcallContext ctx) { }
+	@Override public void enterExprPrimitive(GoodscriptParser.ExprPrimitiveContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitShortcall(GoodscriptParser.ShortcallContext ctx) { }
+	@Override public void exitExprPrimitive(GoodscriptParser.ExprPrimitiveContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExprOpBin(GoodscriptParser.ExprOpBinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExprOpBin(GoodscriptParser.ExprOpBinContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterShortcallArg(GoodscriptParser.ShortcallArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitShortcallArg(GoodscriptParser.ShortcallArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterShortcallNoArg(GoodscriptParser.ShortcallNoArgContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitShortcallNoArg(GoodscriptParser.ShortcallNoArgContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -88,6 +160,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStatementReturn(GoodscriptParser.StatementReturnContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatementReturn(GoodscriptParser.StatementReturnContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterBlock(GoodscriptParser.BlockContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -95,6 +179,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitBlock(GoodscriptParser.BlockContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUse(GoodscriptParser.UseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUse(GoodscriptParser.UseContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

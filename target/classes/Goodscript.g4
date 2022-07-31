@@ -30,6 +30,7 @@ NAME: [_a-zA-Z][_a-zA-Z0-9]*;
 ATOM: ':'[a-zA-Z0-9][_a-zA-Z0-9]*;
 
 INT: '0'|'-'?[1-9][0-9]*;
+FLOAT: '0f'|'-'?[1-9][0-9]*('.'[0-9]*)?'f'?;
 HEX: '0x'[0-9a-fA-F]*;
 BIN: '0b'[0-1]*;
 
@@ -42,9 +43,10 @@ COMMENT: '//' ~[\r\n]* -> skip;
 BLOCKCOMMENT: '/*' .*? '*/' -> skip;
 
 number:
-    | INT
-    | HEX
-    | BIN
+    INT             #numberInt
+    | FLOAT         #numberFloat
+    | HEX           #numberHex
+    | BIN           #numberBin
     ;
 
 primitive:
@@ -56,7 +58,9 @@ primitive:
     ;
 
 expr:
-    primitive
+    expr '+' expr       #exprOpBin
+    | '(' expr ')'      #exprNest
+    | primitive         #exprPrimitive
     ;
 
 shortcall:

@@ -5,9 +5,10 @@ import github.mrh0.goodscript.antlr.GoodscriptParser
 import github.mrh0.goodscript.ast.nodes.*
 import org.antlr.v4.runtime.ParserRuleContext
 import org.antlr.v4.runtime.Token
+import java.io.File
 
 
-class Visitor : GoodscriptBaseVisitor<ITok>() {
+class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
 
     fun <T : ParserRuleContext, O : ITok?> visit(list: MutableList<T>): MutableList<O> {
         val t: MutableList<O> = mutableListOf()
@@ -26,19 +27,14 @@ class Visitor : GoodscriptBaseVisitor<ITok>() {
     }
 
     override fun visitProgram(ctx: GoodscriptParser.ProgramContext): ITok {
-        return TProgram(visit(ctx.functions))
+        return TProgram(visit(ctx.functions), ctx.start, file)
     }
 
     override fun visitFunc(ctx: GoodscriptParser.FuncContext): ITok {
-        return TFunction(cvisit(ctx.body));
-    }
-
-    override fun visitStatementAssignment(ctx: GoodscriptParser.StatementAssignmentContext): ITok {
-        return TStatement() //TODO
+        return TFunction(cvisit(ctx.body), ctx.name.text, tvisit(ctx.args), ctx.start, file);
     }
 
     override fun visitBlock(ctx: GoodscriptParser.BlockContext): ITok {
-        return TBlock(visit(ctx.statements));
+        return TBlock(visit(ctx.statements), ctx.start, file);
     }
-
 }

@@ -30,6 +30,7 @@ NAME: [_a-zA-Z][_a-zA-Z0-9]*;
 ATOM: ':'[a-zA-Z0-9][_a-zA-Z0-9]*;
 
 INT: '0'|'-'?[1-9][0-9]*;
+FLOAT: '0f'|'-'?[1-9][0-9]*('.'[0-9]*)?'f'?;
 HEX: '0x'[0-9a-fA-F]*;
 BIN: '0b'[0-1]*;
 
@@ -42,9 +43,10 @@ COMMENT: '//' ~[\r\n]* -> skip;
 BLOCKCOMMENT: '/*' .*? '*/' -> skip;
 
 number:
-    | INT
-    | HEX
-    | BIN
+    INT             #numberInt
+    | FLOAT         #numberFloat
+    | HEX           #numberHex
+    | BIN           #numberBin
     ;
 
 primitive:
@@ -56,25 +58,30 @@ primitive:
     ;
 
 expr:
-    expr '+' expr
-    | '(' expr ')'
-    | primitive
+    expr '+' expr       #exprOpBin
+    | '(' expr ')'      #exprNest
+    | primitive         #exprPrimitive
     ;
 
 shortcall:
-    | NAME shortcall
-    | NAME expr
-    | NAME
+    NAME shortcall                  #shortcallArg
+    | NAME expr                     #shortcallArg
+    | NAME                          #shortcallNoArg
     ;
 
 statement:
     NAME '=' '(' expr ')' NL        #statementAssignment
     | NAME '=' expr NL              #statementAssignment
     | shortcall NL                  #statementShortcall
+    | 'ret' expr NL                 #statementReturn
     ;
 
 block:
     INDENT (statements+=statement)+ DEDENT
+    ;
+
+use:
+    'use' (NAME 'from')? STRING ('as' NAME)? NL
     ;
 
 func:
@@ -82,5 +89,6 @@ func:
     ;
 
 program:
+    use*
     functions+=func*
     ;

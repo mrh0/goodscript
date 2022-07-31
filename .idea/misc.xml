@@ -6,7 +6,7 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/src/main/antlr4/Goodscript.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="C:\Development\goodscript\src\main\java\" />
+          <option name="outputDir" value="W:\Development\GitHub\goodscript\src\main\java" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
           <option name="pkg" value="github.mrh0.goodscript.antlr" />

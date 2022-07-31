@@ -1,6 +1,9 @@
 package github.mrh0.goodscript.ast.nodes
 
-class TProgram(val functions: MutableList<TFunction>) : ITok {
+import org.antlr.v4.runtime.Token
+import java.io.File
+
+class TProgram(val functions: MutableList<TFunction>, token: Token, file: File) : Tok(token, file) {
     override fun toString(): String {
         return "TProgram$functions"
     }
