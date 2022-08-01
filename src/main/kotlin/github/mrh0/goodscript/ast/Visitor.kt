@@ -2,7 +2,7 @@ package github.mrh0.goodscript.ast
 
 import github.mrh0.goodscript.antlr.GoodscriptBaseVisitor
 import github.mrh0.goodscript.antlr.GoodscriptParser
-import github.mrh0.goodscript.ast.nodes.*
+import github.mrh0.goodscript.ast.token.*
 import org.antlr.v4.runtime.ParserRuleContext
 import org.antlr.v4.runtime.Token
 import java.io.File
@@ -26,16 +26,18 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
         return if (rule == null) throw Exception("Undefined rule.") else visit(rule) as O
     }
 
+    fun loc(ctx: ParserRuleContext) = Loc(ctx.start, file)
+
     override fun visitProgram(ctx: GoodscriptParser.ProgramContext): ITok {
-        return TProgram(visit(ctx.functions), ctx.start, file)
+        return TProgram(visit(ctx.functions), loc(ctx))
     }
 
     override fun visitFunc(ctx: GoodscriptParser.FuncContext): ITok {
-        return TFunction(cvisit(ctx.body), ctx.name.text, tvisit(ctx.args), ctx.start, file);
+        return TFunction(cvisit(ctx.body), ctx.name.text, tvisit(ctx.args), loc(ctx));
     }
 
     override fun visitBlock(ctx: GoodscriptParser.BlockContext): ITok {
-        return TBlock(visit(ctx.statements), ctx.start, file);
+        return TBlock(visit(ctx.statements), loc(ctx));
     }
 
     override fun visitExprNest(ctx: GoodscriptParser.ExprNestContext): ITok {
@@ -51,14 +53,14 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
     }
 
     override fun visitShortcallArg(ctx: GoodscriptParser.ShortcallArgContext): ITok {
-        return TShortCallArg(ctx.name.text, visit(ctx.next), ctx.start, file)
+        return TShortCallArg(ctx.name.text, visit(ctx.next), loc(ctx))
     }
 
     override fun visitShortcallNoArg(ctx: GoodscriptParser.ShortcallNoArgContext): ITok {
-        return TShortCallNoArg(ctx.name.text, ctx.start, file)
+        return TShortCallNoArg(ctx.name.text, loc(ctx))
     }
 
     override fun visitNumberInt(ctx: GoodscriptParser.NumberIntContext): ITok {
-        return TInteger(Integer.valueOf(ctx.text), ctx.start, file)
+        return TInteger(Integer.valueOf(ctx.text), loc(ctx))
     }
 }

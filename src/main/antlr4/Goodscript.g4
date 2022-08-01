@@ -65,8 +65,8 @@ expr:
     ;
 
 shortcall:
-    name=NAME next=expr                     #shortcallArg
-    | name=NAME                          #shortcallNoArg
+    name=NAME next=expr             #shortcallArg
+    | name=NAME                     #shortcallNoArg
     ;
 
 statement:
