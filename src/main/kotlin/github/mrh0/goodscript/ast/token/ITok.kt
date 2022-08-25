@@ -6,5 +6,5 @@ import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 
 interface ITok {
-    fun check(vm: VM, c: Context): GsType
+    fun process(vm: VM, c: Context): Pair<GsType, ITok>
 }
