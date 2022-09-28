@@ -65,13 +65,12 @@ expr:
     ;
 
 shortcall:
-    name=NAME next=expr                     #shortcallArg
-    | name=NAME                          #shortcallNoArg
+    name=NAME next=expr             #shortcallArg
+    | name=NAME                     #shortcallNoArg
     ;
 
 statement:
-    NAME '=' '(' expr ')' NL        #statementAssignment
-    | NAME '=' expr NL              #statementAssignment
+    NAME '=' expr NL              #statementAssignment
     | shortcall NL                  #statementShortcall
     | 'ret' expr NL                 #statementReturn
     ;

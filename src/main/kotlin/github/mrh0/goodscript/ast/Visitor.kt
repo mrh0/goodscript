@@ -52,14 +52,6 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
         return visit(ctx.shortcall())
     }
 
-    override fun visitShortcallArg(ctx: GoodscriptParser.ShortcallArgContext): ITok {
-        return TShortCallArg(ctx.name.text, visit(ctx.next), loc(ctx))
-    }
-
-    override fun visitShortcallNoArg(ctx: GoodscriptParser.ShortcallNoArgContext): ITok {
-        return TShortCallNoArg(ctx.name.text, loc(ctx))
-    }
-
     override fun visitNumberInt(ctx: GoodscriptParser.NumberIntContext): ITok {
         return TInteger(Integer.valueOf(ctx.text), loc(ctx))
     }
