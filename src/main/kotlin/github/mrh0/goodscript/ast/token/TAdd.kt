@@ -1,22 +1,25 @@
 package github.mrh0.goodscript.ast.token
 
+import github.mrh0.goodscript.ast.ITok
+import github.mrh0.goodscript.ast.Index
 import github.mrh0.goodscript.ast.Loc
+import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.error.GsTypeError
+import github.mrh0.goodscript.ir.IIR
+import github.mrh0.goodscript.ir.binop.add.IRAddIntInt
 import github.mrh0.goodscript.types.GsTypeInt
 import github.mrh0.goodscript.types.GsType
-import github.mrh0.goodscript.vm.Context
-import github.mrh0.goodscript.vm.VM
 
-class TAdd(val left: ITok, val right: ITok, location: Loc) : Tok(location) {
+class TAdd(location: Loc, val left: ITok, val right: ITok) : Tok(location) {
     override fun toString(): String {
-        return "+i"
+        return "?+?"
     }
 
-    override fun process(vm: VM, c: Context): Pair<GsType, ITok> {
-        val l = left.process(vm, c);
-        val r = right.process(vm, c);
+    override fun process(i: Index): Pair<GsType, IIR> {
+        val l = left.process(i);
+        val r = right.process(i);
         return when {
-            l.first is GsTypeInt && r.first is GsTypeInt -> Pair(GsTypeInt, this)
+            l.first is GsTypeInt && r.first is GsTypeInt -> Pair(GsTypeInt, IRAddIntInt(location))
             else -> throw GsTypeError("+", l.first, r.first)
         }
     }

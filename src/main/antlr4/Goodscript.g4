@@ -61,7 +61,7 @@ expr:
     expr '+' expr       #exprOpBin
     | '(' expr ')'      #exprNest
     | primitive         #exprPrimitive
-    | shortcall         #exprShortcall
+//   | shortcall         #exprShortcall
     ;
 
 /*

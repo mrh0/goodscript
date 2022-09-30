@@ -4,7 +4,7 @@ import Root
 import github.mrh0.goodscript.antlr.GoodscriptLexer
 import github.mrh0.goodscript.antlr.GoodscriptParser
 import github.mrh0.goodscript.ast.Visitor
-import github.mrh0.goodscript.ast.token.ITok
+import github.mrh0.goodscript.ast.ITok
 import org.antlr.v4.runtime.ANTLRInputStream
 import org.antlr.v4.runtime.CommonTokenStream
 import java.io.FileInputStream

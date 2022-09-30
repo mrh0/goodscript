@@ -1,6 +1,8 @@
 package github.mrh0.goodscript.ast.token
 
+import github.mrh0.goodscript.ast.ITok
 import github.mrh0.goodscript.ast.Loc
+import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.types.GsType
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM

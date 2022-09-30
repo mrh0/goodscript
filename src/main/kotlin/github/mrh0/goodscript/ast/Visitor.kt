@@ -33,7 +33,7 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
     }
 
     override fun visitFunc(ctx: GoodscriptParser.FuncContext): ITok {
-        return TFunction(cvisit(ctx.body), ctx.name.text, tvisit(ctx.args), loc(ctx));
+        return TFunc(cvisit(ctx.body), ctx.name.text, tvisit(ctx.args), loc(ctx));
     }
 
     override fun visitBlock(ctx: GoodscriptParser.BlockContext): ITok {
