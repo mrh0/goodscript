@@ -1,7 +1,7 @@
 package github.mrh0.goodscript.ast.token
 
 import github.mrh0.goodscript.ast.ITok
-import github.mrh0.goodscript.ast.Index
+import github.mrh0.goodscript.ast.CompileData
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.error.GsTypeError
@@ -15,7 +15,7 @@ class TAdd(location: Loc, val left: ITok, val right: ITok) : Tok(location) {
         return "?+?"
     }
 
-    override fun process(i: Index): Pair<GsType, IIR> {
+    override fun process(i: CompileData): Pair<GsType, IIR> {
         val l = left.process(i);
         val r = right.process(i);
         return when {
