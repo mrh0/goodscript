@@ -3,8 +3,11 @@ package github.mrh0.goodscript
 import Root
 import github.mrh0.goodscript.antlr.GoodscriptLexer
 import github.mrh0.goodscript.antlr.GoodscriptParser
+import github.mrh0.goodscript.ast.CompileData
 import github.mrh0.goodscript.ast.Visitor
 import github.mrh0.goodscript.ast.ITok
+import github.mrh0.goodscript.vm.Context
+import github.mrh0.goodscript.vm.VM
 import org.antlr.v4.runtime.ANTLRInputStream
 import org.antlr.v4.runtime.CommonTokenStream
 import java.io.FileInputStream
@@ -22,6 +25,10 @@ fun main(args: Array<String>) {
     val parser = GoodscriptParser(tokens)
 
     val tree: ITok = Visitor(file).visitProgram(parser.program())
-
     println(tree)
+
+    val (_, ir) = tree.process(CompileData())
+    println(ir)
+
+    ir.evaluate(VM(), Context(arrayOf(), arrayOf()))
 }

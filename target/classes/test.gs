@@ -1,2 +1,2 @@
 start fn main(a, b):
-    log 0
+    ret 0

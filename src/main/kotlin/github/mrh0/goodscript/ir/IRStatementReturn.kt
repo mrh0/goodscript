@@ -5,7 +5,7 @@ import github.mrh0.goodscript.values.GsValue
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 
-class IRStatement(location: Loc) : IR(location) {
+class IRStatementReturn(location: Loc, next: IIR) : IR(location) {
     override fun evaluate(vm: VM, c: Context): GsValue {
         TODO("Not yet implemented")
     }

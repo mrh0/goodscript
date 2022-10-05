@@ -29,30 +29,26 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
     fun loc(ctx: ParserRuleContext) = Loc(ctx.start, file)
 
     override fun visitProgram(ctx: GoodscriptParser.ProgramContext): ITok {
-        return TProgram(visit(ctx.functions), loc(ctx))
+        return TProgram(loc(ctx), visit(ctx.functions))
     }
 
     override fun visitFunc(ctx: GoodscriptParser.FuncContext): ITok {
-        return TFunc(cvisit(ctx.body), ctx.name.text, tvisit(ctx.args), loc(ctx));
+        return TFunc(loc(ctx), cvisit(ctx.body), ctx.name.text, tvisit(ctx.args));
     }
 
     override fun visitBlock(ctx: GoodscriptParser.BlockContext): ITok {
-        return TBlock(visit(ctx.statements), loc(ctx));
+        return TBlock(loc(ctx), visit(ctx.statements));
+    }
+
+    override fun visitStatementReturn(ctx: GoodscriptParser.StatementReturnContext): ITok {
+        return TStatementReturn(loc(ctx), visit(ctx.expr()))
     }
 
     override fun visitExprNest(ctx: GoodscriptParser.ExprNestContext): ITok {
         return visit(ctx.expr());
     }
 
-    override fun visitStatementShortcall(ctx: GoodscriptParser.StatementShortcallContext): ITok {
-        return visit(ctx.shortcall())
-    }
-
-    override fun visitExprShortcall(ctx: GoodscriptParser.ExprShortcallContext): ITok {
-        return visit(ctx.shortcall())
-    }
-
     override fun visitNumberInt(ctx: GoodscriptParser.NumberIntContext): ITok {
-        return TInteger(Integer.valueOf(ctx.text), loc(ctx))
+        return TInteger(loc(ctx), Integer.valueOf(ctx.text))
     }
 }

@@ -78,18 +78,6 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitExprNest(GoodscriptParser.ExprNestContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code exprShortcall}
-	 * labeled alternative in {@link GoodscriptParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void enterExprShortcall(GoodscriptParser.ExprShortcallContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code exprShortcall}
-	 * labeled alternative in {@link GoodscriptParser#expr}.
-	 * @param ctx the parse tree
-	 */
-	void exitExprShortcall(GoodscriptParser.ExprShortcallContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code exprPrimitive}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
@@ -114,30 +102,6 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitExprOpBin(GoodscriptParser.ExprOpBinContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code shortcallArg}
-	 * labeled alternative in {@link GoodscriptParser#shortcall}.
-	 * @param ctx the parse tree
-	 */
-	void enterShortcallArg(GoodscriptParser.ShortcallArgContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code shortcallArg}
-	 * labeled alternative in {@link GoodscriptParser#shortcall}.
-	 * @param ctx the parse tree
-	 */
-	void exitShortcallArg(GoodscriptParser.ShortcallArgContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code shortcallNoArg}
-	 * labeled alternative in {@link GoodscriptParser#shortcall}.
-	 * @param ctx the parse tree
-	 */
-	void enterShortcallNoArg(GoodscriptParser.ShortcallNoArgContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code shortcallNoArg}
-	 * labeled alternative in {@link GoodscriptParser#shortcall}.
-	 * @param ctx the parse tree
-	 */
-	void exitShortcallNoArg(GoodscriptParser.ShortcallNoArgContext ctx);
-	/**
 	 * Enter a parse tree produced by the {@code statementAssignment}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
@@ -149,18 +113,6 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStatementAssignment(GoodscriptParser.StatementAssignmentContext ctx);
-	/**
-	 * Enter a parse tree produced by the {@code statementShortcall}
-	 * labeled alternative in {@link GoodscriptParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void enterStatementShortcall(GoodscriptParser.StatementShortcallContext ctx);
-	/**
-	 * Exit a parse tree produced by the {@code statementShortcall}
-	 * labeled alternative in {@link GoodscriptParser#statement}.
-	 * @param ctx the parse tree
-	 */
-	void exitStatementShortcall(GoodscriptParser.StatementShortcallContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code statementReturn}
 	 * labeled alternative in {@link GoodscriptParser#statement}.

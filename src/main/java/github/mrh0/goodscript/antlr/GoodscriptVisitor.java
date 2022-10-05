@@ -52,13 +52,6 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprNest(GoodscriptParser.ExprNestContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code exprShortcall}
-	 * labeled alternative in {@link GoodscriptParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExprShortcall(GoodscriptParser.ExprShortcallContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code exprPrimitive}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
@@ -73,33 +66,12 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprOpBin(GoodscriptParser.ExprOpBinContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code shortcallArg}
-	 * labeled alternative in {@link GoodscriptParser#shortcall}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitShortcallArg(GoodscriptParser.ShortcallArgContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code shortcallNoArg}
-	 * labeled alternative in {@link GoodscriptParser#shortcall}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitShortcallNoArg(GoodscriptParser.ShortcallNoArgContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code statementAssignment}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitStatementAssignment(GoodscriptParser.StatementAssignmentContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code statementShortcall}
-	 * labeled alternative in {@link GoodscriptParser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatementShortcall(GoodscriptParser.StatementShortcallContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code statementReturn}
 	 * labeled alternative in {@link GoodscriptParser#statement}.

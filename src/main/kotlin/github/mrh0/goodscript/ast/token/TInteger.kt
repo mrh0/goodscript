@@ -6,7 +6,7 @@ import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.types.GsType
 
-class TInteger(val value: Int, location: Loc) : Tok(location) {
+class TInteger(location: Loc, val value: Int) : Tok(location) {
     override fun toString(): String {
         return "${value}i"
     }

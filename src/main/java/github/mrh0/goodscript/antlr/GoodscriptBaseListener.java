@@ -88,18 +88,6 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExprShortcall(GoodscriptParser.ExprShortcallContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitExprShortcall(GoodscriptParser.ExprShortcallContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterExprPrimitive(GoodscriptParser.ExprPrimitiveContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -124,30 +112,6 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterShortcallArg(GoodscriptParser.ShortcallArgContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitShortcallArg(GoodscriptParser.ShortcallArgContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterShortcallNoArg(GoodscriptParser.ShortcallNoArgContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitShortcallNoArg(GoodscriptParser.ShortcallNoArgContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterStatementAssignment(GoodscriptParser.StatementAssignmentContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -155,18 +119,6 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStatementAssignment(GoodscriptParser.StatementAssignmentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterStatementShortcall(GoodscriptParser.StatementShortcallContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitStatementShortcall(GoodscriptParser.StatementShortcallContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
