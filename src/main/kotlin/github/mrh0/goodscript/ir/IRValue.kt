@@ -5,9 +5,9 @@ import github.mrh0.goodscript.values.GsValue
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 
-class IRBlock(location: Loc, val statements: List<IIR>) : IR(location) {
+class IRValue(location: Loc, val value: GsValue) : IR(location) {
     override fun toString(): String {
-        return "$statements"
+        return "value(${value})"
     }
 
     override fun evaluate(vm: VM, c: Context): GsValue {

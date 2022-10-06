@@ -4,7 +4,10 @@ import github.mrh0.goodscript.ast.CompileData
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.ir.IIR
+import github.mrh0.goodscript.ir.IRValue
 import github.mrh0.goodscript.types.GsType
+import github.mrh0.goodscript.types.GsTypeInt
+import github.mrh0.goodscript.values.GsInt
 
 class TInteger(location: Loc, val value: Int) : Tok(location) {
     override fun toString(): String {
@@ -12,6 +15,6 @@ class TInteger(location: Loc, val value: Int) : Tok(location) {
     }
 
     override fun process(i: CompileData): Pair<GsType, IIR> {
-        TODO("Not yet implemented")
+        return Pair(GsTypeInt, IRValue(location, GsInt(value)))
     }
 }

@@ -30,5 +30,5 @@ fun main(args: Array<String>) {
     val (_, ir) = tree.process(CompileData())
     println(ir)
 
-    ir.evaluate(VM(), Context(arrayOf(), arrayOf()))
+    //ir.evaluate(VM(), Context(arrayOf(), arrayOf()))
 }
