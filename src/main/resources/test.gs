@@ -1,2 +1,2 @@
 start fn main(a, b):
-    ret 0
+    ret 1 + 2

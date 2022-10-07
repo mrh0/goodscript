@@ -9,9 +9,9 @@ import github.mrh0.goodscript.ir.IRFunc
 import github.mrh0.goodscript.types.GsType
 import github.mrh0.goodscript.types.GsTypeNone
 
-class TFunc(location: Loc, val block: TBlock, val name: String, val args: MutableList<String>) : Tok(location) {
+class TFunc(location: Loc, val block: TBlock, val prefix: String, val name: String, val args: MutableList<String>) : Tok(location) {
     override fun toString(): String {
-        return "$name($args, $block)"
+        return "$prefix:$name($args, $block)"
     }
 
     override fun process(cd: CompileData): Pair<GsType, IIR> {

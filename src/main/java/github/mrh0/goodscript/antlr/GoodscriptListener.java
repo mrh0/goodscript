@@ -66,6 +66,26 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitPrimitive(GoodscriptParser.PrimitiveContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GoodscriptParser#unOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterUnOp(GoodscriptParser.UnOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GoodscriptParser#unOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitUnOp(GoodscriptParser.UnOpContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GoodscriptParser#binOp}.
+	 * @param ctx the parse tree
+	 */
+	void enterBinOp(GoodscriptParser.BinOpContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GoodscriptParser#binOp}.
+	 * @param ctx the parse tree
+	 */
+	void exitBinOp(GoodscriptParser.BinOpContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code exprNest}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
@@ -77,6 +97,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExprNest(GoodscriptParser.ExprNestContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code exprBinOp}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprBinOp(GoodscriptParser.ExprBinOpContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprBinOp}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprBinOp(GoodscriptParser.ExprBinOpContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code exprPrimitive}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
@@ -90,17 +122,17 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitExprPrimitive(GoodscriptParser.ExprPrimitiveContext ctx);
 	/**
-	 * Enter a parse tree produced by the {@code exprOpBin}
+	 * Enter a parse tree produced by the {@code exprUnOp}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void enterExprOpBin(GoodscriptParser.ExprOpBinContext ctx);
+	void enterExprUnOp(GoodscriptParser.ExprUnOpContext ctx);
 	/**
-	 * Exit a parse tree produced by the {@code exprOpBin}
+	 * Exit a parse tree produced by the {@code exprUnOp}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
 	 */
-	void exitExprOpBin(GoodscriptParser.ExprOpBinContext ctx);
+	void exitExprUnOp(GoodscriptParser.ExprUnOpContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code statementAssignment}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
@@ -145,6 +177,16 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUse(GoodscriptParser.UseContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link GoodscriptParser#funcPrefix}.
+	 * @param ctx the parse tree
+	 */
+	void enterFuncPrefix(GoodscriptParser.FuncPrefixContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GoodscriptParser#funcPrefix}.
+	 * @param ctx the parse tree
+	 */
+	void exitFuncPrefix(GoodscriptParser.FuncPrefixContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GoodscriptParser#func}.
 	 * @param ctx the parse tree

@@ -12,14 +12,14 @@ import github.mrh0.goodscript.types.GsType
 
 class TAdd(location: Loc, val left: ITok, val right: ITok) : Tok(location) {
     override fun toString(): String {
-        return "?+?"
+        return "($left + $right)"
     }
 
     override fun process(i: CompileData): Pair<GsType, IIR> {
         val l = left.process(i);
         val r = right.process(i);
         return when {
-            l.first is GsTypeInt && r.first is GsTypeInt -> Pair(GsTypeInt, IRAddIntInt(location))
+            l.first is GsTypeInt && r.first is GsTypeInt -> Pair(GsTypeInt, IRAddIntInt(location, l.second, r.second))
             else -> throw GsTypeError("+", l.first, r.first)
         }
     }

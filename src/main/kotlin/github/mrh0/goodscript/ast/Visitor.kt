@@ -33,7 +33,7 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
     }
 
     override fun visitFunc(ctx: GoodscriptParser.FuncContext): ITok {
-        return TFunc(loc(ctx), cvisit(ctx.body), ctx.name.text, tvisit(ctx.args));
+        return TFunc(loc(ctx), cvisit(ctx.body), ctx.funcPrefix().text, ctx.name.text, tvisit(ctx.args))
     }
 
     override fun visitBlock(ctx: GoodscriptParser.BlockContext): ITok {
@@ -45,10 +45,17 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
     }
 
     override fun visitExprNest(ctx: GoodscriptParser.ExprNestContext): ITok {
-        return visit(ctx.expr());
+        return visit(ctx.expr())
     }
 
     override fun visitNumberInt(ctx: GoodscriptParser.NumberIntContext): ITok {
         return TInteger(loc(ctx), Integer.valueOf(ctx.text))
+    }
+
+    override fun visitExprBinOp(ctx: GoodscriptParser.ExprBinOpContext): ITok {
+        return when (ctx.binOp().text) {
+            "+" -> TAdd(loc(ctx), visit(ctx.left), visit(ctx.right))
+            else -> throw NotImplementedError("Binary Operator '${ctx.binOp().text}' is not implemented.")
+        }
     }
 }

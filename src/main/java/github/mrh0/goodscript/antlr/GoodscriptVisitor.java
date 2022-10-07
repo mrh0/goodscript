@@ -45,12 +45,31 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrimitive(GoodscriptParser.PrimitiveContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GoodscriptParser#unOp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUnOp(GoodscriptParser.UnOpContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GoodscriptParser#binOp}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBinOp(GoodscriptParser.BinOpContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code exprNest}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitExprNest(GoodscriptParser.ExprNestContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprBinOp}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprBinOp(GoodscriptParser.ExprBinOpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exprPrimitive}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
@@ -59,12 +78,12 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprPrimitive(GoodscriptParser.ExprPrimitiveContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code exprOpBin}
+	 * Visit a parse tree produced by the {@code exprUnOp}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExprOpBin(GoodscriptParser.ExprOpBinContext ctx);
+	T visitExprUnOp(GoodscriptParser.ExprUnOpContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code statementAssignment}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
@@ -91,6 +110,12 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitUse(GoodscriptParser.UseContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link GoodscriptParser#funcPrefix}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitFuncPrefix(GoodscriptParser.FuncPrefixContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GoodscriptParser#func}.
 	 * @param ctx the parse tree

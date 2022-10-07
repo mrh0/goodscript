@@ -57,10 +57,22 @@ primitive:
     | ATOM
     ;
 
+unOp:
+    'not' | '!' | '~'
+    ;
+
+binOp:
+    '+' | '-' | '*' | '/' | '%'
+    | '<' | '>' | '<=' | '>=' | '==' | '!='
+    | '&' | '|' | 'and' | 'or'
+    | '<<' | '>>' | '='
+    ;
+
 expr:
-    expr '+' expr       #exprOpBin
-    | '(' expr ')'      #exprNest
-    | primitive         #exprPrimitive
+    left=expr binOp right=expr          #exprBinOp
+    | unOp expr                         #exprUnOp
+    | '(' expr ')'                      #exprNest
+    | primitive                         #exprPrimitive
 //   | shortcall         #exprShortcall
     ;
 

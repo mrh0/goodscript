@@ -57,10 +57,22 @@ primitive:
     | ATOM
     ;
 
+unOp:
+    'not' | '!' | '~'
+    ;
+
+binOp:
+    '+' | '-' | '*' | '/' | '%'
+    | '<' | '>' | '<=' | '>=' | '==' | '!='
+    | '&' | '|' | 'and' | 'or'
+    | '<<' | '>>' | '='
+    ;
+
 expr:
-    expr '+' expr       #exprOpBin
-    | '(' expr ')'      #exprNest
-    | primitive         #exprPrimitive
+    left=expr binOp right=expr          #exprBinOp
+    | unOp expr                         #exprUnOp
+    | '(' expr ')'                      #exprNest
+    | primitive                         #exprPrimitive
 //   | shortcall         #exprShortcall
     ;
 
@@ -85,8 +97,12 @@ use:
     'use' (NAME 'from')? STRING ('as' NAME)? NL
     ;
 
+funcPrefix:
+    'start'
+    ;
+
 func:
-    'start'? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' ':' body=block
+    funcPrefix? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' ':' body=block
     ;
 
 program:

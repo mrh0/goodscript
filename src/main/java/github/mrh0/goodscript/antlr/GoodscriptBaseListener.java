@@ -76,6 +76,30 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterUnOp(GoodscriptParser.UnOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUnOp(GoodscriptParser.UnOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBinOp(GoodscriptParser.BinOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBinOp(GoodscriptParser.BinOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExprNest(GoodscriptParser.ExprNestContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -83,6 +107,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExprNest(GoodscriptParser.ExprNestContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExprBinOp(GoodscriptParser.ExprBinOpContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExprBinOp(GoodscriptParser.ExprBinOpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -100,13 +136,13 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterExprOpBin(GoodscriptParser.ExprOpBinContext ctx) { }
+	@Override public void enterExprUnOp(GoodscriptParser.ExprUnOpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void exitExprOpBin(GoodscriptParser.ExprOpBinContext ctx) { }
+	@Override public void exitExprUnOp(GoodscriptParser.ExprUnOpContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -155,6 +191,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitUse(GoodscriptParser.UseContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterFuncPrefix(GoodscriptParser.FuncPrefixContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitFuncPrefix(GoodscriptParser.FuncPrefixContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
