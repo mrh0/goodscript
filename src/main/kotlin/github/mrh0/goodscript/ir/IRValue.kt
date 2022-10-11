@@ -1,16 +1,16 @@
 package github.mrh0.goodscript.ir
 
 import github.mrh0.goodscript.ast.Loc
-import github.mrh0.goodscript.values.GsValue
+import github.mrh0.goodscript.values.GsAny
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 
-class IRValue(location: Loc, val value: GsValue) : IR(location) {
+class IRValue<T : GsAny>(location: Loc, val value: T) : IR<T>(location) {
     override fun toString(): String {
         return "value(${value})"
     }
 
-    override fun evaluate(vm: VM, c: Context): GsValue {
-        TODO("Not yet implemented")
+    override fun evaluate(vm: VM, c: Context): T {
+        return value
     }
 }

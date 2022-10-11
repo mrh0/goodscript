@@ -2,16 +2,17 @@ package github.mrh0.goodscript.values
 
 import github.mrh0.goodscript.types.GsType
 
-abstract class GsValue {
+abstract class GsAny {
     abstract fun getType(): GsType
 
     abstract fun getName(): String
 
-    fun isSameType(other: GsValue): Boolean {
+    fun isSameType(other: GsAny): Boolean {
         return this.getType() == other.getType()
     }
 
-    open fun invoke(vararg args: GsValue): GsValue {
+    // Operations
+    open fun invoke(vararg args: GsAny): GsAny {
         throw Exception("Cannot invoke ${getType()}")
     }
 }
