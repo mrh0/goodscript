@@ -1,9 +1,9 @@
 package github.mrh0.goodscript.values
 
-import github.mrh0.goodscript.types.GsType
+import github.mrh0.goodscript.types.GsTypeBase
 
-class GsFunction : GsAny() {
-    override fun getType(): GsType {
+class GsFunction : GsBase() {
+    override fun getType(): GsTypeBase {
         TODO("Not yet implemented")
     }
 

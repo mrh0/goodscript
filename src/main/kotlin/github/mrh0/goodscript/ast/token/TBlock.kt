@@ -6,8 +6,7 @@ import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.IRBlock
-import github.mrh0.goodscript.ir.IRStatementReturn
-import github.mrh0.goodscript.types.GsType
+import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.types.GsTypeNone
 
 class TBlock(location: Loc, val statements: MutableList<ITok>) : Tok(location) {
@@ -15,7 +14,7 @@ class TBlock(location: Loc, val statements: MutableList<ITok>) : Tok(location) {
         return "$statements"
     }
 
-    override fun process(cd: CompileData): Pair<GsType, IIR> {
+    override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
         val ir = statements.map { it.process(cd).second }
         return Pair(GsTypeNone, IRBlock(location, ir))
     }

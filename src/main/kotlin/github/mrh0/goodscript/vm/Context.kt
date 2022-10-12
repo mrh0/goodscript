@@ -1,8 +1,8 @@
 package github.mrh0.goodscript.vm
 
-import github.mrh0.goodscript.types.GsType
-import github.mrh0.goodscript.values.GsAny
+import github.mrh0.goodscript.types.GsTypeBase
+import github.mrh0.goodscript.values.GsBase
 
-class Context(val types: Array<GsType>, val values: Array<GsAny>) {
+class Context(val types: Array<GsTypeBase>, val values: Array<GsBase>) {
 
 }

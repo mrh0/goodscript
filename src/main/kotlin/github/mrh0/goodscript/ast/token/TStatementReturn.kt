@@ -6,11 +6,10 @@ import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.IRStatementReturn
-import github.mrh0.goodscript.types.GsType
-import github.mrh0.goodscript.types.GsTypeNone
+import github.mrh0.goodscript.types.GsTypeBase
 
 class TStatementReturn(location: Loc, val next: ITok) : Tok(location) {
-    override fun process(cd: CompileData): Pair<GsType, IIR> {
+    override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
         val ir = next.process(cd)
         return Pair(ir.first, IRStatementReturn(location, ir.second))
     }

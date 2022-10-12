@@ -1,5 +1,5 @@
 package github.mrh0.goodscript.types
 
-open class GsType {
+open abstract class GsTypeBase {
 
 }

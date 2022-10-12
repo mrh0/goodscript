@@ -1,5 +1,5 @@
 package github.mrh0.goodscript.values
 
 interface IOf<T> {
-    fun of(of: T): GsAny
+    fun of(of: T): GsBase
 }

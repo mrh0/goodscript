@@ -8,14 +8,14 @@ import github.mrh0.goodscript.error.GsTypeError
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.binop.add.IRAddIntInt
 import github.mrh0.goodscript.types.GsTypeInt
-import github.mrh0.goodscript.types.GsType
+import github.mrh0.goodscript.types.GsTypeBase
 
 class TAdd(location: Loc, val left: ITok, val right: ITok) : Tok(location) {
     override fun toString(): String {
         return "($left + $right)"
     }
 
-    override fun process(i: CompileData): Pair<GsType, IIR> {
+    override fun process(i: CompileData): Pair<GsTypeBase, IIR> {
         val l = left.process(i);
         val r = right.process(i);
         return when {
