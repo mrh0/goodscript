@@ -9,6 +9,7 @@ import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.binop.add.IRAddIntInt
 import github.mrh0.goodscript.types.GsTypeInt
 import github.mrh0.goodscript.types.GsTypeBase
+import github.mrh0.goodscript.values.GsBase
 
 class TAdd(location: Loc, val left: ITok, val right: ITok) : Tok(location) {
     override fun toString(): String {

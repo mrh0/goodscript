@@ -97,8 +97,12 @@ use:
     'use' (NAME 'from')? STRING ('as' NAME)? NL
     ;
 
+funcPrefix:
+    'start'
+    ;
+
 func:
-    'start'? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' ':' body=block
+    funcPrefix? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' ':' body=block
     ;
 
 program:
