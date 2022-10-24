@@ -5,7 +5,7 @@ import github.mrh0.goodscript.values.GsBase
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 
-class IRBlock(location: Loc, val statements: List<IIR<GsBase>>) : IR<GsBase>(location) {
+class IRBlock(location: Loc, val statements: List<IIR>) : IR(location) {
     override fun toString(): String {
         return "$statements"
     }

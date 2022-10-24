@@ -5,5 +5,5 @@ import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 
 interface IIR {
-    fun <T : GsBase>evaluate(vm: VM, c: Context): T
+    fun evaluate(vm: VM, c: Context): GsBase
 }
