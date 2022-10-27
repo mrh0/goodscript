@@ -6,5 +6,5 @@ import github.mrh0.goodscript.values.GsBase
 
 interface ITok {
     // Hint is for inferring types
-    fun process(cd: CompileData /*, hint: GsType*/): Pair<GsTypeBase, IIR<GsBase>>
+    fun process(cd: CompileData /*, hint: GsType*/): Pair<GsTypeBase, IIR>
 }

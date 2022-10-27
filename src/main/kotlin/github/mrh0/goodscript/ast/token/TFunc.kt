@@ -15,7 +15,7 @@ class TFunc(location: Loc, val block: TBlock, val prefix: String, val name: Stri
         return "$prefix:$name($args, $block)"
     }
 
-    override fun process(cd: CompileData): Pair<GsTypeBase, IIR<GsBase>> {
+    override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
         val ir = block.process(cd)
         return Pair(GsTypeNone, IRFunc(location, ir.second as IRBlock, name, args))
     }
