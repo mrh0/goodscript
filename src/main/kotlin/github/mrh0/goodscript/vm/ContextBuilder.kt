@@ -24,7 +24,7 @@ class ContextBuilder {
         return if(map.containsKey(name)) types[map[name]!!] else GsTypeNone
     }
 
-    fun set(name: String, type: GsTypeBase) {
+    fun assign(name: String, type: GsTypeBase) {
         if(!map.containsKey(name))
             throw Exception("Variable '$name' is used before it is defined")
         if(type != types[map[name]!!])
