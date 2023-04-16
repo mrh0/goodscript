@@ -1,5 +1,7 @@
 package github.mrh0.goodscript.types
 
-open abstract class GsTypeBase {
-
+abstract class GsTypeBase(val identifier: String) {
+    override fun toString(): String {
+        return identifier
+    }
 }

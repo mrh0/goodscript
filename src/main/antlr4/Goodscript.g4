@@ -62,13 +62,13 @@ block:
     ;
 
 unOp:
-    'not' | '!' | '~' | '-'
+    'not' | '!' | '!!' | '~' | '-'
     ;
 
 binOp:
     '+' | '-' | '*' | '/' | '%'
     | '<' | '>' | '<=' | '>=' | '==' | '!='
-    | '&' | '|' | 'and' | 'or'
+    | '&' | '|' | '&&' | 'and' | '||' | 'or'
     | '<<' | '>>'
     ;
 
@@ -94,9 +94,12 @@ statement:
     | NAME '=' expr NL              #statementAssignment
 //    | shortcall NL                  #statementShortcall
     | 'ret' expr NL                 #statementReturn
+    | 'break' NL                    #statementBreak
+    | 'continue' NL                 #statementContinue
 
     | 'if' '('? conditions+=expr ')'? ':' bodies+=block ('eif' '('? conditions+=expr ')'? ':' bodies+=block)* ('else' ':' elseBody=block)? #statementIf
     | 'while' '('? condition=expr ')'? ':' body=block ('else' ':' elseBody=block)? #statementWhile
+
     ;
 
 

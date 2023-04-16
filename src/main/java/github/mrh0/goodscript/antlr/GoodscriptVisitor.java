@@ -155,6 +155,20 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatementReturn(GoodscriptParser.StatementReturnContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code statementBreak}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementBreak(GoodscriptParser.StatementBreakContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementContinue}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementContinue(GoodscriptParser.StatementContinueContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code statementIf}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree

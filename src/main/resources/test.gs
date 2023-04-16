@@ -6,5 +6,5 @@ start fn main(a, b):
     eif false:
         k = 5
     else:
-        k = -1
+        k = false
     ret k

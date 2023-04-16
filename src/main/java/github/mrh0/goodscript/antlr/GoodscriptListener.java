@@ -254,6 +254,30 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitStatementReturn(GoodscriptParser.StatementReturnContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code statementBreak}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementBreak(GoodscriptParser.StatementBreakContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code statementBreak}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementBreak(GoodscriptParser.StatementBreakContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code statementContinue}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementContinue(GoodscriptParser.StatementContinueContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code statementContinue}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementContinue(GoodscriptParser.StatementContinueContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code statementIf}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree

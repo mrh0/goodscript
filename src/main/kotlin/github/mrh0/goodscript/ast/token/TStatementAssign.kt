@@ -11,7 +11,7 @@ import github.mrh0.goodscript.types.GsTypeBase
 class TStatementAssign(location: Loc, private val varName: String, private val expr: ITok) : Tok(location) {
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
         val ir = expr.process(cd)
-        val index = cd.ctx().assign(varName, ir.first)
+        val index = cd.ctx().assign(location, varName, ir.first)
         return Pair(ir.first, IRStatementAssign(location, index, ir.second))
     }
 

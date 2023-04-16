@@ -1,4 +1,4 @@
 package github.mrh0.goodscript.types
 
-object GsTypeNone : GsTypeBase() {
+object GsTypeNone : GsTypeBase("Gs.None") {
 }

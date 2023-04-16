@@ -13,9 +13,9 @@ class IRBlock(location: Loc, val statements: List<IIR>) : IR(location) {
 
     override fun evaluate(vm: VM, c: Context): GsBase {
         for (statement in statements) {
-            c.captureReturn()
             val ret = statement.evaluate(vm, c)
             if(c.isReturnFlagged()) return ret
+            if(c.isContinueFlagged() || c.isBreakFlagged()) return GsValueNone
         }
         return GsValueNone
     }

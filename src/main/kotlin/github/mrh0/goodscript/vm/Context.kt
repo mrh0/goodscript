@@ -13,6 +13,16 @@ class Context(val name: String, val types: Array<GsTypeBase>, val values: Array<
     fun captureReturn() { shouldReturn = false }
     fun isReturnFlagged() = shouldReturn
 
+    private var shouldContinue = false;
+    fun flagContinue() { shouldContinue = true }
+    fun captureContinue() { shouldContinue = false }
+    fun isContinueFlagged() = shouldContinue
+
+    private var shouldBreak = false;
+    fun flagBreak() { shouldBreak = true }
+    fun captureBreak() { shouldBreak = false }
+    fun isBreakFlagged() = shouldBreak
+
     fun getValue(index: Int) = values[index]
     fun setValue(index: Int, value: GsBase) {
         values[index] = value
