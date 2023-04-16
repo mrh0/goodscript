@@ -11,6 +11,6 @@ class IRProgram(location: Loc, val functions: List<IRFunc>) : IR(location) {
     }
 
     override fun evaluate(vm: VM, c: Context): GsBase {
-        TODO("Not yet implemented")
+        return functions[0].evaluate(vm, c)
     }
 }

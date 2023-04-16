@@ -65,7 +65,7 @@ binOp:
     '+' | '-' | '*' | '/' | '%'
     | '<' | '>' | '<=' | '>=' | '==' | '!='
     | '&' | '|' | 'and' | 'or'
-    | '<<' | '>>' | '='
+    | '<<' | '>>'
     ;
 
 expr:
@@ -73,6 +73,7 @@ expr:
     | unOp expr                         #exprUnOp
     | '(' expr ')'                      #exprNest
     | primitive                         #exprPrimitive
+    | NAME                              #exprNamed
 //   | shortcall         #exprShortcall
     ;
 
@@ -84,7 +85,8 @@ shortcall:
 */
 
 statement:
-    NAME '=' expr NL              #statementAssignment
+    'var' NAME '=' expr NL          #statementDefine
+    | NAME '=' expr NL              #statementAssignment
 //    | shortcall NL                  #statementShortcall
     | 'ret' expr NL                 #statementReturn
     ;

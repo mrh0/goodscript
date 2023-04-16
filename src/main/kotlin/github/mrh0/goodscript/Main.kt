@@ -27,8 +27,10 @@ fun main(args: Array<String>) {
     val tree: ITok = Visitor(file).visitProgram(parser.program())
     println(tree)
 
-    val (_, ir) = tree.process(CompileData())
+    val cd = CompileData()
+    val (_, ir) = tree.process(cd)
     println(ir)
+    cd.newContext("")
 
-    //ir.evaluate(VM(), Context(arrayOf(), arrayOf()))
+    println(ir.evaluate(VM(cd), Context.IDENTITY))
 }

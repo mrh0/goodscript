@@ -11,6 +11,8 @@ class IRStatementReturn(location: Loc, val next: IIR) : IR(location) {
     }
 
     override fun evaluate(vm: VM, c: Context): GsBase {
-        TODO("Not yet implemented")
+        val ret = next.evaluate(vm, c)
+        c.flagReturn()
+        return ret
     }
 }

@@ -1,4 +1,4 @@
-package github.mrh0.goodscript.ir.binop.add
+package github.mrh0.goodscript.ir.binop.arithmetic.add
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ir.IIR

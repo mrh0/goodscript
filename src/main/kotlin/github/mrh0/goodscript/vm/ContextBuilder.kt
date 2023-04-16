@@ -1,11 +1,10 @@
 package github.mrh0.goodscript.vm
 
+import github.mrh0.goodscript.error.GsNotDefinedError
 import github.mrh0.goodscript.types.GsTypeBase
-import github.mrh0.goodscript.types.GsTypeNone
 import github.mrh0.goodscript.values.GsBase
-import github.mrh0.goodscript.values.GsValueNone
 
-class ContextBuilder {
+class ContextBuilder(val contextName: String) {
     val types: MutableList<GsTypeBase> = mutableListOf()
     val values: MutableList<GsBase> = mutableListOf()
     val names: MutableList<String> = mutableListOf()
@@ -13,6 +12,7 @@ class ContextBuilder {
     var index: Int = 0
 
     fun define(type: GsTypeBase, value: GsBase, name: String): Int {
+        //println("Defining $name:$index for $contextName")
         types.add(type)
         values.add(value)
         names.add(name)
@@ -20,18 +20,24 @@ class ContextBuilder {
         return index++
     }
 
-    fun get(name: String): GsTypeBase {
-        return if(map.containsKey(name)) types[map[name]!!] else GsTypeNone
+    fun getType(name: String): GsTypeBase {
+        return if(map.containsKey(name)) types[map[name]!!] else throw GsNotDefinedError(name)
     }
 
-    fun assign(name: String, type: GsTypeBase) {
+    fun getIndex(name: String): Int {
+        return if(map.containsKey(name)) map[name]!! else throw GsNotDefinedError(name)
+    }
+
+    fun assign(name: String, type: GsTypeBase): Int {
         if(!map.containsKey(name))
-            throw Exception("Variable '$name' is used before it is defined")
+            throw GsNotDefinedError(name)
         if(type != types[map[name]!!])
             throw Exception("Cannot set variable '$name' of type '${types[map[name]!!]}' to value of type '$type'")
+        return map[name]!!
     }
 
     fun build(): Context {
-        return Context(types.toTypedArray(), values.toTypedArray(), names.toTypedArray())
+        // println("BuildingContext: $contextName, ${types.size}")
+        return Context(contextName, types.toTypedArray(), values.toTypedArray(), names.toTypedArray())
     }
 }

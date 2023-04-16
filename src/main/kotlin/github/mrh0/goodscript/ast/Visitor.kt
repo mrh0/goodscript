@@ -3,6 +3,12 @@ package github.mrh0.goodscript.ast
 import github.mrh0.goodscript.antlr.GoodscriptBaseVisitor
 import github.mrh0.goodscript.antlr.GoodscriptParser
 import github.mrh0.goodscript.ast.token.*
+import github.mrh0.goodscript.ast.token.data.TBoolean
+import github.mrh0.goodscript.ast.token.data.TInteger
+import github.mrh0.goodscript.ast.token.op.arithmetic.TAdd
+import github.mrh0.goodscript.ast.token.op.arithmetic.TSub
+import github.mrh0.goodscript.ast.token.op.compare.TEquals
+import github.mrh0.goodscript.ast.token.op.compare.TNotEquals
 import org.antlr.v4.runtime.ParserRuleContext
 import org.antlr.v4.runtime.Token
 import java.io.File
@@ -55,7 +61,27 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
     override fun visitExprBinOp(ctx: GoodscriptParser.ExprBinOpContext): ITok {
         return when (ctx.binOp().text) {
             "+" -> TAdd(loc(ctx), visit(ctx.left), visit(ctx.right))
+            "-" -> TSub(loc(ctx), visit(ctx.left), visit(ctx.right))
+
+            "==" -> TEquals(loc(ctx), visit(ctx.left), visit(ctx.right))
+            "!=" -> TNotEquals(loc(ctx), visit(ctx.left), visit(ctx.right))
             else -> throw NotImplementedError("Binary Operator '${ctx.binOp().text}' is not implemented.")
         }
+    }
+
+    override fun visitStatementDefine(ctx: GoodscriptParser.StatementDefineContext): ITok {
+        return TStatementDefine(loc(ctx), ctx.NAME().text, visit(ctx.expr()))
+    }
+
+    override fun visitExprNamed(ctx: GoodscriptParser.ExprNamedContext): ITok {
+        return TNamed(loc(ctx), ctx.NAME().text)
+    }
+
+    override fun visitStatementAssignment(ctx: GoodscriptParser.StatementAssignmentContext): ITok {
+        return TStatementAssign(loc(ctx), ctx.NAME().text, visit(ctx.expr()))
+    }
+
+    override fun visitPrimitiveBool(ctx: GoodscriptParser.PrimitiveBoolContext): ITok {
+        return TBoolean(loc(ctx), ctx.BOOL().text == "true")
     }
 }

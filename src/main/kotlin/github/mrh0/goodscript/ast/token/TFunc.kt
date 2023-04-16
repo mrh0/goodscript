@@ -16,6 +16,7 @@ class TFunc(location: Loc, val block: TBlock, val prefix: String, val name: Stri
     }
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
+        cd.newContext(name)
         val ir = block.process(cd)
         return Pair(GsTypeNone, IRFunc(location, ir.second as IRBlock, name, args))
     }

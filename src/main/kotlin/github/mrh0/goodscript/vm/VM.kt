@@ -1,11 +1,9 @@
 package github.mrh0.goodscript.vm
 
-import github.mrh0.goodscript.values.GsBase
+import github.mrh0.goodscript.ast.CompileData
 
-class VM {
-    private val context: MutableMap<String, GsBase> = mutableMapOf()
+class VM(cd: CompileData) {
+    private val contexts: MutableMap<String, Context> = cd.contextMap
 
-    fun store(name: String, value: GsBase) = context.put(name, value)
-
-    fun get(name: String) = context[name]
+    fun getContext(name: String) = contexts[name]!!
 }

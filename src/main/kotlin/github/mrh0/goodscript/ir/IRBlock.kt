@@ -2,6 +2,7 @@ package github.mrh0.goodscript.ir
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.values.GsBase
+import github.mrh0.goodscript.values.GsValueNone
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 
@@ -11,6 +12,11 @@ class IRBlock(location: Loc, val statements: List<IIR>) : IR(location) {
     }
 
     override fun evaluate(vm: VM, c: Context): GsBase {
-        TODO("Not yet implemented")
+        for (statement in statements) {
+            c.captureReturn()
+            val ret = statement.evaluate(vm, c)
+            if(c.isReturnFlagged()) return ret
+        }
+        return GsValueNone
     }
 }
