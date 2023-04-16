@@ -6,4 +6,5 @@ import github.mrh0.goodscript.vm.VM
 
 interface IIR {
     fun evaluate(vm: VM, c: Context): GsBase
+    fun deterministic() = false
 }

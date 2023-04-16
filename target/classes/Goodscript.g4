@@ -29,8 +29,8 @@ BOOL: 'true' | 'false';
 NAME: [_a-zA-Z][_a-zA-Z0-9]*;
 ATOM: ':'[a-zA-Z0-9][_a-zA-Z0-9]*;
 
-INT: '0'|'-'?[1-9][0-9]*;
-FLOAT: '0f'|'-'?[1-9][0-9]*('.'[0-9]*)?'f'?;
+INT: '0'|[1-9][0-9]*;
+FLOAT: '0f'|[1-9][0-9]*('.'[0-9]*)?'f'?;
 HEX: '0x'[0-9a-fA-F]*;
 BIN: '0b'[0-1]*;
 
@@ -50,15 +50,19 @@ number:
     ;
 
 primitive:
-    number
-    | BOOL
-    | STRING
-    | CHAR
-    | ATOM
+    number          #primitiveNumber
+    | BOOL          #primitiveBool
+    | STRING        #primitiveString
+    | CHAR          #primitiveChar
+    | ATOM          #primitiveAtom
+    ;
+
+block:
+    INDENT (statements+=statement)+ DEDENT
     ;
 
 unOp:
-    'not' | '!' | '~'
+    'not' | '!' | '~' | '-'
     ;
 
 binOp:
@@ -74,6 +78,7 @@ expr:
     | '(' expr ')'                      #exprNest
     | primitive                         #exprPrimitive
     | NAME                              #exprNamed
+    | 'if' '(' condition=expr ')' body=expr 'else' elseBody=expr #exprInlineIf
 //   | shortcall         #exprShortcall
     ;
 
@@ -89,11 +94,12 @@ statement:
     | NAME '=' expr NL              #statementAssignment
 //    | shortcall NL                  #statementShortcall
     | 'ret' expr NL                 #statementReturn
+
+    | 'if' '('? conditions+=expr ')'? ':' bodies+=block ('eif' '('? conditions+=expr ')'? ':' bodies+=block)* ('else' ':' elseBody=block)? #statementIf
+    | 'while' '('? condition=expr ')'? ':' body=block ('else' ':' elseBody=block)? #statementWhile
     ;
 
-block:
-    INDENT (statements+=statement)+ DEDENT
-    ;
+
 
 use:
     'use' (NAME 'from')? STRING ('as' NAME)? NL

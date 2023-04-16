@@ -74,6 +74,12 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitPrimitiveAtom(GoodscriptParser.PrimitiveAtomContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GoodscriptParser#block}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitBlock(GoodscriptParser.BlockContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link GoodscriptParser#unOp}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
@@ -99,6 +105,13 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExprBinOp(GoodscriptParser.ExprBinOpContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprInlineIf}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprInlineIf(GoodscriptParser.ExprInlineIfContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exprPrimitive}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
@@ -142,11 +155,19 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatementReturn(GoodscriptParser.StatementReturnContext ctx);
 	/**
-	 * Visit a parse tree produced by {@link GoodscriptParser#block}.
+	 * Visit a parse tree produced by the {@code statementIf}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitBlock(GoodscriptParser.BlockContext ctx);
+	T visitStatementIf(GoodscriptParser.StatementIfContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementWhile}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementWhile(GoodscriptParser.StatementWhileContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GoodscriptParser#use}.
 	 * @param ctx the parse tree

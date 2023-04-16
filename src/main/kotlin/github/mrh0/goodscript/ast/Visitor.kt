@@ -3,9 +3,11 @@ package github.mrh0.goodscript.ast
 import github.mrh0.goodscript.antlr.GoodscriptBaseVisitor
 import github.mrh0.goodscript.antlr.GoodscriptParser
 import github.mrh0.goodscript.ast.token.*
+import github.mrh0.goodscript.ast.token.branch.TStatementIf
 import github.mrh0.goodscript.ast.token.data.TBoolean
 import github.mrh0.goodscript.ast.token.data.TInteger
 import github.mrh0.goodscript.ast.token.op.arithmetic.TAdd
+import github.mrh0.goodscript.ast.token.op.arithmetic.TNegate
 import github.mrh0.goodscript.ast.token.op.arithmetic.TSub
 import github.mrh0.goodscript.ast.token.op.compare.TEquals
 import github.mrh0.goodscript.ast.token.op.compare.TNotEquals
@@ -14,7 +16,7 @@ import org.antlr.v4.runtime.Token
 import java.io.File
 
 
-class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
+class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
 
     fun <T : ParserRuleContext, O : ITok?> visit(list: MutableList<T>): MutableList<O> {
         val t: MutableList<O> = mutableListOf()
@@ -69,6 +71,13 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
         }
     }
 
+    override fun visitExprUnOp(ctx: GoodscriptParser.ExprUnOpContext): ITok {
+        return when (ctx.unOp().text) {
+            "-" -> TNegate(loc(ctx), visit(ctx.expr()))
+            else -> throw NotImplementedError("Binary Operator '${ctx.unOp().text}' is not implemented.")
+        }
+    }
+
     override fun visitStatementDefine(ctx: GoodscriptParser.StatementDefineContext): ITok {
         return TStatementDefine(loc(ctx), ctx.NAME().text, visit(ctx.expr()))
     }
@@ -83,5 +92,9 @@ class Visitor(val file: File) : GoodscriptBaseVisitor<ITok>() {
 
     override fun visitPrimitiveBool(ctx: GoodscriptParser.PrimitiveBoolContext): ITok {
         return TBoolean(loc(ctx), ctx.BOOL().text == "true")
+    }
+
+    override fun visitStatementIf(ctx: GoodscriptParser.StatementIfContext): ITok {
+        return TStatementIf(loc(ctx), visit(ctx.conditions), visit(ctx.bodies), if(ctx.elseBody == null) null else visit(ctx.elseBody))
     }
 }

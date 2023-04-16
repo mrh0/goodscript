@@ -116,6 +116,16 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitPrimitiveAtom(GoodscriptParser.PrimitiveAtomContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link GoodscriptParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void enterBlock(GoodscriptParser.BlockContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link GoodscriptParser#block}.
+	 * @param ctx the parse tree
+	 */
+	void exitBlock(GoodscriptParser.BlockContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link GoodscriptParser#unOp}.
 	 * @param ctx the parse tree
 	 */
@@ -159,6 +169,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExprBinOp(GoodscriptParser.ExprBinOpContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code exprInlineIf}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprInlineIf(GoodscriptParser.ExprInlineIfContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprInlineIf}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprInlineIf(GoodscriptParser.ExprInlineIfContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code exprPrimitive}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
@@ -232,15 +254,29 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitStatementReturn(GoodscriptParser.StatementReturnContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link GoodscriptParser#block}.
+	 * Enter a parse tree produced by the {@code statementIf}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void enterBlock(GoodscriptParser.BlockContext ctx);
+	void enterStatementIf(GoodscriptParser.StatementIfContext ctx);
 	/**
-	 * Exit a parse tree produced by {@link GoodscriptParser#block}.
+	 * Exit a parse tree produced by the {@code statementIf}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
 	 */
-	void exitBlock(GoodscriptParser.BlockContext ctx);
+	void exitStatementIf(GoodscriptParser.StatementIfContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code statementWhile}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementWhile(GoodscriptParser.StatementWhileContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code statementWhile}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementWhile(GoodscriptParser.StatementWhileContext ctx);
 	/**
 	 * Enter a parse tree produced by {@link GoodscriptParser#use}.
 	 * @param ctx the parse tree

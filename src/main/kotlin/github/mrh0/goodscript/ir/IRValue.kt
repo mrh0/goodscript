@@ -13,4 +13,6 @@ class IRValue<T : GsBase>(location: Loc, val value: T) : IR(location) {
     override fun evaluate(vm: VM, c: Context): T {
         return value
     }
+
+    override fun deterministic() = true
 }

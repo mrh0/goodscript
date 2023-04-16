@@ -6,7 +6,7 @@ import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.error.GsOpTypeError
 import github.mrh0.goodscript.ir.IIR
-import github.mrh0.goodscript.ir.binop.compare.arithmetic.add.sub.IRSubIntInt
+import github.mrh0.goodscript.ir.binop.arithmetic.sub.IRSubIntInt
 import github.mrh0.goodscript.types.GsTypeInt
 import github.mrh0.goodscript.types.GsTypeBase
 
