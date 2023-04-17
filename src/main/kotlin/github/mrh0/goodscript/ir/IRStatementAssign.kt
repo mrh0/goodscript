@@ -12,7 +12,7 @@ class IRStatementAssign(location: Loc, private val index: Int, private val expr:
     }
 
     override fun evaluate(vm: VM, c: Context): GsBase {
-        c.setValue(index, expr.evaluate(vm, c))
+        c.setValue(location, index, expr.evaluate(vm, c))
         return GsValueNone
     }
 }

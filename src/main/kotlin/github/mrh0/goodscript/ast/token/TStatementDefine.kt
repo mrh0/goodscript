@@ -9,11 +9,12 @@ import github.mrh0.goodscript.ir.IRStatementDefine
 import github.mrh0.goodscript.ir.IRStatementReturn
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.values.GsValueNone
+import github.mrh0.goodscript.vm.state.Variable
 
 class TStatementDefine(location: Loc, private val varName: String, private val expr: ITok) : Tok(location) {
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
         val ir = expr.process(cd)
-        val index = cd.ctx().define(location, ir.first, GsValueNone, varName)
+        val index = cd.ctx().define(location, Variable(varName, ir.first, GsValueNone))
         return Pair(ir.first, IRStatementDefine(location, index, ir.second))
     }
 

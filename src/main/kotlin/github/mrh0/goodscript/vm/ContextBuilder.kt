@@ -5,25 +5,21 @@ import github.mrh0.goodscript.error.GsAssignTypeError
 import github.mrh0.goodscript.error.GsNotDefinedError
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.values.GsBase
+import github.mrh0.goodscript.vm.state.IVar
 
 class ContextBuilder(val contextName: String) {
-    val types: MutableList<GsTypeBase> = mutableListOf()
-    val values: MutableList<GsBase> = mutableListOf()
-    val names: MutableList<String> = mutableListOf()
-    val map: MutableMap<String, Int> = mutableMapOf()
-    var index: Int = 0
+    private val vars: MutableList<IVar> = mutableListOf()
+    private val map: MutableMap<String, Int> = mutableMapOf()
+    private var index: Int = 0
 
-    fun define(location: Loc, type: GsTypeBase, value: GsBase, name: String): Int {
+    fun define(location: Loc, variable: IVar): Int {
         //println("Defining $name:$index for $contextName")
-        types.add(type)
-        values.add(value)
-        names.add(name)
-        map[name] = index
+        vars.add(variable)
+        map[variable.getName()] = index
         return index++
     }
-
-    fun getType(location: Loc, name: String): GsTypeBase {
-        return if(map.containsKey(name)) types[map[name]!!] else throw GsNotDefinedError(location, name)
+    fun get(location: Loc, name: String): IVar {
+        return if(map.containsKey(name)) vars[map[name]!!] else throw GsNotDefinedError(location, name)
     }
 
     fun getIndex(location: Loc, name: String): Int {
@@ -33,13 +29,13 @@ class ContextBuilder(val contextName: String) {
     fun assign(location: Loc, name: String, type: GsTypeBase): Int {
         if(!map.containsKey(name))
             throw GsNotDefinedError(location, name)
-        if(type != types[map[name]!!])
-            throw GsAssignTypeError(location, name, types[map[name]!!], type)
+        if(type != get(location, name).getType())
+            throw GsAssignTypeError(location, name, get(location, name).getType(), type)
         return map[name]!!
     }
 
     fun build(): Context {
         // println("BuildingContext: $contextName, ${types.size}")
-        return Context(contextName, types.toTypedArray(), values.toTypedArray(), names.toTypedArray())
+        return Context(contextName, vars.toTypedArray())
     }
 }

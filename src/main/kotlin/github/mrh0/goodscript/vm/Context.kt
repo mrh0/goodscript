@@ -1,11 +1,13 @@
 package github.mrh0.goodscript.vm
 
+import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.values.GsBase
+import github.mrh0.goodscript.vm.state.IVar
 
-class Context(val name: String, val types: Array<GsTypeBase>, val values: Array<GsBase>, val names: Array<String>) {
+class Context(val name: String, val vars: Array<IVar>) {
     companion  object {
-        val IDENTITY = Context("IDENTITY", arrayOf(), arrayOf(), arrayOf())
+        val IDENTITY = Context("IDENTITY", arrayOf())
     }
 
     private var shouldReturn = false;
@@ -23,8 +25,6 @@ class Context(val name: String, val types: Array<GsTypeBase>, val values: Array<
     fun captureBreak() { shouldBreak = false }
     fun isBreakFlagged() = shouldBreak
 
-    fun getValue(index: Int) = values[index]
-    fun setValue(index: Int, value: GsBase) {
-        values[index] = value
-    }
+    fun getValue(location: Loc, index: Int) = vars[index].getValue(location)
+    fun setValue(location: Loc, index: Int, value: GsBase) = vars[index].setValue(location, value)
 }

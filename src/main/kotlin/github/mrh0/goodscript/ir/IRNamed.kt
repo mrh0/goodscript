@@ -11,6 +11,6 @@ class IRNamed(location: Loc, private val name: String, private val index: Int) :
     }
 
     override fun evaluate(vm: VM, c: Context): GsBase {
-        return c.getValue(index)
+        return c.getValue(location, index)
     }
 }
