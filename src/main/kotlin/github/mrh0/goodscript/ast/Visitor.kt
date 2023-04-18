@@ -3,6 +3,7 @@ package github.mrh0.goodscript.ast
 import github.mrh0.goodscript.antlr.GoodscriptBaseVisitor
 import github.mrh0.goodscript.antlr.GoodscriptParser
 import github.mrh0.goodscript.ast.token.*
+import github.mrh0.goodscript.ast.token.branch.TInlineIf
 import github.mrh0.goodscript.ast.token.branch.TStatementIf
 import github.mrh0.goodscript.ast.token.data.TBoolean
 import github.mrh0.goodscript.ast.token.data.TInteger
@@ -109,6 +110,10 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
     // Branches
     override fun visitStatementIf(ctx: GoodscriptParser.StatementIfContext): ITok {
         return TStatementIf(loc(ctx), visit(ctx.conditions), visit(ctx.bodies), if(ctx.elseBody == null) null else visit(ctx.elseBody))
+    }
+
+    override fun visitExprInlineIf(ctx: GoodscriptParser.ExprInlineIfContext): ITok {
+        return TInlineIf(loc(ctx), visit(ctx.condition), visit(ctx.body), visit(ctx.elseBody))
     }
 
     // Loops

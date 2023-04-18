@@ -99,13 +99,13 @@ statement:
 
     | 'if' '('? conditions+=expr ')'? ':' bodies+=block ('eif' '('? conditions+=expr ')'? ':' bodies+=block)* ('else' ':' elseBody=block)? #statementIf
     | 'while' '('? condition=expr ')'? ':' body=block ('else' ':' elseBody=block)? #statementWhile
-
+    | NAME '(' args+=expr? (',' args+=expr)* ')' #statementCallFunction
     ;
 
 
 
 use:
-    'use' (NAME 'from')? STRING ('as' NAME)? NL
+    'use' NAME ('from' STRING)? ('as' NAME)? NL
     ;
 
 funcPrefix:
