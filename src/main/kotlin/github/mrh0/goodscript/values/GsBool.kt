@@ -4,6 +4,5 @@ import github.mrh0.goodscript.types.GsTypeBool
 
 class GsBool(val value: Boolean) : GsBase() {
     override fun getType() = GsTypeBool
-    override fun getName() = "bool"
     override fun toString() = "$value"
 }

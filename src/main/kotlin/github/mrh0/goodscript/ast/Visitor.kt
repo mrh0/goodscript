@@ -7,6 +7,7 @@ import github.mrh0.goodscript.ast.token.branch.TInlineIf
 import github.mrh0.goodscript.ast.token.branch.TStatementIf
 import github.mrh0.goodscript.ast.token.data.TBoolean
 import github.mrh0.goodscript.ast.token.data.TInteger
+import github.mrh0.goodscript.ast.token.function.TFunc
 import github.mrh0.goodscript.ast.token.loop.TStatementBreak
 import github.mrh0.goodscript.ast.token.loop.TStatementContinue
 import github.mrh0.goodscript.ast.token.loop.TStatementWhile

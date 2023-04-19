@@ -1,4 +1,4 @@
-package github.mrh0.goodscript.ir.logical
+package github.mrh0.goodscript.ir.logical.not
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ir.IIR
@@ -9,12 +9,12 @@ import github.mrh0.goodscript.values.GsInt
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 
-class IRNotNotInt(location: Loc, val expr: IIR) : IR(location) {
+class IRNotInt(location: Loc, val expr: IIR) : IR(location) {
     override fun evaluate(vm: VM, c: Context): GsBase {
-        return GsBool((expr.evaluate(vm, c) as GsInt).value <= 0)
+        return GsBool((expr.evaluate(vm, c) as GsInt).value > 0)
     }
 
-    override fun toString() = "(!!i $expr)"
+    override fun toString() = "(!i $expr)"
 
     override fun deterministic() = expr.deterministic()
 }

@@ -1,12 +1,23 @@
 package github.mrh0.goodscript.reflect
 
-class Reflection {
-    fun getClass(name: String): Class<*> {
-        return Class.forName(name)
-    }
+import java.lang.reflect.Method
 
-    fun call(cl: Class<*>, name: String, types: Class<*>) {
-        val method = cl.javaClass.getMethod(name, types)
-        val returnType = method.returnType
+class Reflection {
+    companion object {
+        fun getMethods(className: String): List<Method> {
+            return Class.forName(className).methods.filter { it.isAnnotationPresent(GsMethod::class.java) }
+        }
+
+        fun call(method: Method, parameterTypes: Array<Class<*>>, arguments: Array<Any>) {
+            method.invoke(null, *arguments)
+        }
+
+        fun call(className: String, methodName: String, parameterTypes: Array<Class<*>>, arguments: Array<Any>) {
+            val clazz = Class.forName(className)
+            val method = clazz.getMethod(methodName, *parameterTypes)
+            if(!method.isAnnotationPresent(GsMethod::class.java)) return
+            method.invoke(null, *arguments)
+        }
     }
 }
+

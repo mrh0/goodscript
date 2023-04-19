@@ -1,13 +1,7 @@
 package github.mrh0.goodscript.values
 
-import github.mrh0.goodscript.types.GsTypeBase
+import github.mrh0.goodscript.types.GsTypeFunction
 
-class GsFunction : GsBase() {
-    override fun getType(): GsTypeBase {
-        TODO("Not yet implemented")
-    }
-
-    override fun getName(): String {
-        TODO("Not yet implemented")
-    }
+open class GsFunction : GsBase() {
+    override fun getType() = GsTypeFunction
 }

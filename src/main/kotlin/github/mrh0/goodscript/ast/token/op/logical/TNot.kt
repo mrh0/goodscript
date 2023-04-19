@@ -6,8 +6,8 @@ import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.error.GsOpTypeError
 import github.mrh0.goodscript.ir.IIR
-import github.mrh0.goodscript.ir.logical.IRNotBool
-import github.mrh0.goodscript.ir.logical.IRNotInt
+import github.mrh0.goodscript.ir.logical.not.IRNotBool
+import github.mrh0.goodscript.ir.logical.not.IRNotInt
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.types.GsTypeBool
 import github.mrh0.goodscript.types.GsTypeInt

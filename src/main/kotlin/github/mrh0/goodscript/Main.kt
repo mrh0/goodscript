@@ -6,6 +6,7 @@ import github.mrh0.goodscript.antlr.GoodscriptParser
 import github.mrh0.goodscript.ast.CompileData
 import github.mrh0.goodscript.ast.Visitor
 import github.mrh0.goodscript.ast.ITok
+import github.mrh0.goodscript.reflect.Reflection
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 import org.antlr.v4.runtime.ANTLRInputStream
@@ -15,6 +16,7 @@ import java.nio.file.Path
 
 
 fun main(args: Array<String>) {
+    testReflection()
     val file = Path.of(Root::class.java.classLoader.getResource("test.gs").toURI()).toFile()
 
     val stream = if (file == null) System.`in` else FileInputStream(file)
@@ -30,7 +32,16 @@ fun main(args: Array<String>) {
     val cd = CompileData()
     val (_, ir) = tree.process(cd)
     println(ir)
-    cd.newContext("")
+    cd.finalize()
 
     println(ir.evaluate(VM(cd), Context.IDENTITY))
+
+
 }
+
+fun testReflection() {
+    Reflection.call("github.mrh0.goodscript.reflect.Test", "testFunction", arrayOf(Int::class.java), arrayOf(1))
+    Reflection.call("github.mrh0.goodscript.MainKt", "testFunction", arrayOf(Int::class.java), arrayOf(1))
+}
+
+fun testFunction(value: Int) = println("Int: $value")

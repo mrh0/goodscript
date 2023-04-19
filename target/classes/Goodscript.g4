@@ -79,6 +79,8 @@ expr:
     | primitive                         #exprPrimitive
     | NAME                              #exprNamed
     | 'if' '(' condition=expr ')' body=expr 'else' elseBody=expr #exprInlineIf
+    | expr 'is' NAME                    #exprIs
+    | expr 'as' NAME                    #exprAs
 //   | shortcall         #exprShortcall
     ;
 
@@ -91,6 +93,7 @@ shortcall:
 
 statement:
     'var' NAME '=' expr NL          #statementDefine
+    | 'val' NAME '=' expr NL          #statementDefineConst
     | NAME '=' expr NL              #statementAssignment
 //    | shortcall NL                  #statementShortcall
     | 'ret' expr NL                 #statementReturn
@@ -99,13 +102,14 @@ statement:
 
     | 'if' '('? conditions+=expr ')'? ':' bodies+=block ('eif' '('? conditions+=expr ')'? ':' bodies+=block)* ('else' ':' elseBody=block)? #statementIf
     | 'while' '('? condition=expr ')'? ':' body=block ('else' ':' elseBody=block)? #statementWhile
-
+    | NAME '('? args+=expr? (',' args+=expr)* ')'? NL #statementCallFunction
+    | 'ret' NAME '('? args+=expr? (',' args+=expr)* ')'? NL #statementCallFunctionReturn
     ;
 
 
 
 use:
-    'use' (NAME 'from')? STRING ('as' NAME)? NL
+    'use' NAME ('from' STRING)? ('as' NAME)? NL
     ;
 
 funcPrefix:
@@ -114,6 +118,7 @@ funcPrefix:
 
 func:
     funcPrefix? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' ':' body=block
+    // funcPrefix? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' '=' expr NL
     ;
 
 program:
