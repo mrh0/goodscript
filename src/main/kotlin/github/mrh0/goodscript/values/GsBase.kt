@@ -6,8 +6,8 @@ import github.mrh0.goodscript.types.GsTypeBase
 
 abstract class GsBase {
     abstract fun getType(): GsTypeBase
-    open fun getJavaClass(location: Loc): Class<*> {
-        throw GsError(location, "Type ${getName()} cannot be a Java Class")
+    open fun getNativeValue(location: Loc): Any {
+        throw GsError(location, "Type ${getName()} cannot be a Native value")
     }
 
     open fun getName() = getType().identifier
