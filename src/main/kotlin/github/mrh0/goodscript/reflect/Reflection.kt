@@ -2,7 +2,9 @@ package github.mrh0.goodscript.reflect
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.values.GsBase
-import github.mrh0.goodscript.vm.FunctionManager
+import github.mrh0.goodscript.values.GsValueNone
+import github.mrh0.goodscript.vm.function.FunctionManager
+import github.mrh0.goodscript.vm.function.JavaCallable
 import java.lang.reflect.Method
 
 object Reflection {
@@ -18,26 +20,31 @@ object Reflection {
     }
 
     fun call(location: Loc, method: Method, args: Array<GsBase>): GsBase {
-        val res: Any = method.invoke(null, TypeMapper.getNativeValues(location, args))
+        val native = TypeMapper.getNativeValues(location, args)
+        val res: Any? = method.invoke(null, *native)
         return TypeMapper.getGsValue(location, method.returnType, res)
     }
 
     fun callExternal(location: Loc, className: String, methodName: String, args: Array<GsBase>): GsBase {
         val clazz = Class.forName(className)
-        val method = clazz.getMethod(methodName, *TypeMapper.getNativeTypes(location, args).toTypedArray())
+        val method = clazz.getMethod(methodName, *TypeMapper.getNativeTypes(location, args))
         val res = call(location, method, args)
         return TypeMapper.getGsValue(location, method.returnType, res)
     }
 
     fun loadClass(location: Loc, fnm: FunctionManager, className: String) {
         getMethods(className).forEach {
-            m -> fnm.addOverride(
+            m -> val argList = TypeMapper.getMethodArgumentTypeList(location, m).toTypedArray()
+                val o = fnm.addOverride(
                 location,
                 m.name,
-                m.parameters.map { it.name },
-                TypeMapper.getMethodArgumentTypeList(location, m),
-                TypeMapper.getGsType(location, m.returnType)
+                m.parameters.map { it.name }.toTypedArray(),
+                argList,
+                TypeMapper.getGsType(location, m.returnType),
+                JavaCallable(m)
             )
+            fnm.addValidSignature(m.name, argList, o)
+            //println("${m.parameters.map { it.type }} : ${argList.map { "${it.getJavaClass(location)}," }}")
         }
     }
 }

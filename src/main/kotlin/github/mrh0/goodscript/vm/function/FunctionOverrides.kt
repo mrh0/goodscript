@@ -1,4 +1,4 @@
-package github.mrh0.goodscript.vm
+package github.mrh0.goodscript.vm.function
 
 class FunctionOverrides(val name: String) {
     val overrides: MutableList<FunctionOverride> = mutableListOf()
