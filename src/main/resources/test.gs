@@ -1,4 +1,4 @@
-start fn main(a, b):
+start fn main(a, b): do
     var k = 1
     k = k+1
     if 1 != 1:

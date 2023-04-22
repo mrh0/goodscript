@@ -32,4 +32,8 @@ class FunctionManager {
     fun find(name: String, args: Array<GsTypeBase>): FunctionOverride {
         return validSignaturesCache.getOrElse(getOverrideSignature(name, args)) { throw Exception("No override found") }
     }
+
+    fun testForCompatible(name: String, args: Array<GsTypeBase>) {
+
+    }
 }
