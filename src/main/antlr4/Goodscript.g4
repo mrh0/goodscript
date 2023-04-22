@@ -91,7 +91,7 @@ shortcall:
     ;
 */
 type:
-    NAME
+    NAME        #typeByName
     ;
 
 argument:
@@ -115,8 +115,6 @@ statement:
     | 'ret' NAME '('? args+=expr? (',' args+=expr)* ')'? NL #statementCallFunctionReturn
     ;
 
-
-
 use:
     'use' NAME ('from' STRING)? ('as' NAME)? NL
     ;
@@ -126,7 +124,7 @@ funcPrefix:
     ;
 
 func:
-    funcPrefix? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' 'do' body=block
+    funcPrefix? 'fn' name=NAME '(' args+=argument? (',' args+=argument)* ')' 'do' body=block
     // funcPrefix? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' '=' expr NL
     ;
 

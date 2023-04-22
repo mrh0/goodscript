@@ -4,9 +4,9 @@ import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.error.GsError
 import github.mrh0.goodscript.values.GsBase
 
-abstract class GsTypeBase(val identifier: String) {
+abstract class GsTypeBase(val namespace: String, val identifier: String) {
     override fun toString(): String {
-        return identifier
+        return "$namespace.$identifier"
     }
 
     open fun getJavaClass(location: Loc): Class<*> {

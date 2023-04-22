@@ -242,6 +242,54 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitExprUnOp(GoodscriptParser.ExprUnOpContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code typeByName}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeByName(GoodscriptParser.TypeByNameContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeByName}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeByName(GoodscriptParser.TypeByNameContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code argumentTyped}
+	 * labeled alternative in {@link GoodscriptParser#argument}.
+	 * @param ctx the parse tree
+	 */
+	void enterArgumentTyped(GoodscriptParser.ArgumentTypedContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code argumentTyped}
+	 * labeled alternative in {@link GoodscriptParser#argument}.
+	 * @param ctx the parse tree
+	 */
+	void exitArgumentTyped(GoodscriptParser.ArgumentTypedContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code argumentPrimitive}
+	 * labeled alternative in {@link GoodscriptParser#argument}.
+	 * @param ctx the parse tree
+	 */
+	void enterArgumentPrimitive(GoodscriptParser.ArgumentPrimitiveContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code argumentPrimitive}
+	 * labeled alternative in {@link GoodscriptParser#argument}.
+	 * @param ctx the parse tree
+	 */
+	void exitArgumentPrimitive(GoodscriptParser.ArgumentPrimitiveContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code argumentWildcard}
+	 * labeled alternative in {@link GoodscriptParser#argument}.
+	 * @param ctx the parse tree
+	 */
+	void enterArgumentWildcard(GoodscriptParser.ArgumentWildcardContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code argumentWildcard}
+	 * labeled alternative in {@link GoodscriptParser#argument}.
+	 * @param ctx the parse tree
+	 */
+	void exitArgumentWildcard(GoodscriptParser.ArgumentWildcardContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code statementDefine}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
