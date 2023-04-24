@@ -100,6 +100,12 @@ argument:
     | '_'                       #argumentWildcard
     ;
 
+orderExpression:
+    'orderby' expr
+    | 'orderasc'
+    | 'orderdesc'
+    ;
+
 statement:
     'var' NAME (':' type)? '=' expr NL          #statementDefine
     | 'val' NAME (':' type)? '=' expr NL          #statementDefineConst
@@ -111,6 +117,7 @@ statement:
 
     | 'if' '('? conditions+=expr ')'? 'do' bodies+=block ('eif' '('? conditions+=expr ')'? 'do' bodies+=block)* ('else' elseBody=block)? #statementIf
     | 'while' '('? condition=expr ')'? 'do' body=block ('else' elseBody=block)? #statementWhile
+    | 'for' '('? NAME 'in' expr ('where' expr)? orderExpression? ')'? 'do' body=block ('else' elseBody=block)? #statementForIn
     | NAME '('? args+=expr? (',' args+=expr)* ')'? NL #statementCallFunction
     | 'ret' NAME '('? args+=expr? (',' args+=expr)* ')'? NL #statementCallFunctionReturn
     ;

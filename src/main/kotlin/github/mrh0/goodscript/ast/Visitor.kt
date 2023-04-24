@@ -7,6 +7,7 @@ import github.mrh0.goodscript.ast.token.branch.TInlineIf
 import github.mrh0.goodscript.ast.token.branch.TStatementIf
 import github.mrh0.goodscript.ast.token.data.TBoolean
 import github.mrh0.goodscript.ast.token.data.TInteger
+import github.mrh0.goodscript.ast.token.function.TArgument
 import github.mrh0.goodscript.ast.token.function.TFunc
 import github.mrh0.goodscript.ast.token.loop.TStatementBreak
 import github.mrh0.goodscript.ast.token.loop.TStatementContinue
@@ -18,6 +19,7 @@ import github.mrh0.goodscript.ast.token.op.compare.TEquals
 import github.mrh0.goodscript.ast.token.op.compare.TNotEquals
 import github.mrh0.goodscript.ast.token.op.logical.TNot
 import github.mrh0.goodscript.ast.token.op.logical.TNotNot
+import github.mrh0.goodscript.ast.token.type.TTypeByName
 import org.antlr.v4.runtime.ParserRuleContext
 import org.antlr.v4.runtime.Token
 import java.io.File
@@ -47,9 +49,14 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
         return TProgram(loc(ctx), visit(ctx.functions))
     }
 
+    // Types
+    override fun visitTypeByName(ctx: GoodscriptParser.TypeByNameContext): ITok {
+        return TTypeByName(loc(ctx), ctx.text)
+    }
+
     // Functions
     override fun visitFunc(ctx: GoodscriptParser.FuncContext): ITok {
-        return TFunc(loc(ctx), cvisit(ctx.body), ctx.funcPrefix().text, ctx.name.text, tvisit(ctx.args))
+        return TFunc(loc(ctx), cvisit(ctx.body), ctx.funcPrefix().text, ctx.name.text, visit(ctx.args))
     }
 
     override fun visitBlock(ctx: GoodscriptParser.BlockContext): ITok {
@@ -58,6 +65,10 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
 
     override fun visitStatementReturn(ctx: GoodscriptParser.StatementReturnContext): ITok {
         return TStatementReturn(loc(ctx), visit(ctx.expr()))
+    }
+
+    override fun visitArgumentTyped(ctx: GoodscriptParser.ArgumentTypedContext): ITok {
+        return TArgument(loc(ctx), ctx.NAME().text, visit(ctx.type()) as TTypeByName)
     }
 
     // Expressions

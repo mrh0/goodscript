@@ -9,17 +9,18 @@ import github.mrh0.goodscript.ir.IRBlock
 import github.mrh0.goodscript.ir.IRFunc
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.types.GsTypeNone
+import github.mrh0.goodscript.values.GsValueNone
+import github.mrh0.goodscript.vm.state.Constant
+import github.mrh0.goodscript.vm.state.Variable
 
-class TFunc(location: Loc, val block: TBlock, val prefix: String, val name: String, val args: MutableList<String>) : Tok(location) {
-    override fun toString(): String {
-        return "$prefix:$name($args, $block)"
-    }
-
-
+class TFunc(location: Loc, val block: TBlock, val prefix: String, val name: String, val args: MutableList<TArgument>) : Tok(location) {
+    override fun toString() = "$prefix:$name($args, $block)"
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
         cd.newContext(name)
+        val argPairs = args.map { Pair(it.name, it.process(cd).first) }.toTypedArray()
+        argPairs.forEach { cd.ctx().define(location, Variable(it.first, it.second, GsValueNone)) }
         val ir = block.process(cd)
-        return Pair(GsTypeNone, IRFunc(location, ir.second as IRBlock, name, args))
+        return Pair(GsTypeNone, IRFunc(location, ir.second as IRBlock, name, argPairs))
     }
 }
