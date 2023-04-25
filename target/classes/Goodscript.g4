@@ -90,23 +90,38 @@ shortcall:
     | name=NAME                     #shortcallNoArg
     ;
 */
+type:
+    NAME        #typeByName
+    ;
+
+argument:
+    NAME ':' type               #argumentTyped
+    | primitive                 #argumentPrimitive
+    | '_'                       #argumentWildcard
+    ;
+
+orderExpression:
+    'orderby' expr
+    | 'orderasc'
+    | 'orderdesc'
+    ;
 
 statement:
-    'var' NAME '=' expr NL          #statementDefine
-    | 'val' NAME '=' expr NL          #statementDefineConst
+    'var' NAME (':' type)? '=' expr NL          #statementDefine
+    | 'val' NAME (':' type)? '=' expr NL          #statementDefineConst
     | NAME '=' expr NL              #statementAssignment
 //    | shortcall NL                  #statementShortcall
-    | 'ret' expr NL                 #statementReturn
+
     | 'break' NL                    #statementBreak
     | 'continue' NL                 #statementContinue
 
-    | 'if' '('? conditions+=expr ')'? ':' bodies+=block ('eif' '('? conditions+=expr ')'? ':' bodies+=block)* ('else' ':' elseBody=block)? #statementIf
-    | 'while' '('? condition=expr ')'? ':' body=block ('else' ':' elseBody=block)? #statementWhile
-    | NAME '('? args+=expr? (',' args+=expr)* ')'? NL #statementCallFunction
-    | 'ret' NAME '('? args+=expr? (',' args+=expr)* ')'? NL #statementCallFunctionReturn
+    | 'if' '('? conditions+=expr ')'? 'do' bodies+=block ('eif' '('? conditions+=expr ')'? 'do' bodies+=block)* ('else' elseBody=block)? #statementIf
+    | 'while' '('? condition=expr ')'? 'do' body=block ('else' elseBody=block)? #statementWhile
+    | 'for' '('? NAME 'in' expr ('where' expr)? orderExpression? ')'? 'do' body=block ('else' elseBody=block)? #statementForIn
+    | 'ret' NAME '(' args+=expr? (',' args+=expr)* ')' NL #statementCallFunctionReturn
+    | NAME '(' args+=expr? (',' args+=expr)* ')' NL #statementCallFunction
+    | 'ret' expr NL                 #statementReturn
     ;
-
-
 
 use:
     'use' NAME ('from' STRING)? ('as' NAME)? NL
@@ -117,7 +132,7 @@ funcPrefix:
     ;
 
 func:
-    funcPrefix? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' ':' body=block
+    funcPrefix? 'fn' name=NAME '(' args+=argument? (',' args+=argument)* ')' 'do' body=block
     // funcPrefix? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' '=' expr NL
     ;
 

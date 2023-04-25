@@ -1,6 +1,8 @@
-package github.mrh0.goodscript.ir
+package github.mrh0.goodscript.ir.function
 
 import github.mrh0.goodscript.ast.Loc
+import github.mrh0.goodscript.ir.IR
+import github.mrh0.goodscript.ir.IRBlock
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.values.GsBase
 import github.mrh0.goodscript.vm.Context

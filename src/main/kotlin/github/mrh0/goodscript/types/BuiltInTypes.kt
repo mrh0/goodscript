@@ -8,6 +8,6 @@ object BuiltInTypes {
     )
     val builtInNamespaceMap: Map<String, GsTypeBase> = builtInList.associateBy { it.toString() }
     val builtInNameMap: Map<String, GsTypeBase> = builtInList.associateBy { it.identifier }
-    fun getType(test: String): GsTypeBase = builtInNameMap.getOrDefault(test, builtInNamespaceMap.getOrElse(test) { throw Exception() })
+    fun getType(test: String): GsTypeBase = builtInNameMap.getOrElse(test) { builtInNamespaceMap.getOrElse(test) { throw Exception("No such type $test") } }
 }
 

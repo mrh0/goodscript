@@ -5,7 +5,7 @@ import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.ast.token.function.TFunc
 import github.mrh0.goodscript.ir.IIR
-import github.mrh0.goodscript.ir.IRFunc
+import github.mrh0.goodscript.ir.function.IRFunc
 import github.mrh0.goodscript.ir.IRProgram
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.types.GsTypeNone

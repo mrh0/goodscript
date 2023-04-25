@@ -34,10 +34,6 @@ class ContextBuilder(val contextName: String) {
         return map[name]!!
     }
 
-    fun defineFunction(name: String, args: List<String>) {
-
-    }
-
     fun build(): Context {
         // println("BuildingContext: $contextName, ${types.size}")
         return Context(contextName, vars.toTypedArray())

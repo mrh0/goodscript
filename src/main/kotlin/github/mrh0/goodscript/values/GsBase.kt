@@ -17,7 +17,7 @@ abstract class GsBase {
     }
 
     // Operations
-    open fun invoke(vararg args: GsBase): GsBase {
+    open fun invoke(location: Loc, args: Array<GsBase>): GsBase {
         throw Exception("Cannot invoke ${getType()}")
     }
 }

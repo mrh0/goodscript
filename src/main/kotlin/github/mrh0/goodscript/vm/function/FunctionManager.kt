@@ -8,32 +8,22 @@ class FunctionManager {
     companion object {
         val INSTANCE = FunctionManager()
     }
-    val returnTypeCache: MutableMap<String, GsTypeBase> = mutableMapOf()
-    val namedFunctionMap: MutableMap<String, FunctionOverrides> = mutableMapOf()
-    val validSignaturesCache: MutableMap<String, FunctionOverride> = mutableMapOf()
+    private val namedFunctionMap: MutableMap<String, FunctionOverrides> = mutableMapOf()
 
     private fun getOverrideSignature(name: String, args: Array<GsTypeBase>) = "$name(${args.map { "${it.identifier};" }})"
 
-    fun addOverride(location: Loc, name: String, args: Array<String>, types: Array<GsTypeBase>, ret: GsTypeBase, callable: ICallable): FunctionOverride {
-        if(returnTypeCache.containsKey(name)) {
-            if(returnTypeCache[name] != ret) throw GsError(location, "Function $name is already defined with another return-type")
+    fun addOverride(location: Loc, name: String, args: Array<String>, types: Array<GsTypeBase>, returnType: GsTypeBase, callable: ICallable): FunctionOverride {
+        val fo: FunctionOverrides
+        if(namedFunctionMap.containsKey(name)) {
+            if(namedFunctionMap[name]!!.returnType != returnType) throw GsError(location, "Function $name is already defined with another return-type")
+            fo = namedFunctionMap[name]!!
         }
-        else returnTypeCache[name] = ret
-        if(!namedFunctionMap.containsKey(name)) namedFunctionMap[name] = FunctionOverrides(name)
+        else {
+            fo = FunctionOverrides(name, returnType)
+            namedFunctionMap[name] = fo
+        }
         val res = FunctionOverride(name, args, types, callable)
-        namedFunctionMap[name]!!.add(res)
+        fo.add(res)
         return res
-    }
-
-    fun addValidSignature(name: String, args: Array<GsTypeBase>, override: FunctionOverride) {
-        validSignaturesCache[getOverrideSignature(name, args)] = override
-    }
-
-    fun find(name: String, args: Array<GsTypeBase>): FunctionOverride {
-        return validSignaturesCache.getOrElse(getOverrideSignature(name, args)) { throw Exception("No override found") }
-    }
-
-    fun testForCompatible(name: String, args: Array<GsTypeBase>) {
-
     }
 }

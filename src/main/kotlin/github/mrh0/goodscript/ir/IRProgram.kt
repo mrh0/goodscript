@@ -2,6 +2,7 @@ package github.mrh0.goodscript.ir
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.error.GsError
+import github.mrh0.goodscript.ir.function.IRFunc
 import github.mrh0.goodscript.values.GsBase
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM

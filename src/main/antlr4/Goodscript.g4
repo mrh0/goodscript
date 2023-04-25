@@ -80,6 +80,7 @@ expr:
     | NAME                              #exprNamed
     | 'if' '(' condition=expr ')' body=expr 'else' elseBody=expr #exprInlineIf
     | expr 'is' NAME                    #exprIs
+    | expr '!is' NAME                    #exprIsNot
     | expr 'as' NAME                    #exprAs
 //   | shortcall         #exprShortcall
     ;
@@ -111,15 +112,16 @@ statement:
     | 'val' NAME (':' type)? '=' expr NL          #statementDefineConst
     | NAME '=' expr NL              #statementAssignment
 //    | shortcall NL                  #statementShortcall
-    | 'ret' expr NL                 #statementReturn
+
     | 'break' NL                    #statementBreak
     | 'continue' NL                 #statementContinue
 
     | 'if' '('? conditions+=expr ')'? 'do' bodies+=block ('eif' '('? conditions+=expr ')'? 'do' bodies+=block)* ('else' elseBody=block)? #statementIf
     | 'while' '('? condition=expr ')'? 'do' body=block ('else' elseBody=block)? #statementWhile
     | 'for' '('? NAME 'in' expr ('where' expr)? orderExpression? ')'? 'do' body=block ('else' elseBody=block)? #statementForIn
-    | NAME '('? args+=expr? (',' args+=expr)* ')'? NL #statementCallFunction
-    | 'ret' NAME '('? args+=expr? (',' args+=expr)* ')'? NL #statementCallFunctionReturn
+    | 'ret' NAME ('('? args+=expr? (',' args+=expr)* ')'? | '(' ')') NL #statementCallFunctionReturn
+    | NAME ('('? args+=expr (',' args+=expr)* ')'? | '(' ')') NL #statementCallFunction
+    | 'ret' expr NL                 #statementReturn
     ;
 
 use:

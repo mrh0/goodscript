@@ -1,7 +1,8 @@
-start fn main(a, b):
+start fn main(a: Int, b: Int) do
     var k = 1
-    while k != 10:
-        k=k+1
-        if true:
-            ret 100
+    k = k+1
+    if 1 != 1 do
+        k = k+1
+    eif false do
+        k = 5
     ret k

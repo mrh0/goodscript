@@ -1,5 +1,5 @@
 package github.mrh0.goodscript.types
 
-object GsTypeFunction : GsTypeBase("Gs", "Function") {
-
+class GsTypeFunction(val args: Array<GsTypeBase>, val ret: GsTypeBase) : GsTypeBase("Gs", "Function") {
+    override fun toString() = args.joinToString(",", "(", "): $ret") { it.toString() }
 }

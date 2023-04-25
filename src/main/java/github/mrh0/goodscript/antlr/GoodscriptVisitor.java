@@ -176,6 +176,12 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitArgumentWildcard(GoodscriptParser.ArgumentWildcardContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link GoodscriptParser#orderExpression}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitOrderExpression(GoodscriptParser.OrderExpressionContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code statementDefine}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
@@ -196,13 +202,6 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStatementAssignment(GoodscriptParser.StatementAssignmentContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code statementReturn}
-	 * labeled alternative in {@link GoodscriptParser#statement}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitStatementReturn(GoodscriptParser.StatementReturnContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code statementBreak}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
@@ -232,12 +231,12 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatementWhile(GoodscriptParser.StatementWhileContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code statementCallFunction}
+	 * Visit a parse tree produced by the {@code statementForIn}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitStatementCallFunction(GoodscriptParser.StatementCallFunctionContext ctx);
+	T visitStatementForIn(GoodscriptParser.StatementForInContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code statementCallFunctionReturn}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
@@ -245,6 +244,20 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitStatementCallFunctionReturn(GoodscriptParser.StatementCallFunctionReturnContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementCallFunction}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementCallFunction(GoodscriptParser.StatementCallFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementReturn}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementReturn(GoodscriptParser.StatementReturnContext ctx);
 	/**
 	 * Visit a parse tree produced by {@link GoodscriptParser#use}.
 	 * @param ctx the parse tree

@@ -6,11 +6,10 @@ import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.ast.token.TBlock
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.IRBlock
-import github.mrh0.goodscript.ir.IRFunc
+import github.mrh0.goodscript.ir.function.IRFunc
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.types.GsTypeNone
 import github.mrh0.goodscript.values.GsValueNone
-import github.mrh0.goodscript.vm.state.Constant
 import github.mrh0.goodscript.vm.state.Variable
 
 class TFunc(location: Loc, val block: TBlock, val prefix: String, val name: String, val args: MutableList<TArgument>) : Tok(location) {
