@@ -2,14 +2,13 @@ package github.mrh0.goodscript.reflect
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.values.GsBase
-import github.mrh0.goodscript.values.GsValueNone
 import github.mrh0.goodscript.vm.function.FunctionManager
 import github.mrh0.goodscript.vm.function.JavaCallable
 import java.lang.reflect.Method
 
 object Reflection {
     fun getMethods(className: String): List<Method> {
-        return Class.forName(className).methods.filter { it.isAnnotationPresent(GsMethod::class.java) }
+        return Class.forName(className).methods.filter { it.isAnnotationPresent(GsExport::class.java) }
     }
 
     fun call(className: String, methodName: String, parameterTypes: Array<Class<*>>, arguments: Array<Any>): Any {

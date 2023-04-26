@@ -10,8 +10,6 @@ class FunctionManager {
     }
     private val namedFunctionMap: MutableMap<String, FunctionOverrides> = mutableMapOf()
 
-    private fun getOverrideSignature(name: String, args: Array<GsTypeBase>) = "$name(${args.map { "${it.identifier};" }})"
-
     fun addOverride(location: Loc, name: String, args: Array<String>, types: Array<GsTypeBase>, returnType: GsTypeBase, callable: ICallable): FunctionOverride {
         val fo: FunctionOverrides
         if(namedFunctionMap.containsKey(name)) {
@@ -25,5 +23,11 @@ class FunctionManager {
         val res = FunctionOverride(name, args, types, callable)
         fo.add(res)
         return res
+    }
+
+    fun getOverridesByName(location: Loc, name: String) = namedFunctionMap.getOrElse(name) { throw GsError(location, "No such override $name") }
+    fun getOverrides(location: Loc, name: String, types: Array<GsTypeBase>) {
+        val overrides = getOverridesByName(location, name)
+
     }
 }

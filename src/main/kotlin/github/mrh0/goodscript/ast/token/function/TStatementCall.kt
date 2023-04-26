@@ -8,6 +8,7 @@ import github.mrh0.goodscript.error.GsError
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.IRNamed
 import github.mrh0.goodscript.ir.IRValue
+import github.mrh0.goodscript.ir.function.IRFunctionCall
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.types.GsTypeFunction
 import github.mrh0.goodscript.types.GsTypeInt
@@ -19,8 +20,8 @@ class TStatementCall (location: Loc, val name: String, val args: List<ITok>) : T
     }
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
-        val fn = cd.ctx().get(location, name).getType()
-        if(fn !is GsTypeFunction) throw GsError(location, "Unexpected type")
-        return Pair(fn, )
+        val fn = cd.ctx().get(location, name)
+        if(fn.getType() !is GsTypeFunction) throw GsError(location, "Unexpected type")
+        return Pair(fn.getType(), IRFunctionCall())
     }
 }

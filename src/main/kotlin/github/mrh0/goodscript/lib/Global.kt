@@ -1,6 +1,6 @@
 package github.mrh0.goodscript.lib
 
-import github.mrh0.goodscript.reflect.GsMethod
+import github.mrh0.goodscript.reflect.GsExport
 
-@GsMethod
+@GsExport
 fun log(value: Int) = println("LOG: $value")

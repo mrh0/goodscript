@@ -134,6 +134,13 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprNamed(GoodscriptParser.ExprNamedContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code exprIsNot}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprIsNot(GoodscriptParser.ExprIsNotContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code exprAs}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
@@ -245,12 +252,26 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatementCallFunctionReturn(GoodscriptParser.StatementCallFunctionReturnContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code statementCallFunctionReturnNoArgs}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementCallFunctionReturnNoArgs(GoodscriptParser.StatementCallFunctionReturnNoArgsContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code statementCallFunction}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitStatementCallFunction(GoodscriptParser.StatementCallFunctionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementCallFunctionNoArgs}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementCallFunctionNoArgs(GoodscriptParser.StatementCallFunctionNoArgsContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code statementReturn}
 	 * labeled alternative in {@link GoodscriptParser#statement}.

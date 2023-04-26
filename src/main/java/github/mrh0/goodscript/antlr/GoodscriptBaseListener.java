@@ -232,6 +232,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExprIsNot(GoodscriptParser.ExprIsNotContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExprIsNot(GoodscriptParser.ExprIsNotContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExprAs(GoodscriptParser.ExprAsContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -424,6 +436,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterStatementCallFunctionReturnNoArgs(GoodscriptParser.StatementCallFunctionReturnNoArgsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatementCallFunctionReturnNoArgs(GoodscriptParser.StatementCallFunctionReturnNoArgsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterStatementCallFunction(GoodscriptParser.StatementCallFunctionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -431,6 +455,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitStatementCallFunction(GoodscriptParser.StatementCallFunctionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterStatementCallFunctionNoArgs(GoodscriptParser.StatementCallFunctionNoArgsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitStatementCallFunctionNoArgs(GoodscriptParser.StatementCallFunctionNoArgsContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

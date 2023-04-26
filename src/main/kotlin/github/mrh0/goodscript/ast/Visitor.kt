@@ -9,6 +9,7 @@ import github.mrh0.goodscript.ast.token.data.TBoolean
 import github.mrh0.goodscript.ast.token.data.TInteger
 import github.mrh0.goodscript.ast.token.function.TArgument
 import github.mrh0.goodscript.ast.token.function.TFunc
+import github.mrh0.goodscript.ast.token.function.TStatementCall
 import github.mrh0.goodscript.ast.token.loop.TStatementBreak
 import github.mrh0.goodscript.ast.token.loop.TStatementContinue
 import github.mrh0.goodscript.ast.token.loop.TStatementWhile
@@ -69,6 +70,14 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
 
     override fun visitArgumentTyped(ctx: GoodscriptParser.ArgumentTypedContext): ITok {
         return TArgument(loc(ctx), ctx.NAME().text, visit(ctx.type()) as TTypeByName)
+    }
+
+    override fun visitStatementCallFunction(ctx: GoodscriptParser.StatementCallFunctionContext?): ITok {
+        return TStatementCall()
+    }
+
+    override fun visitStatementCallFunctionNoArgs(ctx: GoodscriptParser.StatementCallFunctionNoArgsContext?): ITok {
+        return super.visitStatementCallFunctionNoArgs(ctx)
     }
 
     // Expressions

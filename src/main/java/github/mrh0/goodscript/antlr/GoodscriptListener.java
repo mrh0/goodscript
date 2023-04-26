@@ -218,6 +218,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitExprNamed(GoodscriptParser.ExprNamedContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code exprIsNot}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprIsNot(GoodscriptParser.ExprIsNotContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprIsNot}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprIsNot(GoodscriptParser.ExprIsNotContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code exprAs}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
@@ -408,6 +420,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitStatementCallFunctionReturn(GoodscriptParser.StatementCallFunctionReturnContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code statementCallFunctionReturnNoArgs}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementCallFunctionReturnNoArgs(GoodscriptParser.StatementCallFunctionReturnNoArgsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code statementCallFunctionReturnNoArgs}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementCallFunctionReturnNoArgs(GoodscriptParser.StatementCallFunctionReturnNoArgsContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code statementCallFunction}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
@@ -419,6 +443,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitStatementCallFunction(GoodscriptParser.StatementCallFunctionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code statementCallFunctionNoArgs}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void enterStatementCallFunctionNoArgs(GoodscriptParser.StatementCallFunctionNoArgsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code statementCallFunctionNoArgs}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 */
+	void exitStatementCallFunctionNoArgs(GoodscriptParser.StatementCallFunctionNoArgsContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code statementReturn}
 	 * labeled alternative in {@link GoodscriptParser#statement}.

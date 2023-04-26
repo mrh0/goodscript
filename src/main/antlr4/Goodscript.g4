@@ -119,8 +119,12 @@ statement:
     | 'if' '('? conditions+=expr ')'? 'do' bodies+=block ('eif' '('? conditions+=expr ')'? 'do' bodies+=block)* ('else' elseBody=block)? #statementIf
     | 'while' '('? condition=expr ')'? 'do' body=block ('else' elseBody=block)? #statementWhile
     | 'for' '('? NAME 'in' expr ('where' expr)? orderExpression? ')'? 'do' body=block ('else' elseBody=block)? #statementForIn
-    | 'ret' NAME ('('? args+=expr? (',' args+=expr)* ')'? | '(' ')') NL #statementCallFunctionReturn
-    | NAME ('('? args+=expr (',' args+=expr)* ')'? | '(' ')') NL #statementCallFunction
+
+    | 'ret' NAME '('? args+=expr (',' args+=expr)* ')'? NL #statementCallFunctionReturn
+    | 'ret' NAME '(' ')' NL #statementCallFunctionReturnNoArgs
+    | NAME '('? args+=expr (',' args+=expr)* ')'? NL #statementCallFunction
+    | NAME '(' ')' NL #statementCallFunctionNoArgs
+
     | 'ret' expr NL                 #statementReturn
     ;
 
