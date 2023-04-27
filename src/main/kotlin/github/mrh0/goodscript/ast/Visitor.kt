@@ -57,7 +57,7 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
 
     // Functions
     override fun visitFunc(ctx: GoodscriptParser.FuncContext): ITok {
-        return TFunc(loc(ctx), cvisit(ctx.body), ctx.funcPrefix().text, ctx.name.text, visit(ctx.args))
+        return TFunc(loc(ctx), cvisit(ctx.body), ctx.funcPrefix()?.text ?: "", ctx.name.text, visit(ctx.args), visit(ctx.returnType))
     }
 
     override fun visitBlock(ctx: GoodscriptParser.BlockContext): ITok {
@@ -72,12 +72,12 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
         return TArgument(loc(ctx), ctx.NAME().text, visit(ctx.type()) as TTypeByName)
     }
 
-    override fun visitStatementCallFunction(ctx: GoodscriptParser.StatementCallFunctionContext?): ITok {
-        return TStatementCall()
+    override fun visitStatementCallFunction(ctx: GoodscriptParser.StatementCallFunctionContext): ITok {
+        return TStatementCall(loc(ctx), ctx.NAME().text, visit(ctx.args))
     }
 
-    override fun visitStatementCallFunctionNoArgs(ctx: GoodscriptParser.StatementCallFunctionNoArgsContext?): ITok {
-        return super.visitStatementCallFunctionNoArgs(ctx)
+    override fun visitStatementCallFunctionNoArgs(ctx: GoodscriptParser.StatementCallFunctionNoArgsContext): ITok {
+        return TStatementCall(loc(ctx), ctx.NAME().text, arrayListOf())
     }
 
     // Expressions

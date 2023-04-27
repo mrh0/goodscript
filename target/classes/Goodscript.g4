@@ -39,6 +39,7 @@ CHAR: '\''.'\'' | '\'\\'('n'|'r'|'t'|'\\'|'\''|'"'|'0')'\'';
 STRING: '"' .*? '"';
 
 WHITESPACE: [ \t\r\n]+ -> skip;
+EMPTYLINE: NL -> skip;
 COMMENT: '//' ~[\r\n]* -> skip;
 BLOCKCOMMENT: '/*' .*? '*/' -> skip;
 
@@ -80,6 +81,7 @@ expr:
     | NAME                              #exprNamed
     | 'if' '(' condition=expr ')' body=expr 'else' elseBody=expr #exprInlineIf
     | expr 'is' NAME                    #exprIs
+    | expr '!is' NAME                    #exprIsNot
     | expr 'as' NAME                    #exprAs
 //   | shortcall         #exprShortcall
     ;
@@ -118,8 +120,12 @@ statement:
     | 'if' '('? conditions+=expr ')'? 'do' bodies+=block ('eif' '('? conditions+=expr ')'? 'do' bodies+=block)* ('else' elseBody=block)? #statementIf
     | 'while' '('? condition=expr ')'? 'do' body=block ('else' elseBody=block)? #statementWhile
     | 'for' '('? NAME 'in' expr ('where' expr)? orderExpression? ')'? 'do' body=block ('else' elseBody=block)? #statementForIn
-    | 'ret' NAME '(' args+=expr? (',' args+=expr)* ')' NL #statementCallFunctionReturn
-    | NAME '(' args+=expr? (',' args+=expr)* ')' NL #statementCallFunction
+
+    | 'ret' NAME '('? args+=expr (',' args+=expr)* ')'? NL #statementCallFunctionReturn
+    | 'ret' NAME '(' ')' NL #statementCallFunctionReturnNoArgs
+    | NAME '('? args+=expr (',' args+=expr)* ')'? NL #statementCallFunction
+    | NAME '(' ')' NL #statementCallFunctionNoArgs
+
     | 'ret' expr NL                 #statementReturn
     ;
 
@@ -132,11 +138,11 @@ funcPrefix:
     ;
 
 func:
-    funcPrefix? 'fn' name=NAME '(' args+=argument? (',' args+=argument)* ')' 'do' body=block
-    // funcPrefix? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' '=' expr NL
+    funcPrefix? 'fn' name=NAME '(' args+=argument? (',' args+=argument)* ')' ':' returnType=type 'do' body=block
     ;
 
 program:
     use*
     functions+=func*
+    EOF
     ;

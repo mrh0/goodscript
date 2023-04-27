@@ -20,14 +20,11 @@ class FunctionManager {
             fo = FunctionOverrides(name, returnType)
             namedFunctionMap[name] = fo
         }
-        val res = FunctionOverride(name, args, types, callable)
+        val res = FunctionOverride(name, args, types, returnType, callable)
         fo.add(res)
         return res
     }
 
     fun getOverridesByName(location: Loc, name: String) = namedFunctionMap.getOrElse(name) { throw GsError(location, "No such override $name") }
-    fun getOverrides(location: Loc, name: String, types: Array<GsTypeBase>) {
-        val overrides = getOverridesByName(location, name)
-
-    }
+    fun getOverrides(location: Loc, name: String, types: Array<GsTypeBase>) = getOverridesByName(location, name).getMatching(types)
 }

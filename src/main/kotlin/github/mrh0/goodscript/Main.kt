@@ -19,7 +19,6 @@ import org.antlr.v4.runtime.CommonTokenStream
 import java.io.FileInputStream
 import java.nio.file.Path
 
-
 fun main(args: Array<String>) {
     testReflection()
     val file = Path.of(Root::class.java.classLoader.getResource("test.gs").toURI()).toFile()
@@ -39,18 +38,14 @@ fun main(args: Array<String>) {
     println(ir)
     cd.finalize()
 
-    println(ir.evaluate(VM(cd), Context.IDENTITY))
-
-
+    println("Exit: ${ir.evaluate(VM(cd), Context.IDENTITY)}")
 }
-
-fun testFunction(value: Int) = println("Int: $value")
 
 fun testReflection() {
     //Reflection.call("github.mrh0.goodscript.reflect.Test", "testFunction", arrayOf(Int::class.java), arrayOf(1))
     //Reflection.call("github.mrh0.goodscript.MainKt", "testFunction", arrayOf(Int::class.java), arrayOf(1))
 
     Reflection.loadClass(Loc.IDENTITY, FunctionManager.INSTANCE, "github.mrh0.goodscript.lib.GlobalKt")
-    FunctionManager.INSTANCE.find("log", arrayOf(GsTypeInt)).callable.call(Loc.IDENTITY, arrayOf(GsInt(10)))
+    //FunctionManager.INSTANCE.find("log", arrayOf(GsTypeInt)).callable.call(Loc.IDENTITY, arrayOf(GsInt(10)))
 }
 

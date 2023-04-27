@@ -42,7 +42,6 @@ object Reflection {
                 TypeMapper.getGsType(location, m.returnType),
                 JavaCallable(m)
             )
-            fnm.addValidSignature(m.name, argList, o)
             //println("${m.parameters.map { it.type }} : ${argList.map { "${it.getJavaClass(location)}," }}")
         }
     }

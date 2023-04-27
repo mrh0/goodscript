@@ -39,6 +39,7 @@ CHAR: '\''.'\'' | '\'\\'('n'|'r'|'t'|'\\'|'\''|'"'|'0')'\'';
 STRING: '"' .*? '"';
 
 WHITESPACE: [ \t\r\n]+ -> skip;
+EMPTYLINE: NL -> skip;
 COMMENT: '//' ~[\r\n]* -> skip;
 BLOCKCOMMENT: '/*' .*? '*/' -> skip;
 
@@ -137,11 +138,11 @@ funcPrefix:
     ;
 
 func:
-    funcPrefix? 'fn' name=NAME '(' args+=argument? (',' args+=argument)* ')' 'do' body=block
-    // funcPrefix? 'fn' name=NAME '(' args+=NAME? (',' args+=NAME)* ')' '=' expr NL
+    funcPrefix? 'fn' name=NAME '(' args+=argument? (',' args+=argument)* ')' ':' returnType=type 'do' body=block
     ;
 
 program:
     use*
     functions+=func*
+    EOF
     ;
