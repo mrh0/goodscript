@@ -120,6 +120,13 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprIs(GoodscriptParser.ExprIsContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code exprCallFunction}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprCallFunction(GoodscriptParser.ExprCallFunctionContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code exprPrimitive}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree

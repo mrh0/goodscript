@@ -14,7 +14,7 @@ class IRFunc(location: Loc, private val block: IRBlock, val name: String, val ar
     }
 
     override fun evaluate(vm: VM, c: Context): GsBase {
-        val result = block.evaluate(vm, vm.getContext(name))
+        val result = block.evaluate(vm, vm.getContext(name)!!) // Should never be null
         c.captureReturn()
         return result
     }

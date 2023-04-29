@@ -1,4 +1,6 @@
-fn dub(a: Int): Int do
-    var k = 1
 fn main(a: Int): Int do
-    ret 1
+    log dub(6)
+    log "Hello World"
+
+fn dub(a: Int): Int do
+    ret a+a

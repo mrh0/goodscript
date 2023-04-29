@@ -5,5 +5,6 @@ import github.mrh0.goodscript.ast.CompileData
 class VM(cd: CompileData) {
     private val contexts: MutableMap<String, Context> = cd.contextMap
 
-    fun getContext(name: String) = contexts[name]!!
+    fun getContext(name: String) = contexts[name]
+    fun getContextOrDefault(name: String, default: Context) = contexts[name] ?: default
 }

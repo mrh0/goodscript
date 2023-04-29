@@ -9,7 +9,10 @@ import github.mrh0.goodscript.vm.VM
 import java.util.function.Supplier
 
 class UserCallable(private val func: Supplier<IRFunc>) : ICallable {
-    override fun call(location: Loc, vm: VM, c: Context, args: Array<GsBase>): GsBase = func.get().evaluate(vm, c)
+    override fun call(location: Loc, vm: VM, c: Context, args: Array<GsBase>): GsBase {
+        args.forEachIndexed { i, it ->  c.setValue(location, i, it) }
+        return func.get().evaluate(vm, c)
+    }
     override fun test(location: Loc, args: Array<GsTypeBase>): GsTypeBase {
         throw NotImplementedError()
     }

@@ -4,6 +4,7 @@ object BuiltInTypes {
     val builtInList: List<GsTypeBase> = listOf(
         GsTypeInt,
         GsTypeBool,
+        GsTypeString,
         GsTypeNone
     )
     val builtInNamespaceMap: Map<String, GsTypeBase> = builtInList.associateBy { it.toString() }

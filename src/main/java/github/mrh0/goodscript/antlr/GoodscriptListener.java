@@ -194,6 +194,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitExprIs(GoodscriptParser.ExprIsContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code exprCallFunction}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprCallFunction(GoodscriptParser.ExprCallFunctionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprCallFunction}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprCallFunction(GoodscriptParser.ExprCallFunctionContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code exprPrimitive}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree

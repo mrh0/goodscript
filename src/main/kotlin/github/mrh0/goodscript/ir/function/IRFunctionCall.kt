@@ -14,6 +14,6 @@ class IRFunctionCall(location: Loc, val name: String, val override: FunctionOver
     }
 
     override fun evaluate(vm: VM, c: Context): GsBase {
-        return override.callable.call(location, vm, c, args.map { it.evaluate(vm, c) }.toTypedArray())
+        return override.callable.call(location, vm, vm.getContextOrDefault(name, c), args.map { it.evaluate(vm, c) }.toTypedArray())
     }
 }

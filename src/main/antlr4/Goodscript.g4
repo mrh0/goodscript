@@ -38,7 +38,8 @@ CHAR: '\''.'\'' | '\'\\'('n'|'r'|'t'|'\\'|'\''|'"'|'0')'\'';
 
 STRING: '"' .*? '"';
 
-WHITESPACE: [ \t\r\n]+ -> skip;
+WHITESPACE: [ \t]+ -> skip;
+// WHITESPACE: [ \t\r\n]+ -> skip;
 EMPTYLINE: NL -> skip;
 COMMENT: '//' ~[\r\n]* -> skip;
 BLOCKCOMMENT: '/*' .*? '*/' -> skip;
@@ -83,6 +84,7 @@ expr:
     | expr 'is' NAME                    #exprIs
     | expr '!is' NAME                    #exprIsNot
     | expr 'as' NAME                    #exprAs
+    | NAME '(' args+=expr? (',' args+=expr)* ')' #exprCallFunction
 //   | shortcall         #exprShortcall
     ;
 

@@ -7,7 +7,9 @@ import github.mrh0.goodscript.ast.token.branch.TInlineIf
 import github.mrh0.goodscript.ast.token.branch.TStatementIf
 import github.mrh0.goodscript.ast.token.data.TBoolean
 import github.mrh0.goodscript.ast.token.data.TInteger
+import github.mrh0.goodscript.ast.token.data.TString
 import github.mrh0.goodscript.ast.token.function.TArgument
+import github.mrh0.goodscript.ast.token.function.TExprCall
 import github.mrh0.goodscript.ast.token.function.TFunc
 import github.mrh0.goodscript.ast.token.function.TStatementCall
 import github.mrh0.goodscript.ast.token.loop.TStatementBreak
@@ -80,6 +82,10 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
         return TStatementCall(loc(ctx), ctx.NAME().text, arrayListOf())
     }
 
+    override fun visitExprCallFunction(ctx: GoodscriptParser.ExprCallFunctionContext): ITok {
+        return TExprCall(loc(ctx), ctx.NAME().text, visit(ctx.args))
+    }
+
     // Expressions
     override fun visitExprNest(ctx: GoodscriptParser.ExprNestContext): ITok {
         return visit(ctx.expr())
@@ -92,6 +98,10 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
 
     override fun visitPrimitiveBool(ctx: GoodscriptParser.PrimitiveBoolContext): ITok {
         return TBoolean(loc(ctx), ctx.BOOL().text == "true")
+    }
+
+    override fun visitPrimitiveString(ctx: GoodscriptParser.PrimitiveStringContext): ITok {
+        return TString(loc(ctx), ctx.text.substring(1, ctx.text.length-1))
     }
 
     // Ops
