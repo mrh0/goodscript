@@ -4,7 +4,7 @@ import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.IR
 import github.mrh0.goodscript.values.GsBase
-import github.mrh0.goodscript.values.GsInt
+import github.mrh0.goodscript.values.numbers.GsInt
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 

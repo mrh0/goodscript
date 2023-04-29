@@ -96,6 +96,9 @@ shortcall:
 */
 type:
     NAME        #typeByName
+    | type '|' type ('|' type)* #typeUnion
+    | type '&' type ('&' type)* #typeTuple
+    | '(' type ')'              #typeNest
     ;
 
 argument:

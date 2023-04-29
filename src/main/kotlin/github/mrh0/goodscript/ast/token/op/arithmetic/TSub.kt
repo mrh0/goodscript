@@ -7,7 +7,7 @@ import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.error.GsOpTypeError
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.arithmetic.sub.IRSubIntInt
-import github.mrh0.goodscript.types.GsTypeInt
+import github.mrh0.goodscript.types.numbers.GsTypeInt
 import github.mrh0.goodscript.types.GsTypeBase
 
 class TSub(location: Loc, val left: ITok, val right: ITok) : Tok(location) {

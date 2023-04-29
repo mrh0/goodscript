@@ -266,6 +266,30 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitExprUnOp(GoodscriptParser.ExprUnOpContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code typeUnion}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeUnion(GoodscriptParser.TypeUnionContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeUnion}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeUnion(GoodscriptParser.TypeUnionContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code typeTuple}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeTuple(GoodscriptParser.TypeTupleContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeTuple}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeTuple(GoodscriptParser.TypeTupleContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code typeByName}
 	 * labeled alternative in {@link GoodscriptParser#type}.
 	 * @param ctx the parse tree
@@ -277,6 +301,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTypeByName(GoodscriptParser.TypeByNameContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code typeNest}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeNest(GoodscriptParser.TypeNestContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeNest}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeNest(GoodscriptParser.TypeNestContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code argumentTyped}
 	 * labeled alternative in {@link GoodscriptParser#argument}.

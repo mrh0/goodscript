@@ -17,5 +17,6 @@ abstract class GsTypeBase(val namespace: String, val identifier: String) {
         throw GsError(location, "Type $identifier cannot be constructed from Any")
     }
 
-    open fun match(type: GsTypeBase) = type == this
+    open fun accepts(location: Loc, type: GsTypeBase): Boolean = type == this
+    open fun accepts(location: Loc, value: GsBase): Boolean = accepts(location, value.getType())
 }

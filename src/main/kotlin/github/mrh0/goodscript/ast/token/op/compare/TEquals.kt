@@ -4,10 +4,10 @@ import github.mrh0.goodscript.ast.ITok
 import github.mrh0.goodscript.ast.CompileData
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ast.Tok
-import github.mrh0.goodscript.error.GsOpTypeError
 import github.mrh0.goodscript.ir.IIR
+import github.mrh0.goodscript.ir.compare.equals.IREqualsFallback
 import github.mrh0.goodscript.ir.compare.equals.IREqualsIntInt
-import github.mrh0.goodscript.types.GsTypeInt
+import github.mrh0.goodscript.types.numbers.GsTypeInt
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.types.GsTypeBool
 
@@ -21,7 +21,7 @@ class TEquals(location: Loc, private val left: ITok, private val right: ITok) : 
         val r = right.process(cd);
         return when {
             l.first is GsTypeInt && r.first is GsTypeInt -> Pair(GsTypeBool, IREqualsIntInt(location, l.second, r.second))
-            else -> throw GsOpTypeError(location, "==", l.first, r.first)
+            else -> Pair(GsTypeBool, IREqualsFallback(location, l.second, r.second))//throw GsOpTypeError(location, "==", l.first, r.first)
         }
     }
 }

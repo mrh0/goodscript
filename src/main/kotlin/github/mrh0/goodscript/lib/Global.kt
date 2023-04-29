@@ -10,3 +10,6 @@ fun log(value: Boolean) = println("LOG: $value")
 
 @GsExport
 fun log(value: String) = println("LOG: $value")
+
+@GsExport
+fun log(value: Double) = println("LOG: $value")

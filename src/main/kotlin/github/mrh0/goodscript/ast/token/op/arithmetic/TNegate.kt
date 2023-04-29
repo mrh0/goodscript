@@ -8,7 +8,7 @@ import github.mrh0.goodscript.error.GsOpTypeError
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.arithmetic.negate.IRNegateInt
 import github.mrh0.goodscript.types.GsTypeBase
-import github.mrh0.goodscript.types.GsTypeInt
+import github.mrh0.goodscript.types.numbers.GsTypeInt
 
 class TNegate(location: Loc, val expr: ITok) : Tok(location) {
     override fun toString(): String {

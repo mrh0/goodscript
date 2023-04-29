@@ -6,6 +6,7 @@ import github.mrh0.goodscript.ast.token.*
 import github.mrh0.goodscript.ast.token.branch.TInlineIf
 import github.mrh0.goodscript.ast.token.branch.TStatementIf
 import github.mrh0.goodscript.ast.token.data.TBoolean
+import github.mrh0.goodscript.ast.token.data.TFloat
 import github.mrh0.goodscript.ast.token.data.TInteger
 import github.mrh0.goodscript.ast.token.data.TString
 import github.mrh0.goodscript.ast.token.function.TArgument
@@ -94,6 +95,10 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
     // Primitives
     override fun visitNumberInt(ctx: GoodscriptParser.NumberIntContext): ITok {
         return TInteger(loc(ctx), Integer.valueOf(ctx.text))
+    }
+
+    override fun visitNumberFloat(ctx: GoodscriptParser.NumberFloatContext): ITok {
+        return TFloat(loc(ctx), ctx.text.toDouble())
     }
 
     override fun visitPrimitiveBool(ctx: GoodscriptParser.PrimitiveBoolContext): ITok {

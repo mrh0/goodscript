@@ -3,9 +3,10 @@ package github.mrh0.goodscript.reflect
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.error.GsError
 import github.mrh0.goodscript.types.GsTypeBool
-import github.mrh0.goodscript.types.GsTypeInt
+import github.mrh0.goodscript.types.numbers.GsTypeInt
 import github.mrh0.goodscript.types.GsTypeNone
 import github.mrh0.goodscript.types.GsTypeString
+import github.mrh0.goodscript.types.numbers.GsTypeFloat
 import github.mrh0.goodscript.values.GsBase
 import github.mrh0.goodscript.values.GsValueNone
 import java.lang.reflect.Method
@@ -16,6 +17,8 @@ object TypeMapper {
 
     fun getGsType(location: Loc, javaClass: Class<*>) = when (javaClass) {
         Int::class.java, Int::class.javaPrimitiveType -> GsTypeInt
+        Float::class.java, Float::class.javaPrimitiveType -> GsTypeFloat
+        Double::class.java, Double::class.javaPrimitiveType -> GsTypeFloat
         Boolean::class.java, Boolean::class.javaPrimitiveType -> GsTypeBool
         String::class.java -> GsTypeString
         Unit::class.java, Void::class.java, Void::class.javaPrimitiveType -> GsTypeNone

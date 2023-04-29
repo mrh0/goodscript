@@ -20,4 +20,10 @@ abstract class GsBase {
     open fun invoke(location: Loc, args: Array<GsBase>): GsBase {
         throw Exception("Cannot invoke ${getType()}")
     }
+
+    open fun equals(location: Loc, other: GsBase): Boolean {
+        return getNativeValue(location) == other.getNativeValue(location)
+    }
+
+    open fun match(location: Loc, type: GsTypeBase) = type.accepts(location, this)
 }

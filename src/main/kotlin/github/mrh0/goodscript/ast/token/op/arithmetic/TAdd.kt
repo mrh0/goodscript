@@ -7,8 +7,10 @@ import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.error.GsOpTypeError
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.arithmetic.add.IRAddIntInt
-import github.mrh0.goodscript.types.GsTypeInt
+import github.mrh0.goodscript.ir.arithmetic.add.IRAddStringWithAny
+import github.mrh0.goodscript.types.numbers.GsTypeInt
 import github.mrh0.goodscript.types.GsTypeBase
+import github.mrh0.goodscript.types.GsTypeString
 
 class TAdd(location: Loc, val left: ITok, val right: ITok) : Tok(location) {
     override fun toString(): String {
@@ -20,6 +22,7 @@ class TAdd(location: Loc, val left: ITok, val right: ITok) : Tok(location) {
         val r = right.process(cd);
         return when {
             l.first is GsTypeInt && r.first is GsTypeInt -> Pair(GsTypeInt, IRAddIntInt(location, l.second, r.second))
+            l.first is GsTypeString || r.first is GsTypeString -> Pair(GsTypeString, IRAddStringWithAny(location, l.second, r.second))
             else -> throw GsOpTypeError(location, "+", l.first, r.first)
         }
     }

@@ -3,10 +3,15 @@ package github.mrh0.goodscript.vm.function
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.error.GsError
 import github.mrh0.goodscript.types.GsTypeBase
+import github.mrh0.goodscript.values.GsBase
 
 class FunctionManager {
     companion object {
         val INSTANCE = FunctionManager()
+
+        fun findExactMatch(location: Loc, overrides: List<FunctionOverride>, args: Array<GsBase>): FunctionOverride {
+            return overrides.find { it.match(location, args) } ?: TODO("Handle missing runtime matching")
+        }
     }
     private val namedFunctionMap: MutableMap<String, FunctionOverrides> = mutableMapOf()
 
@@ -26,5 +31,5 @@ class FunctionManager {
     }
 
     fun getOverridesByName(location: Loc, name: String) = namedFunctionMap.getOrElse(name) { throw GsError(location, "No such override $name") }
-    fun getOverrides(location: Loc, name: String, types: Array<GsTypeBase>) = getOverridesByName(location, name).getMatching(types)
+    fun getOverrides(location: Loc, name: String, types: Array<GsTypeBase>) = getOverridesByName(location, name).getMatching(location, types)
 }

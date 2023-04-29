@@ -5,7 +5,6 @@ import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.IR
 import github.mrh0.goodscript.values.GsBase
 import github.mrh0.goodscript.values.GsBool
-import github.mrh0.goodscript.values.GsInt
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 

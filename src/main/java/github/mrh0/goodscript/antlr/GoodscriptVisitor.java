@@ -162,12 +162,33 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprUnOp(GoodscriptParser.ExprUnOpContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code typeUnion}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeUnion(GoodscriptParser.TypeUnionContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code typeTuple}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeTuple(GoodscriptParser.TypeTupleContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code typeByName}
 	 * labeled alternative in {@link GoodscriptParser#type}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitTypeByName(GoodscriptParser.TypeByNameContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code typeNest}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeNest(GoodscriptParser.TypeNestContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code argumentTyped}
 	 * labeled alternative in {@link GoodscriptParser#argument}.

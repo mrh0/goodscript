@@ -9,7 +9,7 @@ import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.logical.notnot.IRNotNotInt
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.types.GsTypeBool
-import github.mrh0.goodscript.types.GsTypeInt
+import github.mrh0.goodscript.types.numbers.GsTypeInt
 
 class TNotNot(location: Loc, val expr: ITok) : Tok(location) {
     override fun toString(): String {

@@ -8,9 +8,6 @@ import github.mrh0.goodscript.ast.Visitor
 import github.mrh0.goodscript.ast.ITok
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.reflect.Reflection
-import github.mrh0.goodscript.reflect.TypeMapper
-import github.mrh0.goodscript.types.GsTypeInt
-import github.mrh0.goodscript.values.GsInt
 import github.mrh0.goodscript.vm.Context
 import github.mrh0.goodscript.vm.VM
 import github.mrh0.goodscript.vm.function.FunctionManager

@@ -280,6 +280,30 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTypeUnion(GoodscriptParser.TypeUnionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeUnion(GoodscriptParser.TypeUnionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeTuple(GoodscriptParser.TypeTupleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeTuple(GoodscriptParser.TypeTupleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTypeByName(GoodscriptParser.TypeByNameContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -287,6 +311,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTypeByName(GoodscriptParser.TypeByNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeNest(GoodscriptParser.TypeNestContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeNest(GoodscriptParser.TypeNestContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
