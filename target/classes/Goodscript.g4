@@ -70,30 +70,25 @@ unOp:
 binOp:
     '+' | '-' | '*' | '/' | '%'
     | '<' | '>' | '<=' | '>=' | '==' | '!='
-    | '&' | '|' | '&&' | 'and' | '||' | 'or'
+    |'&&' | 'and' | '||' | 'or'
     | '<<' | '>>'
     ;
 
 expr:
-    left=expr binOp right=expr          #exprBinOp
+    'here'                            #exprHere
+    | left=expr binOp right=expr          #exprBinOp
     | unOp expr                         #exprUnOp
     | '(' expr ')'                      #exprNest
     | primitive                         #exprPrimitive
     | NAME                              #exprNamed
     | 'if' '(' condition=expr ')' body=expr 'else' elseBody=expr #exprInlineIf
     | expr 'is' NAME                    #exprIs
-    | expr '!is' NAME                    #exprIsNot
+    | expr '!is' NAME                   #exprIsNot
     | expr 'as' NAME                    #exprAs
     | NAME '(' args+=expr? (',' args+=expr)* ')' #exprCallFunction
-//   | shortcall         #exprShortcall
+    | values+=expr '&' values+=expr ('&' values+=expr)* #exprTuple
     ;
 
-/*
-shortcall:
-    name=NAME next=expr             #shortcallArg
-    | name=NAME                     #shortcallNoArg
-    ;
-*/
 type:
     NAME        #typeByName
     | type '|' type ('|' type)* #typeUnion
@@ -113,29 +108,34 @@ orderExpression:
     | 'orderdesc'
     ;
 
+functionCall:
+    NAME '('? args+=expr (',' args+=expr)* ')'?             #functionCallWithArgs
+    | NAME '(' ')'                                          #functionCallNoArgs
+    ;
+
 statement:
-    'var' NAME (':' type)? '=' expr NL          #statementDefine
-    | 'val' NAME (':' type)? '=' expr NL          #statementDefineConst
-    | NAME '=' expr NL              #statementAssignment
-//    | shortcall NL                  #statementShortcall
+    'var' NAME (':' type)? '=' expr NL                      #statementDefine
+    | 'var' NAME (':' type)? '=' functionCall NL            #statementDefine
+    | 'val' NAME (':' type)? '=' expr NL                    #statementDefineConst
+    | 'val' NAME (':' type)? '=' functionCall NL            #statementDefineConst
+    | NAME '=' expr NL                                      #statementAssignment
 
-    | 'break' NL                    #statementBreak
-    | 'continue' NL                 #statementContinue
+    | 'break' NL                                            #statementBreak
+    | 'continue' NL                                         #statementContinue
 
-    | 'if' '('? conditions+=expr ')'? 'do' bodies+=block ('eif' '('? conditions+=expr ')'? 'do' bodies+=block)* ('else' elseBody=block)? #statementIf
-    | 'while' '('? condition=expr ')'? 'do' body=block ('else' elseBody=block)? #statementWhile
-    | 'for' '('? NAME 'in' expr ('where' expr)? orderExpression? ')'? 'do' body=block ('else' elseBody=block)? #statementForIn
+    | 'if' '('? conditions+=expr ')'? 'do' bodies+=block ('eif' '('? conditions+=expr ')'? 'do' bodies+=block)* ('else' elseBody=block)?    #statementIf
+    | 'while' '('? condition=expr ')'? 'do' body=block ('else' elseBody=block)?                                                             #statementWhile
+    | 'for' '('? NAME 'in' expr ('where' expr)? orderExpression? ')'? 'do' body=block ('else' elseBody=block)?                              #statementForIn
 
-    | 'ret' NAME '('? args+=expr (',' args+=expr)* ')'? NL #statementCallFunctionReturn
-    | 'ret' NAME '(' ')' NL #statementCallFunctionReturnNoArgs
-    | NAME '('? args+=expr (',' args+=expr)* ')'? NL #statementCallFunction
-    | NAME '(' ')' NL #statementCallFunctionNoArgs
+    | functionCall NL                                       #statementCallFunction
 
-    | 'ret' expr NL                 #statementReturn
+    | 'ret' functionCall NL                                 #statementCallFunctionReturn
+    | 'ret' expr NL                                         #statementReturn
     ;
 
 use:
-    'use' NAME ('from' STRING)? ('as' NAME)? NL
+    'use' from=STRING ('as' as=NAME)? NL                                #useModule
+    | 'use' exports+=NAME (',' exports+=NAME)* 'from' from=STRING NL    #useFromModule
     ;
 
 funcPrefix:

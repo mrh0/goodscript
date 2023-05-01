@@ -8,4 +8,5 @@ class GsFloat(val value: Double) : GsNumber() {
     override fun toString() = "$value"
     override fun getNativeValue(location: Loc) = value
     override fun getNumber(): Number = value
+    override fun getAsDouble(): Double = value
 }

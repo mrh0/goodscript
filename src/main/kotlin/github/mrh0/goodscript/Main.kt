@@ -17,7 +17,7 @@ import java.io.FileInputStream
 import java.nio.file.Path
 
 fun main(args: Array<String>) {
-    testReflection()
+    Reflection.loadClass(Loc.IDENTITY, FunctionManager.INSTANCE, "github.mrh0.goodscript.lib.GlobalKt")
     val file = Path.of(Root::class.java.classLoader.getResource("test.gs").toURI()).toFile()
 
     val stream = if (file == null) System.`in` else FileInputStream(file)
@@ -37,12 +37,3 @@ fun main(args: Array<String>) {
 
     println("Exit: ${ir.evaluate(VM(cd), Context.IDENTITY)}")
 }
-
-fun testReflection() {
-    //Reflection.call("github.mrh0.goodscript.reflect.Test", "testFunction", arrayOf(Int::class.java), arrayOf(1))
-    //Reflection.call("github.mrh0.goodscript.MainKt", "testFunction", arrayOf(Int::class.java), arrayOf(1))
-
-    Reflection.loadClass(Loc.IDENTITY, FunctionManager.INSTANCE, "github.mrh0.goodscript.lib.GlobalKt")
-    //FunctionManager.INSTANCE.find("log", arrayOf(GsTypeInt)).callable.call(Loc.IDENTITY, arrayOf(GsInt(10)))
-}
-

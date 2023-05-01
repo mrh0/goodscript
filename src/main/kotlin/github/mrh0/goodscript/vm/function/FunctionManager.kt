@@ -18,11 +18,11 @@ class FunctionManager {
     fun addOverride(location: Loc, name: String, args: Array<String>, types: Array<GsTypeBase>, returnType: GsTypeBase, callable: ICallable): FunctionOverride {
         val fo: FunctionOverrides
         if(namedFunctionMap.containsKey(name)) {
-            if(namedFunctionMap[name]!!.returnType != returnType) throw GsError(location, "Function $name is already defined with another return-type")
+            //if(namedFunctionMap[name]!!.returnType != returnType) throw GsError(location, "Function $name is already defined return type ${namedFunctionMap[name]!!.returnType}")
             fo = namedFunctionMap[name]!!
         }
         else {
-            fo = FunctionOverrides(name, returnType)
+            fo = FunctionOverrides(name)
             namedFunctionMap[name] = fo
         }
         val res = FunctionOverride(name, args, types, returnType, callable)

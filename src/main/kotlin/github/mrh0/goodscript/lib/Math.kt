@@ -1,6 +1,8 @@
 package github.mrh0.goodscript.lib
 
 import github.mrh0.goodscript.reflect.GsExport
+import github.mrh0.goodscript.values.GsTuple
+import github.mrh0.goodscript.values.numbers.GsFloat
 import kotlin.math.pow
 import kotlin.math.roundToInt
 
@@ -42,7 +44,6 @@ fun toRadians(a: Double) = Math.toRadians(a)
 
 @GsExport
 fun random() = Math.random()
-
 @GsExport
 fun randomRange(min: Double, max: Double) = Math.random()*(max-min)+min
 
@@ -108,6 +109,12 @@ fun lerp(a: Double, b: Double, f: Double) = a * (1 - f) + b * f
 
 @GsExport
 fun frac(f: Double) = if (f > 0.0) f - floor(f) else f + floor(f)
+
+@GsExport
+fun remap(fromMin: Double, fromMax: Double, f: Double) = (f-fromMin)/(fromMax-fromMin)
+
+@GsExport
+fun remap(fromMin: Double, fromMax: Double, toMin: Double, toMax: Double, f: Double) = toMin+(toMax-toMin) * remap(fromMin, fromMax, f)
 
 @GsExport
 fun add(a: Double, b: Double) = a + b

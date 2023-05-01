@@ -2,34 +2,50 @@ package github.mrh0.goodscript.reflect
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.error.GsError
-import github.mrh0.goodscript.types.GsTypeBool
+import github.mrh0.goodscript.lib.acos
+import github.mrh0.goodscript.lib.log
+import github.mrh0.goodscript.types.*
 import github.mrh0.goodscript.types.numbers.GsTypeInt
-import github.mrh0.goodscript.types.GsTypeNone
-import github.mrh0.goodscript.types.GsTypeString
 import github.mrh0.goodscript.types.numbers.GsTypeFloat
-import github.mrh0.goodscript.values.GsBase
-import github.mrh0.goodscript.values.GsValueNone
+import github.mrh0.goodscript.values.*
 import java.lang.reflect.Method
+import java.lang.reflect.ParameterizedType
+import java.lang.reflect.Type
+import java.lang.reflect.TypeVariable
+import kotlin.math.log
 
 object TypeMapper {
+    fun getGsType(location: Loc, type: Type, genericType: Type?): GsTypeBase {
+        return when (type) {
+            Integer::class.java, Int::class.java, Int::class.javaPrimitiveType -> GsTypeInt
+            Float::class.java, Float::class.javaPrimitiveType -> GsTypeFloat
+            Double::class.java, Double::class.javaPrimitiveType -> GsTypeFloat
+            Boolean::class.java, Boolean::class.javaPrimitiveType -> GsTypeBool
+            String::class.java -> GsTypeString
+            Pair::class.java -> GsTypeTuple(getGenericGsTypes(location, genericType))
+            //Triple::class.java -> GsTypeTuple(getGenericGsTypes(location, javaClass.typeParameters))
+            Unit::class.java, Void::class.java, Void::class.javaPrimitiveType -> GsTypeNone
 
-    fun asString(javaClass: Class<*>) = "${javaClass.packageName}.${javaClass.typeName}"
-
-    fun getGsType(location: Loc, javaClass: Class<*>) = when (javaClass) {
-        Int::class.java, Int::class.javaPrimitiveType -> GsTypeInt
-        Float::class.java, Float::class.javaPrimitiveType -> GsTypeFloat
-        Double::class.java, Double::class.javaPrimitiveType -> GsTypeFloat
-        Boolean::class.java, Boolean::class.javaPrimitiveType -> GsTypeBool
-        String::class.java -> GsTypeString
-        Unit::class.java, Void::class.java, Void::class.javaPrimitiveType -> GsTypeNone
-        else -> throw GsError(location, "No such Gs Datatype ${asString(javaClass)}")
+            //GsInt::class.java -> GsTypeInt
+            //GsFloat::class.java -> GsTypeFloat
+            //GsString::class.java -> GsTypeString
+            //GsBool::class.java -> GsTypeBool
+            else -> throw GsError(location, "No such Gs Datatype $type")
+        }
     }
 
-    fun getGsValue(location: Loc, javaClass: Class<*>, value: Any?) =
-        if(value == null) GsValueNone else getGsType(location, javaClass).construct(location, value)
+    fun getGenericGsTypes(location: Loc, type: Type?): Array<GsTypeBase> {
+        if(type == null) return arrayOf()
+        val par = type as ParameterizedType
+        return par.actualTypeArguments.mapIndexed() { i, it -> getGsType(location, it, it) }.toTypedArray()
+    }
 
-    fun getMethodArgumentTypeList(location: Loc, method: Method) =
-        method.parameters.map { getGsType(location, it.type) }
+    fun getGsValue(location: Loc, javaType: Type, value: Any?) =
+        if(value == null) GsValueNone else getGsType(location, javaType, null).construct(location, value)
+
+    fun getMethodArgumentTypeList(location: Loc, method: Method): List<GsTypeBase> {
+        return method.parameterTypes.mapIndexed() { i, it -> getGsType(location, it, method.genericParameterTypes[i]) }
+    }
 
     fun getNativeValues(location: Loc, values: Array<GsBase>) = values.map { it.getNativeValue(location) }.toTypedArray()
     fun getNativeTypes(location: Loc, values: Array<GsBase>) = values.map { it.getType().getJavaClass(location) }.toTypedArray()

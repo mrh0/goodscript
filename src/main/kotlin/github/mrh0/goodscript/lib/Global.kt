@@ -13,3 +13,6 @@ fun log(value: String) = println("LOG: $value")
 
 @GsExport
 fun log(value: Double) = println("LOG: $value")
+
+@GsExport
+fun log(value: Pair<Int, Int>) = println("LOG: $value")
