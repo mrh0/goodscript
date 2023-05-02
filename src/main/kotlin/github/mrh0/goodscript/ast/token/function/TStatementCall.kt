@@ -25,7 +25,7 @@ class TStatementCall (location: Loc, val name: String, val args: List<ITok>) : T
             name,
             argTypes
         )
-        if(overrides.isEmpty()) throw GsError(location, "Override for function $name(${argTypes.joinToString(separator = ",") { it.toString() } })")
+        if(overrides.isEmpty()) throw GsError(location, "No override for function $name(${argTypes.joinToString(separator = ",") { it.toString() } })")
         val override = overrides.first()
         return Pair(
             override.ret,

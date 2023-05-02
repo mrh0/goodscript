@@ -12,6 +12,7 @@ import java.lang.reflect.Method
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 import java.lang.reflect.TypeVariable
+import java.util.*
 import kotlin.math.log
 
 object TypeMapper {
@@ -23,13 +24,14 @@ object TypeMapper {
             Boolean::class.java, Boolean::class.javaPrimitiveType -> GsTypeBool
             String::class.java -> GsTypeString
             Pair::class.java -> GsTypeTuple(getGenericGsTypes(location, genericType))
-            //Triple::class.java -> GsTypeTuple(getGenericGsTypes(location, javaClass.typeParameters))
+            Triple::class.java -> GsTypeTuple(getGenericGsTypes(location, genericType))
             Unit::class.java, Void::class.java, Void::class.javaPrimitiveType -> GsTypeNone
 
             //GsInt::class.java -> GsTypeInt
             //GsFloat::class.java -> GsTypeFloat
             //GsString::class.java -> GsTypeString
             //GsBool::class.java -> GsTypeBool
+            Any::class.java, Object::class.java -> GsTypeBoxed
             else -> throw GsError(location, "No such Gs Datatype $type")
         }
     }
@@ -37,14 +39,14 @@ object TypeMapper {
     fun getGenericGsTypes(location: Loc, type: Type?): Array<GsTypeBase> {
         if(type == null) return arrayOf()
         val par = type as ParameterizedType
-        return par.actualTypeArguments.mapIndexed() { i, it -> getGsType(location, it, it) }.toTypedArray()
+        return par.actualTypeArguments.mapIndexed { i, it -> getGsType(location, it, it) }.toTypedArray()
     }
 
     fun getGsValue(location: Loc, javaType: Type, value: Any?) =
         if(value == null) GsValueNone else getGsType(location, javaType, null).construct(location, value)
 
     fun getMethodArgumentTypeList(location: Loc, method: Method): List<GsTypeBase> {
-        return method.parameterTypes.mapIndexed() { i, it -> getGsType(location, it, method.genericParameterTypes[i]) }
+        return method.parameterTypes.mapIndexed { i, it -> getGsType(location, it, method.genericParameterTypes[i]) }
     }
 
     fun getNativeValues(location: Loc, values: Array<GsBase>) = values.map { it.getNativeValue(location) }.toTypedArray()

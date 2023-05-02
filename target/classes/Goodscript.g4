@@ -45,14 +45,14 @@ COMMENT: '//' ~[\r\n]* -> skip;
 BLOCKCOMMENT: '/*' .*? '*/' -> skip;
 
 number:
-    INT             #numberInt
+      INT           #numberInt
     | FLOAT         #numberFloat
     | HEX           #numberHex
     | BIN           #numberBin
     ;
 
 primitive:
-    number          #primitiveNumber
+      number        #primitiveNumber
     | BOOL          #primitiveBool
     | STRING        #primitiveString
     | CHAR          #primitiveChar
@@ -68,15 +68,15 @@ unOp:
     ;
 
 binOp:
-    '+' | '-' | '*' | '/' | '%'
+      '+' | '-' | '*' | '/' | '%'
     | '<' | '>' | '<=' | '>=' | '==' | '!='
     |'&&' | 'and' | '||' | 'or'
     | '<<' | '>>'
     ;
 
 expr:
-    'here'                            #exprHere
-    | left=expr binOp right=expr          #exprBinOp
+      'here'                            #exprHere
+    | left=expr binOp right=expr        #exprBinOp
     | unOp expr                         #exprUnOp
     | '(' expr ')'                      #exprNest
     | primitive                         #exprPrimitive
@@ -90,34 +90,36 @@ expr:
     ;
 
 type:
-    NAME        #typeByName
+      NAME                      #typeByName
     | type '|' type ('|' type)* #typeUnion
     | type '&' type ('&' type)* #typeTuple
     | '(' type ')'              #typeNest
     ;
 
 argument:
-    NAME ':' type               #argumentTyped
+      NAME ':' type             #argumentTyped
     | primitive                 #argumentPrimitive
     | '_'                       #argumentWildcard
     ;
 
 orderExpression:
-    'orderby' expr
+      'orderby' expr
     | 'orderasc'
     | 'orderdesc'
     ;
 
 functionCall:
-    NAME '('? args+=expr (',' args+=expr)* ')'?             #functionCallWithArgs
+      NAME '('? args+=expr (',' args+=expr)* ')'?           #functionCallWithArgs
     | NAME '(' ')'                                          #functionCallNoArgs
     ;
 
 statement:
-    'var' NAME (':' type)? '=' expr NL                      #statementDefine
+      'var' NAME (':' type)? '=' expr NL                    #statementDefine
     | 'var' NAME (':' type)? '=' functionCall NL            #statementDefine
+    | 'var' NAME ',' NAME (',' NAME)* '=' functionCall NL   #statementDefineDestructureTuple
     | 'val' NAME (':' type)? '=' expr NL                    #statementDefineConst
     | 'val' NAME (':' type)? '=' functionCall NL            #statementDefineConst
+    | 'val' NAME ',' NAME (',' NAME)* '=' functionCall NL   #statementDefineConstDestructureTuple
     | NAME '=' expr NL                                      #statementAssignment
 
     | 'break' NL                                            #statementBreak
@@ -134,7 +136,7 @@ statement:
     ;
 
 use:
-    'use' from=STRING ('as' as=NAME)? NL                                #useModule
+      'use' from=STRING ('as' as=NAME)? NL                              #useModule
     | 'use' exports+=NAME (',' exports+=NAME)* 'from' from=STRING NL    #useFromModule
     ;
 

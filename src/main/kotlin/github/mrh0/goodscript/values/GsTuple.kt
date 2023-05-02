@@ -18,9 +18,4 @@ open class GsTuple(private val values: Array<GsBase>) : GsBase() {
             else -> throw GsError(location, "Cannot get native tuple of size ${values.size}")
         }
     }
-
-    override fun match(location: Loc, type: GsTypeBase): Boolean {
-        if(type !is GsTypeTuple) return false
-        return values.zip(type.args).all { it.first.match(location, it.second) }
-    }
 }

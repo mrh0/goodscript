@@ -4,6 +4,8 @@ import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.error.GsError
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.values.GsBase
+import github.mrh0.goodscript.values.GsTuple
+import github.mrh0.goodscript.values.numbers.GsInt
 
 class FunctionManager {
     companion object {
@@ -26,6 +28,7 @@ class FunctionManager {
             namedFunctionMap[name] = fo
         }
         val res = FunctionOverride(name, args, types, returnType, callable)
+        println("$name ${types.map { it.toString() }} ${GsTuple(arrayOf(GsInt(1), GsInt(2))).match(location, types[0])}")
         fo.add(res)
         return res
     }

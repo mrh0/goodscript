@@ -25,5 +25,5 @@ abstract class GsBase {
         return getNativeValue(location) == other.getNativeValue(location)
     }
 
-    open fun match(location: Loc, type: GsTypeBase) = type.accepts(location, this)
+    final fun match(location: Loc, type: GsTypeBase) = type.accepts(location, this)
 }
