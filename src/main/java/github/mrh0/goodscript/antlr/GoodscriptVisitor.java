@@ -99,6 +99,34 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprNest(GoodscriptParser.ExprNestContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code exprInlineIf}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprInlineIf(GoodscriptParser.ExprInlineIfContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprHere}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprHere(GoodscriptParser.ExprHereContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprNamed}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprNamed(GoodscriptParser.ExprNamedContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprAs}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprAs(GoodscriptParser.ExprAsContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code exprBinOp}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
@@ -106,12 +134,12 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprBinOp(GoodscriptParser.ExprBinOpContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code exprInlineIf}
+	 * Visit a parse tree produced by the {@code exprAccessor}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExprInlineIf(GoodscriptParser.ExprInlineIfContext ctx);
+	T visitExprAccessor(GoodscriptParser.ExprAccessorContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exprIs}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
@@ -134,13 +162,6 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprCallFunction(GoodscriptParser.ExprCallFunctionContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code exprHere}
-	 * labeled alternative in {@link GoodscriptParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExprHere(GoodscriptParser.ExprHereContext ctx);
-	/**
 	 * Visit a parse tree produced by the {@code exprPrimitive}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
@@ -148,12 +169,12 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitExprPrimitive(GoodscriptParser.ExprPrimitiveContext ctx);
 	/**
-	 * Visit a parse tree produced by the {@code exprNamed}
+	 * Visit a parse tree produced by the {@code exprAccessName}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
-	T visitExprNamed(GoodscriptParser.ExprNamedContext ctx);
+	T visitExprAccessName(GoodscriptParser.ExprAccessNameContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exprIsNot}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
@@ -161,13 +182,6 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExprIsNot(GoodscriptParser.ExprIsNotContext ctx);
-	/**
-	 * Visit a parse tree produced by the {@code exprAs}
-	 * labeled alternative in {@link GoodscriptParser#expr}.
-	 * @param ctx the parse tree
-	 * @return the visitor result
-	 */
-	T visitExprAs(GoodscriptParser.ExprAsContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exprUnOp}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
@@ -252,12 +266,26 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitStatementDefine(GoodscriptParser.StatementDefineContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code statementDefineDestructureTuple}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementDefineDestructureTuple(GoodscriptParser.StatementDefineDestructureTupleContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code statementDefineConst}
 	 * labeled alternative in {@link GoodscriptParser#statement}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
 	 */
 	T visitStatementDefineConst(GoodscriptParser.StatementDefineConstContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code statementDefineConstDestructureTuple}
+	 * labeled alternative in {@link GoodscriptParser#statement}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitStatementDefineConstDestructureTuple(GoodscriptParser.StatementDefineConstDestructureTupleContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code statementAssignment}
 	 * labeled alternative in {@link GoodscriptParser#statement}.

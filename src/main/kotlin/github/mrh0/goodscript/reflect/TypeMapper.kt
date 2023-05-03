@@ -2,8 +2,6 @@ package github.mrh0.goodscript.reflect
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.error.GsError
-import github.mrh0.goodscript.lib.acos
-import github.mrh0.goodscript.lib.log
 import github.mrh0.goodscript.types.*
 import github.mrh0.goodscript.types.numbers.GsTypeInt
 import github.mrh0.goodscript.types.numbers.GsTypeFloat
@@ -11,9 +9,6 @@ import github.mrh0.goodscript.values.*
 import java.lang.reflect.Method
 import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
-import java.lang.reflect.TypeVariable
-import java.util.*
-import kotlin.math.log
 
 object TypeMapper {
     fun getGsType(location: Loc, type: Type, genericType: Type?): GsTypeBase {
