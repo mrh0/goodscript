@@ -18,6 +18,9 @@ class ContextBuilder(val contextName: String) {
         map[variable.getName()] = index
         return index++
     }
+
+    fun getRaw(location: Loc, name: String): IVar? = if(map.containsKey(name)) vars[map[name]!!] else null
+
     fun get(location: Loc, name: String): IVar {
         return if(map.containsKey(name)) vars[map[name]!!] else throw GsNotDefinedError(location, name)
     }

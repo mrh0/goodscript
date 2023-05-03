@@ -13,6 +13,6 @@ class TNamed (location: Loc, val name: String) : Tok(location) {
     }
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
-        return Pair(cd.ctx().get(location, name).getType(), IRNamed(location, name, cd.ctx().getIndex(location, name)))
+        return Pair(cd.getVar(location, name).getType(), IRNamed(location, name, cd.ctx().getIndex(location, name)))
     }
 }
