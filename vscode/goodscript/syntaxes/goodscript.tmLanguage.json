@@ -1,0 +1,144 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Goodscript",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+		},
+		{
+			"include": "#operators"
+		},
+		{
+			"include": "#variables"
+		},
+		{
+			"include": "#numbers"
+		},
+		{
+			"include": "#booleans"
+		},
+		{
+			"include": "#comparisons"
+		},
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#types"
+		}
+		
+		
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.goodscript",
+				"match": "\\b(if|eif|else|do|while|for|ret|fn|here|use|from|as|is|!is|var|val|where|start|orderby|break|continue)\\b"
+			}]
+		},
+		"strings": {
+			"name": "string.quoted.double.goodscript",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.goodscript",
+					"match": "\\\\."
+				}
+			]
+		},
+		"operators": {
+			"patterns": [
+				{
+					"name": "keyword.operator.arithmetic.goodscript",
+					"match": "\\+|-|\\*|/|%|\\^|&|\\|"
+				},
+				{
+					"name": "keyword.operator.logical.goodscript",
+					"match": "&&|\\|\\||!|and|or|!!"
+				},
+				 {
+                    "name": "keyword.operator.assignment.goodscript",
+                    "match": "="
+                },
+                {
+                    "name": "keyword.operator.comparison.goodscript",
+                    "match": "==|!=|<=|>=|<|>"
+                }
+			]
+		},
+		"variables": {
+			"patterns": [
+				{
+					"name": "variable.other.goodscript",
+					"match": "\\b([A-Za-z][A-Za-z0-9]*)\\b"
+				}
+			]
+		},
+		"numbers": {
+			"patterns": [
+				{
+					"name": "constant.numeric.integer.goodscript",
+					"match": "\\b(0|[1-9][0-9]*)\\b"
+				},
+				{
+					"name": "constant.numeric.hex.goodscript",
+					"match": "\\b0x([0-9A-Fa-f]+)\\b"
+				},
+				{
+					"name": "constant.numeric.bin.goodscript",
+					"match": "\\b0b([01]+)\\b"
+				},
+				{
+					"name": "constant.numeric.float.goodscript",
+					"match": "\\b0f|[1-9][0-9]*('.'[0-9]*)?f?\\b"
+				}
+			]
+		},
+		"types": {
+			"name": "Type Declaration",
+			"match": ":\\s[A-Z][a-zA-Z]*\\b",
+			"captures": {
+				"0": {
+					"name": "punctuation.definition.type.goodscript"
+				},
+				"1": {
+					"name": "storage.type.goodscript"
+				}
+			}
+		},
+		"booleans": {
+			"patterns": [
+				{
+					"name": "constant.language.boolean.goodscript",
+					"match": "\\b(true|false)\\b"
+				}
+			]
+		},
+		"comparisons": {
+			"patterns": [
+				{
+					"name": "keyword.operator.comparison.goodscript",
+					"match": "==|!=|<=|>=|<|>"
+				}
+			]
+		},
+		"comments": {
+			"patterns": [
+				{
+					"name": "comment.line.goodscript",
+					"match": "//.*?$"
+				},
+				{
+					"name": "comment.block.goodscript",
+					"begin": "/\\*",
+					"end": "\\*/"
+				}
+			]
+		}
+	},
+	"scopeName": "source.goodscript"
+}

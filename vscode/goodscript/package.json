@@ -1,0 +1,25 @@
+{
+  "name": "goodscript",
+  "displayName": "goodscript",
+  "description": "Goodscript Language Support",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.77.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "goodscript",
+      "aliases": ["Goodscript", "goodscript"],
+      "extensions": ["gs"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "goodscript",
+      "scopeName": "source.goodscript",
+      "path": "./syntaxes/goodscript.tmLanguage.json"
+    }]
+  }
+}

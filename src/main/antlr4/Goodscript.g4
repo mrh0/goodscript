@@ -87,6 +87,8 @@ expr:
     | expr 'as' NAME                    #exprAs
     | NAME '(' args+=expr? (',' args+=expr)* ')' #exprCallFunction
     | values+=expr '&' values+=expr ('&' values+=expr)* #exprTuple
+    | expr '.' NAME                                     #exprAccessName
+    | expr '[' expr ']'                                 #exprAccessor
     ;
 
 type:
