@@ -2,6 +2,7 @@ package github.mrh0.goodscript.vm.function
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.types.GsTypeBase
+import github.mrh0.goodscript.types.GsTypeFunction
 import github.mrh0.goodscript.values.GsBase
 
 class FunctionOverride(val name: String, val argNames: Array<String>, val argTypes: Array<GsTypeBase>, val ret: GsTypeBase, val callable: ICallable) {
@@ -19,4 +20,6 @@ class FunctionOverride(val name: String, val argNames: Array<String>, val argTyp
         }
         return true
     }
+
+    fun getType() = GsTypeFunction(argTypes, ret)
 }
