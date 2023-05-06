@@ -60,7 +60,7 @@ primitive:
     ;
 
 block:
-    INDENT (statements+=statement)+ DEDENT
+      INDENT (statements+=statement)+ DEDENT
     ;
 
 unOp:
@@ -72,6 +72,12 @@ binOp:
     | '<' | '>' | '<=' | '>=' | '==' | '!='
     |'&&' | 'and' | '||' | 'or'
     | '<<' | '>>'
+    ;
+
+lambda:
+    '(' ')' '=>' expr                                               #lambdaNoArgs
+    | '('? args+=argument ')'? '=>' expr                            #lambdaArgs
+    | '(' args+=argument (',' args+=argument)+ ')' '=>' expr        #lambdaArgs
     ;
 
 expr:
@@ -89,6 +95,7 @@ expr:
     | values+=expr '&' values+=expr ('&' values+=expr)*             #exprTuple
     | expr '.' NAME                                                 #exprAccessName
     | expr '[' expr ']'                                             #exprAccessor
+    | lambda                                                        #exprLambda
     ;
 
 type:
@@ -145,15 +152,15 @@ use:
     ;
 
 funcPrefix:
-    'start'
+      'start'
     ;
 
 func:
-    funcPrefix? 'fn' name=NAME '(' args+=argument? (',' args+=argument)* ')' ':' returnType=type 'do' body=block
+      funcPrefix? 'fn' name=NAME '(' args+=argument? (',' args+=argument)* ')' ':' returnType=type 'do' body=block
     ;
 
 program:
-    use*
-    functions+=func*
-    EOF
+      use*
+      functions+=func*
+      EOF
     ;

@@ -15,6 +15,6 @@ class TInteger(location: Loc, private val value: Int) : Tok(location) {
     }
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
-        return Pair(GsTypeInt, IRValue(location, GsInt(value)))
+        return GsTypeInt to IRValue(location, GsInt(value))
     }
 }

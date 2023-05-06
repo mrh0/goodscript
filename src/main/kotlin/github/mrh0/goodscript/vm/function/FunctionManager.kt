@@ -28,7 +28,8 @@ class FunctionManager {
             namedFunctionMap[name] = fos
         }
         val res = FunctionOverride(name, args, types, returnType, callable)
-        println("$name ${types.map { it.toString() }} ${GsTuple(arrayOf(GsInt(1), GsInt(2))).match(location, types[0])}")
+        println("$name ${types.map { it.toString() }}")
+        //println("$name ${types.map { it.toString() }} ${GsTuple(arrayOf(GsInt(1), GsInt(2))).match(location, types[0])}")
         fos.add(res)
         return fos
     }

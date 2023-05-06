@@ -19,4 +19,9 @@ abstract class GsTypeBase(val namespace: String, val identifier: String) {
 
     open fun accepts(location: Loc, type: GsTypeBase): Boolean = type == this
     open fun accepts(location: Loc, value: GsBase): Boolean = accepts(location, value.getType())
+
+    open fun cast(location: Loc, to: GsTypeBase): GsTypeBase {
+        if(!this.accepts(location, to)) throw GsError(location, "Cannot cast $this to $to")
+        return to
+    }
 }

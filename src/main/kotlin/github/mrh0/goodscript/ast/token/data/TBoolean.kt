@@ -15,6 +15,6 @@ class TBoolean(location: Loc, private val value: Boolean) : Tok(location) {
     }
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
-        return Pair(GsTypeBool, IRValue(location, GsBool(value)))
+        return GsTypeBool to IRValue(location, GsBool(value))
     }
 }

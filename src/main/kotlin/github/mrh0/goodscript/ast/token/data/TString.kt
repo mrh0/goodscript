@@ -15,6 +15,6 @@ class TString(location: Loc, private val value: String) : Tok(location) {
     }
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
-        return Pair(GsTypeString, IRValue(location, GsString(value)))
+        return GsTypeString to IRValue(location, GsString(value))
     }
 }

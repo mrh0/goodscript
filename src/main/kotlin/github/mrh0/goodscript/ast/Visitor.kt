@@ -97,6 +97,7 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
     override fun visitNumberFloat(ctx: GoodscriptParser.NumberFloatContext): ITok = TFloat(loc(ctx), ctx.text.toDouble())
     override fun visitPrimitiveBool(ctx: GoodscriptParser.PrimitiveBoolContext): ITok = TBoolean(loc(ctx), ctx.BOOL().text == "true")
     override fun visitPrimitiveString(ctx: GoodscriptParser.PrimitiveStringContext): ITok = TString(loc(ctx), ctx.text.substring(1, ctx.text.length-1))
+    override fun visitPrimitiveAtom(ctx: GoodscriptParser.PrimitiveAtomContext): ITok = TAtom(loc(ctx), ctx.text.substring(1).lowercase())
 
     //Natives
     override fun visitExprTuple(ctx: GoodscriptParser.ExprTupleContext): ITok = TTuple(loc(ctx), visit(ctx.values))

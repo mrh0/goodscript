@@ -1,25 +1,22 @@
 package github.mrh0.goodscript.ast.token.data
 
 import github.mrh0.goodscript.ast.CompileData
-import github.mrh0.goodscript.ast.ITok
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.ast.Tok
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.IRValue
-import github.mrh0.goodscript.ir.data.IRTuple
+import github.mrh0.goodscript.types.GsTypeAtom
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.types.GsTypeString
-import github.mrh0.goodscript.types.GsTypeTuple
+import github.mrh0.goodscript.values.GsAtom
 import github.mrh0.goodscript.values.GsString
-import github.mrh0.goodscript.values.GsTuple
 
-class TTuple(location: Loc, private val values: List<ITok>) : Tok(location) {
+class TAtom(location: Loc, private val value: String) : Tok(location) {
     override fun toString(): String {
-        return values.joinToString("&", "TTuple(", ")")
+        return "TAtom(${value})"
     }
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
-        val pairs = values.map { it.process(cd) }
-        return GsTypeTuple(pairs.map { it.first }.toTypedArray()) to IRTuple(location, pairs.map { it.second })
+        return GsTypeAtom to IRValue(location, GsAtom.of(value))
     }
 }

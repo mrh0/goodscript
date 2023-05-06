@@ -16,6 +16,6 @@ class THere(location: Loc) : Tok(location) {
     }
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
-        return Pair(GsTypeTuple(arrayOf(GsTypeInt, GsTypeInt, GsTypeString)), IRValue(location, location.asTuple()))
+        return GsTypeTuple(arrayOf(GsTypeInt, GsTypeInt, GsTypeString)) to IRValue(location, location.asTuple())
     }
 }

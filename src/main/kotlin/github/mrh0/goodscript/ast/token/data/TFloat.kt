@@ -17,6 +17,6 @@ class TFloat(location: Loc, private val value: Double) : Tok(location) {
     }
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
-        return Pair(GsTypeFloat, IRValue(location, GsFloat(value)))
+        return GsTypeFloat to IRValue(location, GsFloat(value))
     }
 }

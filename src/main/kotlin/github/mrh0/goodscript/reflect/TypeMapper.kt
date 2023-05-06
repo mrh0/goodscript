@@ -14,12 +14,18 @@ object TypeMapper {
     fun getGsType(location: Loc, type: Type, genericType: Type?): GsTypeBase {
         return when (type) {
             Integer::class.java, Int::class.java, Int::class.javaPrimitiveType -> GsTypeInt
+            Long::class.java, Long::class.javaPrimitiveType -> GsTypeInt
             Float::class.java, Float::class.javaPrimitiveType -> GsTypeFloat
             Double::class.java, Double::class.javaPrimitiveType -> GsTypeFloat
+
             Boolean::class.java, Boolean::class.javaPrimitiveType -> GsTypeBool
             String::class.java -> GsTypeString
+
+            GsAtom::class.java -> GsTypeAtom
+
             Pair::class.java -> GsTypeTuple(getGenericGsTypes(location, genericType))
             Triple::class.java -> GsTypeTuple(getGenericGsTypes(location, genericType))
+
             Unit::class.java, Void::class.java, Void::class.javaPrimitiveType -> GsTypeNone
 
             //GsInt::class.java -> GsTypeInt

@@ -2,12 +2,9 @@ package github.mrh0.goodscript.reflect
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.values.GsBase
-import github.mrh0.goodscript.values.GsFunctionReference
 import github.mrh0.goodscript.vm.function.FunctionManager
-import github.mrh0.goodscript.vm.function.FunctionOverride
 import github.mrh0.goodscript.vm.function.FunctionOverrides
 import github.mrh0.goodscript.vm.function.JavaCallable
-import github.mrh0.goodscript.vm.state.GlobalFunction
 import java.lang.reflect.Method
 
 object Reflection {

@@ -8,6 +8,7 @@ import github.mrh0.goodscript.error.GsError
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.function.IRFunctionCall
 import github.mrh0.goodscript.types.GsTypeBase
+import github.mrh0.goodscript.types.GsTypeCallSignature
 import github.mrh0.goodscript.vm.function.FunctionManager
 
 class TExprCall (location: Loc, val name: String, val args: List<ITok>) : Tok(location) {
@@ -20,18 +21,14 @@ class TExprCall (location: Loc, val name: String, val args: List<ITok>) : Tok(lo
         //if(fn.getType() !is GsTypeFunction) throw GsError(location, "Unexpected type")
         val processedArgs = args.map { it.process(cd) }
         val argTypes = processedArgs.map { it.first }.toTypedArray()
-        val overrides = FunctionManager.INSTANCE.getOverrides(
-            location,
-            name,
-            argTypes
-        )
-        if(overrides.isEmpty()) throw GsError(location, "Override for function $name(${argTypes.joinToString(separator = ",") { it.toString() } })")
-        val override = overrides.first()
+
+        val (varIndex, ivar) = cd.getFunctionVarIndex(location, name, argTypes)
+        val varType = ivar.getType() as GsTypeCallSignature
         return Pair(
-            override.ret,
+            varType.ret,
             IRFunctionCall(location,
                 name,
-                override,
+                varIndex,
                 processedArgs.map { it.second }
             )
         )
