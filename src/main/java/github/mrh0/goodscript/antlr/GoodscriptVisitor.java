@@ -211,6 +211,13 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitTypeByName(GoodscriptParser.TypeByNameContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code typeCallSignature}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitTypeCallSignature(GoodscriptParser.TypeCallSignatureContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code typeNest}
 	 * labeled alternative in {@link GoodscriptParser#type}.
 	 * @param ctx the parse tree
@@ -356,6 +363,13 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitUseModule(GoodscriptParser.UseModuleContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code useAllFromModule}
+	 * labeled alternative in {@link GoodscriptParser#use}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitUseAllFromModule(GoodscriptParser.UseAllFromModuleContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code useFromModule}
 	 * labeled alternative in {@link GoodscriptParser#use}.

@@ -14,8 +14,10 @@ import github.mrh0.goodscript.types.GsTypeNone
 import github.mrh0.goodscript.types.GsTypeString
 import github.mrh0.goodscript.types.numbers.GsTypeFloat
 import github.mrh0.goodscript.types.numbers.GsTypeNumber
+import github.mrh0.goodscript.values.GsFunctionReference
 import github.mrh0.goodscript.vm.Modules
 import github.mrh0.goodscript.vm.function.FunctionManager
+import github.mrh0.goodscript.vm.state.GlobalFunction
 
 class TUseFromModule(location: Loc, private val names: List<String>, private val moduleRef: String) : Tok(location) {
     override fun toString() = "TUse($names from $moduleRef)"
@@ -23,9 +25,16 @@ class TUseFromModule(location: Loc, private val names: List<String>, private val
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
         val (namespace, moduleName) = Modules.parseModuleReference(location, moduleRef)
         val clazz = StandardLib.getModule(location, namespace, moduleName)
+
         val nameSet = names.toHashSet()
         val methods = clazz.methods.filter { nameSet.contains(it.name) }
-        methods.forEach { Reflection.loadMethod(location, FunctionManager.INSTANCE, it) }
+
+        methods.forEach {
+            val fos = Reflection.loadMethod(location, FunctionManager.INSTANCE, it)
+            if(fos.getNumberOfOverrides() == 1)
+                cd.getGlobal().define(location, GlobalFunction(fos.name, fos.getType(), GsFunctionReference(fos)))
+        }
+
         return Pair(GsTypeNone, IRDeadEnd)
     }
 }

@@ -7,8 +7,9 @@ import github.mrh0.goodscript.reflect.Reflection
 class StandardLib {
     companion object {
         private val classMapper = mapOf(
-            Pair("Math", "github.mrh0.goodscript.lib.MathKt"),
-            Pair("IO", "github.mrh0.goodscript.lib.IOKt")
+            "Standard" to "github.mrh0.goodscript.lib.GlobalKt",
+            "Math" to "github.mrh0.goodscript.lib.MathKt",
+            "IO" to "github.mrh0.goodscript.lib.IOKt"
         )
 
         fun getModule(location: Loc, namespace: String, name: String): Class<*> {

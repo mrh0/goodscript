@@ -2,6 +2,7 @@ package github.mrh0.goodscript.vm
 
 import github.mrh0.goodscript.ast.Loc
 import github.mrh0.goodscript.error.GsAssignTypeError
+import github.mrh0.goodscript.error.GsError
 import github.mrh0.goodscript.error.GsNotDefinedError
 import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.values.GsBase
@@ -14,6 +15,7 @@ class ContextBuilder(val contextName: String) {
 
     fun define(location: Loc, variable: IVar): Int {
         //println("Defining $name:$index for $contextName")
+        if(map.containsKey(variable.getName())) throw GsError(location, "${variable.getName()} is already defined in context $contextName")
         vars.add(variable)
         map[variable.getName()] = index
         return index++

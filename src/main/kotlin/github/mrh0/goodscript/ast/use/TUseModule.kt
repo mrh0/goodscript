@@ -21,7 +21,8 @@ class TUseModule(location: Loc, private val module: String, private val asName: 
     }
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
-        Reflection.loadClass(Loc.IDENTITY, FunctionManager.INSTANCE, "github.mrh0.goodscript.lib.GlobalKt")
+        val fos = Reflection.loadClass(Loc.IDENTITY, FunctionManager.INSTANCE, "github.mrh0.goodscript.lib.GlobalKt")
+
         return Pair(GsTypeNone, IRDeadEnd)
     }
 }

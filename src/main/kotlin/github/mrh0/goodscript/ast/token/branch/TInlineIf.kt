@@ -18,10 +18,10 @@ class TInlineIf(location: Loc, private val condition: ITok, private val body: IT
         val conditionPair = condition.process(cd)
         val bodyPair = body.process(cd)
         val elseBodyPair = elseBody.process(cd)
-        if(conditionPair.first != GsTypeBool) throw GsError(location, "Expected if statement condition to be a boolean.")
-        if(bodyPair.first != elseBodyPair.first) throw GsError(location, "Expected both if and else body to return same type.")
+        if(!GsTypeBool.accepts(location, conditionPair.first)) throw GsError(location, "Expected if statement condition to be a boolean.")
+        if(!bodyPair.first.accepts(location, elseBodyPair.first)) throw GsError(location, "Expected both if and else body to return same type.")
 
-        return Pair(GsTypeNone, IRInlineIf(location, conditionPair.second, bodyPair.second, elseBodyPair.second))
+        return Pair(bodyPair.first, IRInlineIf(location, conditionPair.second, bodyPair.second, elseBodyPair.second))
     }
 
     override fun toString(): String {

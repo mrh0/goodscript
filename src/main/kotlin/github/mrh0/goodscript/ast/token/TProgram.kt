@@ -12,8 +12,10 @@ import github.mrh0.goodscript.types.GsTypeBase
 import github.mrh0.goodscript.types.GsTypeFunction
 import github.mrh0.goodscript.types.GsTypeNone
 import github.mrh0.goodscript.values.GsFunction
+import github.mrh0.goodscript.values.GsFunctionReference
 import github.mrh0.goodscript.vm.function.FunctionManager
 import github.mrh0.goodscript.vm.function.UserCallable
+import github.mrh0.goodscript.vm.state.GlobalFunction
 import github.mrh0.goodscript.vm.state.Variable
 
 class TProgram(location: Loc, private val functions: MutableList<TFunc>, val uses: List<ITok>) : Tok(location) {
@@ -31,7 +33,8 @@ class TProgram(location: Loc, private val functions: MutableList<TFunc>, val use
         val argTypes = res.first.map { it.second }.toTypedArray()
         val retType = res.second
         val fos = FunctionManager.INSTANCE.addOverride(func.location, func.name, argNames, argTypes, retType, UserCallable(func::getFuncIR))
-        cd.getGlobal().define(location, Variable(func.name, GsTypeFunction(argTypes, retType), GsFunction(fos)))
+        if(fos.getNumberOfOverrides() == 1)
+            cd.getGlobal().define(location, GlobalFunction(func.name, fos.getType(), GsFunctionReference(fos)))
     }
 
     override fun toString(): String {

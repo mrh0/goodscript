@@ -75,33 +75,34 @@ binOp:
     ;
 
 expr:
-      'here'                            #exprHere
-    | left=expr binOp right=expr        #exprBinOp
-    | unOp expr                         #exprUnOp
-    | '(' expr ')'                      #exprNest
-    | primitive                         #exprPrimitive
-    | NAME                              #exprNamed
-    | 'if' '(' condition=expr ')' body=expr 'else' elseBody=expr #exprInlineIf
-    | expr 'is' NAME                    #exprIs
-    | expr '!is' NAME                   #exprIsNot
-    | expr 'as' NAME                    #exprAs
-    | NAME '(' args+=expr? (',' args+=expr)* ')' #exprCallFunction
-    | values+=expr '&' values+=expr ('&' values+=expr)* #exprTuple
-    | expr '.' NAME                                     #exprAccessName
-    | expr '[' expr ']'                                 #exprAccessor
+      'here'                                                        #exprHere
+    | left=expr binOp right=expr                                    #exprBinOp
+    | unOp expr                                                     #exprUnOp
+    | '(' expr ')'                                                  #exprNest
+    | primitive                                                     #exprPrimitive
+    | NAME                                                          #exprNamed
+    | 'if' '(' condition=expr ')' body=expr 'else' elseBody=expr    #exprInlineIf
+    | expr 'is' NAME                                                #exprIs
+    | expr '!is' NAME                                               #exprIsNot
+    | expr 'as' NAME                                                #exprAs
+    | NAME '(' args+=expr? (',' args+=expr)* ')'                    #exprCallFunction
+    | values+=expr '&' values+=expr ('&' values+=expr)*             #exprTuple
+    | expr '.' NAME                                                 #exprAccessName
+    | expr '[' expr ']'                                             #exprAccessor
     ;
 
 type:
-      NAME                      #typeByName
-    | type '|' type ('|' type)* #typeUnion
-    | type '&' type ('&' type)* #typeTuple
-    | '(' type ')'              #typeNest
+      NAME                                  #typeByName
+    | type '|' type ('|' type)*             #typeUnion
+    | type '&' type ('&' type)*             #typeTuple
+    | '(' type (',' type)* ')' '=>' type    #typeCallSignature
+    | '(' type ')'                          #typeNest
     ;
 
 argument:
-      NAME ':' type             #argumentTyped
-    | primitive                 #argumentPrimitive
-    | '_'                       #argumentWildcard
+      NAME ':' type                         #argumentTyped
+    | primitive                             #argumentPrimitive
+    | '_'                                   #argumentWildcard
     ;
 
 orderExpression:
@@ -139,6 +140,7 @@ statement:
 
 use:
       'use' from=STRING ('as' as=NAME)? NL                              #useModule
+    | 'use' '*' 'from' from=STRING NL                                   #useAllFromModule
     | 'use' exports+=NAME (',' exports+=NAME)* 'from' from=STRING NL    #useFromModule
     ;
 

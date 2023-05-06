@@ -364,6 +364,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterTypeCallSignature(GoodscriptParser.TypeCallSignatureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeCallSignature(GoodscriptParser.TypeCallSignatureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterTypeNest(GoodscriptParser.TypeNestContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -611,6 +623,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitUseModule(GoodscriptParser.UseModuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUseAllFromModule(GoodscriptParser.UseAllFromModuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUseAllFromModule(GoodscriptParser.UseAllFromModuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

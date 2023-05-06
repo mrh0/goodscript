@@ -8,6 +8,10 @@ import github.mrh0.goodscript.error.GsError
 import github.mrh0.goodscript.ir.IIR
 import github.mrh0.goodscript.ir.function.IRFunctionCall
 import github.mrh0.goodscript.types.GsTypeBase
+import github.mrh0.goodscript.types.GsTypeCallSignature
+import github.mrh0.goodscript.types.GsTypeNone
+import github.mrh0.goodscript.values.GsFunction
+import github.mrh0.goodscript.values.GsFunctionReference
 import github.mrh0.goodscript.vm.function.FunctionManager
 
 class TStatementCall (location: Loc, val name: String, val args: List<ITok>) : Tok(location) {
@@ -20,11 +24,17 @@ class TStatementCall (location: Loc, val name: String, val args: List<ITok>) : T
         //if(fn.getType() !is GsTypeFunction) throw GsError(location, "Unexpected type")
         val processedArgs = args.map { it.process(cd) }
         val argTypes = processedArgs.map { it.first }.toTypedArray()
-        val overrides = FunctionManager.INSTANCE.getOverrides(
+        /*val overrides = FunctionManager.INSTANCE.getOverrides(
             location,
             name,
             argTypes
         )
+        if(overrides.isEmpty()) throw GsError(location, "No override for function $name(${argTypes.joinToString(separator = ",") { it.toString() } })")
+        val override = overrides.first()*/
+
+        val value = cd.getVar(location, name).getValue(location)
+        if(value !is GsFunctionReference) throw GsError(location, "Cannot call type ${value.getType()}")
+        val overrides = value.overrides.getMatching(location, argTypes)
         if(overrides.isEmpty()) throw GsError(location, "No override for function $name(${argTypes.joinToString(separator = ",") { it.toString() } })")
         val override = overrides.first()
         return Pair(

@@ -26,4 +26,9 @@ abstract class GsBase {
     }
 
     final fun match(location: Loc, type: GsTypeBase) = type.accepts(location, this)
+
+    open fun cast(location: Loc, to: GsTypeBase): GsBase {
+        if(!getType().accepts(location, to)) throw GsError(location, "Cannot cast ${getType()} to $to")
+        return this
+    }
 }

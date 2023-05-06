@@ -21,6 +21,7 @@ import github.mrh0.goodscript.ast.token.op.compare.TNotEquals
 import github.mrh0.goodscript.ast.token.op.logical.TNot
 import github.mrh0.goodscript.ast.token.op.logical.TNotNot
 import github.mrh0.goodscript.ast.token.type.TTypeByName
+import github.mrh0.goodscript.ast.use.TUseAllFromModule
 import github.mrh0.goodscript.ast.use.TUseFromModule
 import org.antlr.v4.runtime.ParserRuleContext
 import org.antlr.v4.runtime.Token
@@ -53,6 +54,10 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
     // Use
     override fun visitUseFromModule(ctx: GoodscriptParser.UseFromModuleContext): ITok {
         return TUseFromModule(loc(ctx), ctx.exports.map { it.text }, ctx.from.text.substring(1, ctx.from.text.length-1))
+    }
+
+    override fun visitUseAllFromModule(ctx: GoodscriptParser.UseAllFromModuleContext): ITok {
+        return TUseAllFromModule(loc(ctx), ctx.from.text.substring(1, ctx.from.text.length-1))
     }
 
     // Types

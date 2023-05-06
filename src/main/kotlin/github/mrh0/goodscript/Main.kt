@@ -17,7 +17,7 @@ import java.io.FileInputStream
 import java.nio.file.Path
 
 fun main(args: Array<String>) {
-    Reflection.loadClass(Loc.IDENTITY, FunctionManager.INSTANCE, "github.mrh0.goodscript.lib.GlobalKt")
+    //Reflection.loadClass(Loc.IDENTITY, FunctionManager.INSTANCE, "github.mrh0.goodscript.lib.GlobalKt")
     val file = Path.of(Root::class.java.classLoader.getResource("test.gs").toURI()).toFile()
 
     val stream = if (file == null) System.`in` else FileInputStream(file)
