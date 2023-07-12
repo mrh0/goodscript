@@ -145,6 +145,30 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 */
 	void exitBinOp(GoodscriptParser.BinOpContext ctx);
 	/**
+	 * Enter a parse tree produced by the {@code lambdaNoArgs}
+	 * labeled alternative in {@link GoodscriptParser#lambda}.
+	 * @param ctx the parse tree
+	 */
+	void enterLambdaNoArgs(GoodscriptParser.LambdaNoArgsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code lambdaNoArgs}
+	 * labeled alternative in {@link GoodscriptParser#lambda}.
+	 * @param ctx the parse tree
+	 */
+	void exitLambdaNoArgs(GoodscriptParser.LambdaNoArgsContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code lambdaArgs}
+	 * labeled alternative in {@link GoodscriptParser#lambda}.
+	 * @param ctx the parse tree
+	 */
+	void enterLambdaArgs(GoodscriptParser.LambdaArgsContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code lambdaArgs}
+	 * labeled alternative in {@link GoodscriptParser#lambda}.
+	 * @param ctx the parse tree
+	 */
+	void exitLambdaArgs(GoodscriptParser.LambdaArgsContext ctx);
+	/**
 	 * Enter a parse tree produced by the {@code exprNest}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
@@ -192,6 +216,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitExprNamed(GoodscriptParser.ExprNamedContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code exprLambda}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void enterExprLambda(GoodscriptParser.ExprLambdaContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code exprLambda}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 */
+	void exitExprLambda(GoodscriptParser.ExprLambdaContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code exprAs}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
@@ -348,6 +384,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitTypeByName(GoodscriptParser.TypeByNameContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code typeCallSignature}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void enterTypeCallSignature(GoodscriptParser.TypeCallSignatureContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code typeCallSignature}
+	 * labeled alternative in {@link GoodscriptParser#type}.
+	 * @param ctx the parse tree
+	 */
+	void exitTypeCallSignature(GoodscriptParser.TypeCallSignatureContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code typeNest}
 	 * labeled alternative in {@link GoodscriptParser#type}.
@@ -598,6 +646,18 @@ public interface GoodscriptListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitUseModule(GoodscriptParser.UseModuleContext ctx);
+	/**
+	 * Enter a parse tree produced by the {@code useAllFromModule}
+	 * labeled alternative in {@link GoodscriptParser#use}.
+	 * @param ctx the parse tree
+	 */
+	void enterUseAllFromModule(GoodscriptParser.UseAllFromModuleContext ctx);
+	/**
+	 * Exit a parse tree produced by the {@code useAllFromModule}
+	 * labeled alternative in {@link GoodscriptParser#use}.
+	 * @param ctx the parse tree
+	 */
+	void exitUseAllFromModule(GoodscriptParser.UseAllFromModuleContext ctx);
 	/**
 	 * Enter a parse tree produced by the {@code useFromModule}
 	 * labeled alternative in {@link GoodscriptParser#use}.

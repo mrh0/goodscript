@@ -159,6 +159,30 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterLambdaNoArgs(GoodscriptParser.LambdaNoArgsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLambdaNoArgs(GoodscriptParser.LambdaNoArgsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterLambdaArgs(GoodscriptParser.LambdaArgsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitLambdaArgs(GoodscriptParser.LambdaArgsContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterExprNest(GoodscriptParser.ExprNestContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -202,6 +226,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitExprNamed(GoodscriptParser.ExprNamedContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterExprLambda(GoodscriptParser.ExprLambdaContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExprLambda(GoodscriptParser.ExprLambdaContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -358,6 +394,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitTypeByName(GoodscriptParser.TypeByNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterTypeCallSignature(GoodscriptParser.TypeCallSignatureContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitTypeCallSignature(GoodscriptParser.TypeCallSignatureContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *
@@ -610,6 +658,18 @@ public class GoodscriptBaseListener implements GoodscriptListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitUseModule(GoodscriptParser.UseModuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterUseAllFromModule(GoodscriptParser.UseAllFromModuleContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitUseAllFromModule(GoodscriptParser.UseAllFromModuleContext ctx) { }
 	/**
 	 * {@inheritDoc}
 	 *

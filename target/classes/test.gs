@@ -10,7 +10,7 @@ fn main(a: Int): Int do
     log 0xAA
     log 0b1110
     log 1&1
-    logi 1&(2&3)
+    log 1&(2&3)
     log if (true) 1 else 2
     log :test
     log :test == :TEST
