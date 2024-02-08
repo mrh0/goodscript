@@ -1,4 +1,4 @@
-package github.mrh0.goodscript.ast.use
+package github.mrh0.goodscript.ast.token.use
 
 import github.mrh0.goodscript.ast.*
 import github.mrh0.goodscript.ir.IIR
@@ -13,13 +13,16 @@ import github.mrh0.goodscript.vm.Modules
 import github.mrh0.goodscript.vm.function.FunctionManager
 import github.mrh0.goodscript.vm.state.GlobalFunctionReference
 
-class TUseAllFromModule(location: Loc, private val moduleRef: String) : Tok(location) {
-    override fun toString() = "TUse(* from $moduleRef)"
+class TUseFromModule(location: Loc, private val names: List<String>, private val moduleRef: String) : Tok(location) {
+    override fun toString() = "TUse($names from $moduleRef)"
 
     override fun process(cd: CompileData): Pair<GsTypeBase, IIR> {
         val (namespace, moduleName) = Modules.parseModuleReference(location, moduleRef)
         val clazz = StandardLib.getModule(location, namespace, moduleName)
-        val methods = clazz.methods.filter { it.isAnnotationPresent(GsExport::class.java) }
+
+        val nameSet = names.toHashSet()
+        val methods = clazz.methods.filter { it.isAnnotationPresent(GsExport::class.java) }.filter { nameSet.contains(it.name) }
+
         methods.forEach {
             val fos = Reflection.loadMethod(location, FunctionManager.INSTANCE, it)
             if(fos.getNumberOfOverrides() == 1)

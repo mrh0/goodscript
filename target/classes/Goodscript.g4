@@ -29,7 +29,7 @@ BOOL: 'true' | 'false';
 NAME: [_a-zA-Z][_a-zA-Z0-9]*;
 ATOM: ':'[a-zA-Z0-9][_a-zA-Z0-9]*;
 
-INT: '0'|[1-9][0-9]*;
+INT: '0'|[1-9][_0-9]*;
 FLOAT: '0f'|[1-9][0-9]*('.'[0-9]*)?'f'?;
 HEX: '0x'[0-9a-fA-F]*;
 BIN: '0b'[0-1]*;
@@ -37,9 +37,9 @@ BIN: '0b'[0-1]*;
 CHAR: '\''.'\'' | '\'\\'('n'|'r'|'t'|'\\'|'\''|'"'|'0')'\'';
 
 STRING: '"' .*? '"';
+EMBEDED: [_a-zA-Z][_a-zA-Z0-9]*'`'.*?'`';
 
 WHITESPACE: [ \t]+ -> skip;
-// WHITESPACE: [ \t\r\n]+ -> skip;
 EMPTYLINE: NL -> skip;
 COMMENT: '//' ~[\r\n]* -> skip;
 BLOCKCOMMENT: '/*' .*? '*/' -> skip;
@@ -157,6 +157,7 @@ funcPrefix:
 
 func:
       funcPrefix? 'fn' name=NAME '(' args+=argument? (',' args+=argument)* ')' ':' returnType=type 'do' body=block
+    | funcPrefix? 'fn' name=NAME '(' args+=argument? (',' args+=argument)* ')' '=' expression=expr
     ;
 
 program:

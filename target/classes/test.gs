@@ -10,10 +10,15 @@ fn main(a: Int): Int do
     log 0xAA
     log 0b1110
     log 1&1
-    log 1&(2&3)
+    //log 1&(2&3)
     log if (true) 1 else 2
     log :test
     log :test == :TEST
+
+    var i = 0
+    while i != 1_000_000_000 do
+        i = i + 1
+    log i
 
 fn dub(a: Int): Int do
     ret a+a

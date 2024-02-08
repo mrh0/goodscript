@@ -21,8 +21,8 @@ import github.mrh0.goodscript.ast.token.op.compare.TNotEquals
 import github.mrh0.goodscript.ast.token.op.logical.TNot
 import github.mrh0.goodscript.ast.token.op.logical.TNotNot
 import github.mrh0.goodscript.ast.token.type.TTypeByName
-import github.mrh0.goodscript.ast.use.TUseAllFromModule
-import github.mrh0.goodscript.ast.use.TUseFromModule
+import github.mrh0.goodscript.ast.token.use.TUseAllFromModule
+import github.mrh0.goodscript.ast.token.use.TUseFromModule
 import org.antlr.v4.runtime.ParserRuleContext
 import org.antlr.v4.runtime.Token
 import java.io.File
@@ -91,7 +91,7 @@ class Visitor(private val file: File) : GoodscriptBaseVisitor<ITok>() {
     override fun visitExprHere(ctx: GoodscriptParser.ExprHereContext): ITok = THere(loc(ctx))
 
     // Primitives
-    override fun visitNumberInt(ctx: GoodscriptParser.NumberIntContext): ITok = TInteger(loc(ctx), Integer.valueOf(ctx.text))
+    override fun visitNumberInt(ctx: GoodscriptParser.NumberIntContext): ITok = TInteger(loc(ctx), Integer.valueOf(ctx.text.replace("_", "")))
     override fun visitNumberBin(ctx: GoodscriptParser.NumberBinContext): ITok = TInteger(loc(ctx), ctx.text.substring(2).toInt(2))
     override fun visitNumberHex(ctx: GoodscriptParser.NumberHexContext): ITok = TInteger(loc(ctx), Integer.decode(ctx.text))
     override fun visitNumberFloat(ctx: GoodscriptParser.NumberFloatContext): ITok = TFloat(loc(ctx), ctx.text.toDouble())

@@ -15,7 +15,10 @@ import org.antlr.v4.runtime.ANTLRInputStream
 import org.antlr.v4.runtime.CommonTokenStream
 import java.io.FileInputStream
 import java.nio.file.Path
+import kotlin.time.ExperimentalTime
+import kotlin.time.measureTime
 
+@OptIn(ExperimentalTime::class)
 fun main(args: Array<String>) {
     //Reflection.loadClass(Loc.IDENTITY, FunctionManager.INSTANCE, "github.mrh0.goodscript.lib.GlobalKt")
     val file = Path.of(Root::class.java.classLoader.getResource("test.gs").toURI()).toFile()
@@ -35,5 +38,18 @@ fun main(args: Array<String>) {
     println(ir)
     cd.finalize()
 
-    println("Exit: ${ir.evaluate(VM(cd), Context.IDENTITY)}")
+    val timeTaken = measureTime {
+        println("Exit: ${ir.evaluate(VM(cd), Context.IDENTITY)}")
+    }
+
+    println(timeTaken);
+
+    var i = 0;
+    val timeTaken2 = measureTime {
+        while (i != 1000000000) {
+            i += 1;
+        }
+    }
+
+    println(timeTaken2);
 }

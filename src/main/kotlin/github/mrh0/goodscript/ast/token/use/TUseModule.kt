@@ -1,4 +1,4 @@
-package github.mrh0.goodscript.ast.use
+package github.mrh0.goodscript.ast.token.use
 
 import github.mrh0.goodscript.ast.*
 import github.mrh0.goodscript.error.GsOpTypeError

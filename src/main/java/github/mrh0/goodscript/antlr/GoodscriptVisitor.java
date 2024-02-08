@@ -92,6 +92,20 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitBinOp(GoodscriptParser.BinOpContext ctx);
 	/**
+	 * Visit a parse tree produced by the {@code lambdaNoArgs}
+	 * labeled alternative in {@link GoodscriptParser#lambda}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLambdaNoArgs(GoodscriptParser.LambdaNoArgsContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code lambdaArgs}
+	 * labeled alternative in {@link GoodscriptParser#lambda}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitLambdaArgs(GoodscriptParser.LambdaArgsContext ctx);
+	/**
 	 * Visit a parse tree produced by the {@code exprNest}
 	 * labeled alternative in {@link GoodscriptParser#expr}.
 	 * @param ctx the parse tree
@@ -119,6 +133,13 @@ public interface GoodscriptVisitor<T> extends ParseTreeVisitor<T> {
 	 * @return the visitor result
 	 */
 	T visitExprNamed(GoodscriptParser.ExprNamedContext ctx);
+	/**
+	 * Visit a parse tree produced by the {@code exprLambda}
+	 * labeled alternative in {@link GoodscriptParser#expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExprLambda(GoodscriptParser.ExprLambdaContext ctx);
 	/**
 	 * Visit a parse tree produced by the {@code exprAs}
 	 * labeled alternative in {@link GoodscriptParser#expr}.

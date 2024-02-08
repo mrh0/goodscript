@@ -21,7 +21,7 @@ class TNotEquals(location: Loc, private val left: ITok, private val right: ITok)
         val r = right.process(cd);
         return when {
             l.first is GsTypeInt && r.first is GsTypeInt -> Pair(GsTypeBool, IRNotEqualsIntInt(location, l.second, r.second))
-            else -> Pair(GsTypeBool, IRNotEqualsFallback(location, l.second, r.second))//throw GsOpTypeError(location, "!=", l.first, r.first)
+            else -> Pair(GsTypeBool, IRNotEqualsFallback(location, l.second, r.second))
         }
     }
 }
